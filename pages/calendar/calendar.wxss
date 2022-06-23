@@ -1,0 +1,114 @@
+.plugin {
+    /* padding-top: 20px; */
+    padding-left: 30rpx;
+    padding-right: 30rpx;
+}
+
+
+.cell {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #888;
+}
+
+.cell .title {
+    flex-grow: 1;
+}
+
+.calendar-style {
+    margin-top: 100rpx;
+}
+
+.actionView {
+    height: 394rpx;
+    background: #fff;
+    width: 630rpx;
+    box-sizing: border-box;
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: auto;
+    bottom: 0;
+    left: 0rpx;
+    box-shadow: 0px 6px 18px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    animation: mymove 0.3s;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes mymove {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.button {
+    width: 50px;
+    height: 60px;
+    background: rgba(242, 244, 247, 0.8);
+    border-radius: 6px;
+    animation: mymove 0.3s;
+    display: flex;
+    position: fixed;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* 排班 人员 */
+.user_bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -4rpx 10rpx #F0EEF5;
+    padding-bottom: constant(safe-area-inset-bottom);
+	padding-bottom: env(safe-area-inset-bottom);
+}
+
+.user_header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20rpx 12rpx;
+}
+
+.user-swiper {
+    /* background: rgb(156, 146, 146); */
+}
+
+.blocklist {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    flex-wrap: wrap;
+    padding-left: 12rpx;
+}
+
+.block-info {
+    margin-right: 12rpx;
+    flex-shrink: 0;
+    width: 110rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.block-name {
+    width: 100rpx;
+    border-radius: 4rpx;
+    text-align: center;
+    font-size: 22rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

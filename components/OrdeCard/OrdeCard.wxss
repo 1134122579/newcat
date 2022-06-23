@@ -1,0 +1,65 @@
+.block {
+  margin: 0 27rpx;
+  padding: 16rpx 0;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid rgb(235, 234, 234);
+}
+
+.covreImg {
+  width: 152rpx;
+  height: 190rpx;
+  margin-right: 20rpx;
+  border-radius: 10rpx;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.box_content {
+  flex: 1;
+  flex-shrink: 0;
+  height: 190rpx;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.box_desc {
+  flex: 1;
+  align-items: flex-end;
+  color: rgba(153, 153, 153, 1);
+  font-size: 24rpx;
+}
+.box_title{
+  width: 100%;
+  font-size: 30rpx;
+
+}
+
+.box_L {
+  flex: 1;
+  box-sizing: border-box;
+  overflow: hidden;
+
+}
+
+.box_p {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.box_r{
+  width: 100rpx;
+  flex-shrink: 0;
+  text-align: right;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+.NUm{
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+}

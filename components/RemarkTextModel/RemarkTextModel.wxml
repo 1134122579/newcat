@@ -1,0 +1,25 @@
+<!-- 活动简介模块 -->
+
+
+<view class="remark">
+  <!-- <view class="remark_title">
+    {{title}}
+  </view> -->
+  <!-- 内容 -->
+  <block wx:if="{{activeLookId==3}}">
+    <view class="content" wx:if="{{content.desc}}">
+      <rich-text nodes="{{content.desc}}"></rich-text>
+    </view>
+    <view class="content nullStyle" wx:if="{{!content.desc}}">
+      暂无内容
+    </view>
+  </block>
+  <block wx:if="{{activeLookId==4}}">
+    <view class="content" wx:if="{{content.rule}}">
+      <rich-text nodes="{{content.rule}}"></rich-text>
+    </view>
+    <view class="content nullStyle" wx:if="{{!content.rule}}">
+      暂无内容
+    </view>
+  </block>
+</view>

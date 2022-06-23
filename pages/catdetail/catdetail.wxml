@@ -1,0 +1,228 @@
+<view class="saishipage flexcolumn">
+  <Navheader />
+  <!-- 头部 -->
+  <view class="headerImage">
+    <swiper class="headerImage" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{getdata.img}}" wx:key="*this">
+        <swiper-item>
+          <view class="headerImage">
+            <image class="imageStyle" src="{{item}}" data-index='{{index}}' mode="aspectFill" bindtap="previewImage"></image>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
+  <!-- 内容  活动人物-->
+  <!-- <view class="new_content">
+    <view class="typetitle">
+      开设组别
+    </view>
+    <view class="typeList flexastart">
+      <block wx:for="{{10}}" wx:key="index">
+        <view class="type_block flexcolumn">
+          <view class="typeListname">LITTER</view>
+          <view class="userdesc">窝次组</view>
+        </view>
+      </block>
+    </view>
+  </view> -->
+  <!-- 信息 -->
+  <view class="content ">
+    <view class="new_content">
+      <!-- 名字 -->
+      <view class="flexbetween headerName">
+        <view class="name flexastart">
+          <view>{{getdata.cat_name}}</view>
+          <van-icon wx:if="{{getdata.sex==1}}" size="20" name="/images/gong_icon.png"></van-icon>
+          <van-icon wx:if="{{getdata.sex==2}}" size="20" name="/images/mu_icon.png"></van-icon>
+        </view>
+        <view class="header_R">
+          <button open-type="share" class="shareButton">
+            <image class="buttonIcon" src="/images/sharbuttonicon.png"></image>
+          </button>
+        </view>
+      </view>
+      <!-- 简介  -->
+      <view class="desc">
+        {{getdata.desc}}
+      </view>
+    </view>
+    <!-- 信息  -->
+    <view class="new_content">
+      <view class="typetitle">
+        基本信息
+      </view>
+      <view class="userList flexastart">
+        <view class="user_block flexastart">
+          <view class="userdesc">编号：</view>
+          <view class="typeListname">{{getdata.register_no}}</view>
+        </view>
+        <view class="user_block flexastart">
+          <view class="userdesc">生日：</view>
+          <view class="typeListname">{{getdata.birthday}}</view>
+        </view>
+        <view class="user_block flexastart">
+          <view class="userdesc">颜色：</view>
+          <view class="typeListname">{{getdata.color}}</view>
+        </view>
+        <view class="user_block flexastart">
+          <view class="userdesc">性别：</view>
+          <view class="typeListname">{{getdata.sex==1?'弟弟':'妹妹'}}</view>
+        </view>
+        <view class="user_block flexastart">
+          <view class="userdesc">品种：</view>
+          <view class="typeListname">{{getdata.cat_pz}}</view>
+        </view>
+
+        <view class="user_block flexastart">
+          <view class="userdesc">颜色代码：</view>
+          <view class="typeListname">{{getdata.color_code}}</view>
+        </view>
+        <view class="user_block flexastart" wx:if="{{ismyid==getdata.user_id}}">
+          <view class="userdesc">公开：</view>
+          <view class="typeListname" wx:if="{{getdata.is_show==1}}" >是</view>
+          <view class="typeListname" wx:else>否</view>
+        </view>
+      </view>
+    </view>
+    <view class="new_content">
+      <view class="typetitle">
+        扩展信息
+      </view>
+      <view class="userList flexastart">
+        <view class="user_block flexastart" wx:if="{{getdata.blood_type}}">
+          <view class="userdesc">血型：</view>
+          <view class="typeListname">{{getdata.blood_type}}</view>
+        </view>
+        <view class="user_block flexastart">
+          <view class="userdesc">组别：</view>
+          <view class="typeListname" wx:if="{{getdata.group_id==1}}">长毛组</view>
+          <view class="typeListname" wx:if="{{getdata.group_id==2}}">中长毛组</view>
+          <view class="typeListname" wx:if="{{getdata.group_id==3}}">短毛组</view>
+          <view class="typeListname" wx:if="{{getdata.group_id==4}}">东方体组</view>
+          <view class="typeListname" wx:if="{{getdata.group_id==5}}">无毛组</view>
+        </view>
+        <view class="user_block flexastart">
+          <view class="userdesc">类别：</view>
+          <!-- 1 展示 2 待售 3 种公 4 种公 -->
+          <view class="typeListname" wx:if="{{getdata.cat_status==1}}">展示</view>
+          <view class="typeListname" wx:if="{{getdata.cat_status==2}}">待售</view>
+          <view class="typeListname" wx:if="{{getdata.cat_status==3}}">种公</view>
+          <view class="typeListname" wx:if="{{getdata.cat_status==4}}">种母</view>
+        </view>
+        <view class="user_block flexastart">
+          <view class="userdesc">绝育：</view>
+          <view class="typeListname">{{getdata.is_jueyu==1?'已绝育':'未绝育'}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 父母信息 -->
+    <!-- <view class="new_content" wx:if="{{getdata.mother_info&&getdata.father_info}}">
+      <view class="typetitle">
+        父母信息
+      </view>
+      <view class="fm_typeList ">
+        <view class="flexastart fm_li" wx:if="{{getdata.mother_info}}">
+          <view class="userImg">
+            <image style="width: 100%;height: 100%;display: block;"  mode="aspectFill" src="{{getdata.mother_info.img||nullheaderImage}}"></image>
+          </view>
+          <view class="fm_content">
+            <view class="fm_typeListname flexastart">
+              <view> {{getdata.mother_info.cat_name}}</view>
+              <view class="fm_tag">/猫妈</view>
+            </view>
+            <view class="fm_userdesc">{{getdata.mother_info.desc}}</view>
+          </view>
+        </view>
+        <view class="flexastart fm_li" wx:if="{{getdata.father_info}}" style="border-top: 1px solid rgba(233, 230, 230, 0.8);">
+          <view class="userImg">
+            <image style="width: 100%;height: 100%;display: block;" mode="aspectFill" src="{{getdata.father_info.img||nullheaderImage}}"></image>
+          </view>
+          <view class="fm_content">
+            <view class="fm_typeListname flexastart">
+              <view> {{getdata.father_info.cat_name}}</view>
+              <view class="fm_tag">/猫爸</view>
+            </view>
+            <view class="fm_userdesc">{{getdata.father_info.desc}}</view>
+          </view>
+        </view>
+      </view>
+    </view> -->
+    <view class="new_content" wx:if="{{getdata.mother_info||getdata.father_info}}">
+      <view class="typetitle">
+        父母信息
+      </view>
+      <view class="typeList flexastart">
+        <block wx:if="{{getdata.mother_info}}">
+          <view class="type_block flexcolumn" bindtap="gocatDetail" data-item="{{getdata.mother_info}}">
+            <view class="userImg">
+              <image style="width: 100%;height: 100%;display: block;" mode="aspectFill" src="{{getdata.mother_info.img||nullheaderImage}}"></image>
+            </view>
+            <view class="typeListname  cat_namestyle flexcenter">
+            <view class="cat_name">
+              {{getdata.mother_info.cat_name}}
+            </view> <van-icon wx:if="{{getdata.mother_info.sex==1}}" size="20" name="/images/gong_icon.png"></van-icon>
+              <van-icon wx:if="{{getdata.mother_info.sex==2}}" size="20" name="/images/mu_icon.png"></van-icon>
+            </view>
+          </view>
+        </block>
+        <block wx:if="{{getdata.father_info}}">
+          <view class="type_block flexcolumn" bindtap="gocatDetail" data-item="{{getdata.father_info}}">
+            <view class="userImg">
+              <image style="width: 100%;height: 100%;display: block;" mode="aspectFill" src="{{getdata.father_info.img||nullheaderImage}}"></image>
+            </view>
+            <view class="typeListname cat_namestyle flexcenter">
+              <view class="cat_name">
+            {{getdata.father_info.cat_name}}
+            </view> <van-icon wx:if="{{getdata.father_info.sex==1}}" size="20" name="/images/gong_icon.png"></van-icon>
+              <van-icon wx:if="{{getdata.father_info.sex==2}}" size="20" name="/images/mu_icon.png"></van-icon>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 兄弟姐妹-->
+    <view class="new_content" wx:if="{{getdata.nest_info}}">
+      <view class="typetitle">
+        同窝猫咪
+      </view>
+      <view class="typeList flexastart">
+        <block wx:for="{{getdata.nest_info}}" wx:key="index">
+          <view class="type_block flexcolumn" bindtap="gocatDetail" data-item="{{item}}">
+            <view class="userImg">
+              <image style="width: 100%;height: 100%;display: block;" mode="aspectFill" src="{{item.img||nullheaderImage}}"></image>
+            </view>
+            <view class="typeListname flexcenter cat_namestyle">
+              <view class="cat_name">{{item.cat_name}}</view>
+              <van-icon wx:if="{{item.sex==1}}" size="20" name="/images/gong_icon.png"></van-icon>
+              <van-icon wx:if="{{item.sex==2}}" size="20" name="/images/mu_icon.png"></van-icon>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+    <!-- 内容  精彩瞬间-->
+    <!-- <view class="new_content">
+      <view class="typetitle">
+        精彩瞬间
+      </view>
+      <view class="typeList flexastart">
+        图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图
+      </view>
+    </view> -->
+    <view wx:if="{{detile_userid==getdata.user_id}}" class="buttonStyle">
+      <view class="Button_ Button_del " bindtap="delCat">
+        删除猫咪
+      </view>
+      <view class="Button_" bindtap="goedit">
+        编辑信息
+      </view>
+      <!-- <view class="Button_ Button_del " bindtap="delCat">
+        删除猫咪
+      </view> -->
+    </view>
+  </view>
+</view>

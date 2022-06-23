@@ -1,0 +1,238 @@
+/* pages/orderpage/order.wxss */
+page {
+  background-color: rgba(242, 242, 242, 1);
+  padding-bottom: constant(safe-area-inset-bottom);
+  /*兼容 IOS<11.2*/
+  padding-bottom: env(safe-area-inset-bottom);
+  /*兼容 IOS>11.2*/
+  height: auto;
+}
+
+.saishipage {
+  width: 100%;
+  /* height: 100%; */
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+
+.saishipage:after {
+  /*伪元素是行内元素 正常浏览器清除浮动方法*/
+  content: "";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.headerImage {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.imageStyle {
+  display: block;
+  width: 100%;
+}
+
+/* 内容 */
+.matchdetail_content {
+  background: #fff;
+  padding: 20rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.D_title {
+  font-size: 36rpx;
+
+}
+
+.D_header {
+  align-items: flex-end;
+}
+
+.header_L {
+  color: rgba(0, 0, 0, 1);
+  font-size: 24rpx;
+}
+
+.lable {
+  width: 90rpx;
+  flex-shrink: 0;
+}
+
+.header_time {
+  padding-top: 20rpx;
+  font-weight: bold;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.header_time .time {
+  font-weight: bold;
+}
+
+.shareButton {
+  width: 147rpx;
+  height: 61rpx;
+  border-radius: 10rpx;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.buttonIcon {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+
+.tag_style {
+  background: #FEEFE6;
+  color: rgba(255, 87, 51, 1);
+  font-size: 14px;
+  padding: 20rpx;
+  margin: 20rpx 0;
+  border-radius: 10rpx;
+}
+
+.BM_bottom {
+  width: 162rpx;
+  height: 50rpx;
+  background: #FF6A6E;
+  color: #fff;
+  text-align: center;
+  border-radius: 50rpx;
+  line-height: 50rpx;
+}
+
+.timeData {
+  color: rgba(255, 87, 51, 1);
+  font-size: 22rpx;
+}
+
+.hd_text {
+  padding-left: 16rpx;
+  font-size: 14px;
+
+}
+
+
+/* cell */
+.cell {
+  font-size: 28rpx;
+  padding: 10rpx 0;
+  align-items: flex-start;
+}
+
+.cell_title {
+  width: 140rpx;
+  flex-shrink: 0;
+}
+
+.cell_text {
+  font-size: 24rpx;
+  font-weight: bold;
+}
+
+.locationicon {
+  width: 43rpx;
+  height: 40rpx;
+  display: block;
+  margin-left: 10rpx;
+}
+
+/* <!-- 内容  活动人物--> */
+
+.new_content {
+  width: 100%;
+  margin-top: 20rpx;
+  background: #fff;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
+.jcsj {
+  padding: 20rpx 0;
+}
+
+.jcsj .typetitle {
+  padding-left: 20rpx;
+}
+
+.typetitle {
+  font-size: 34rpx;
+  font-weight: bold;
+}
+
+.typeList {
+  flex-wrap: nowrap;
+  margin-top: 10rpx;
+  overflow-x: auto;
+}
+
+.type_block {
+  padding: 14rpx 20rpx;
+  border-radius: 10rpx;
+  /* border: 1rpx solid rgb(180, 177, 177); */
+  min-width: 120rpx;
+  text-align: center;
+  margin: 5rpx;
+  margin-left: 14rpx;
+  flex-shrink: 0;
+  font-size: 24rpx;
+  box-shadow: 0 0 5rpx rgb(180, 177, 177) ;
+}
+
+.typeListname {
+  padding: 10rpx 0;
+  font-weight: bold;
+}
+
+.userImg {
+  width: 124rpx;
+  height: 124rpx;
+  display: block;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.userdesc {
+  font-size: 20rpx;
+  font-weight: normal;
+}
+/* 裁判详情 */
+.pwinfoStyle{
+  padding: 20rpx;
+  width: 550rpx;
+  height: 750rpx;
+  overflow-y: auto;
+  border-radius: 14rpx;
+}
+.van-popup {
+  border-radius: 14rpx;
+}
+.userImageStyle{
+  width: 550rpx;
+  height: 550rpx;
+  overflow: hidden;
+  border-radius: 14rpx;
+}
+.userListname{
+  font-size: 36rpx;
+  margin-top: 20rpx;
+  font-weight: 600;
+}
+.usertype{
+  font-size: 26rpx;
+  padding: 10rpx 0;
+  font-weight: 600;
+  color: #a7a5a4;
+}
+.userobjdesc{
+  font-size:28rpx;
+  line-height: 1.5;
+  text-indent: 64rpx;
+  color: #888584;
+}

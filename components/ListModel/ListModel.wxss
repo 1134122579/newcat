@@ -1,0 +1,44 @@
+/* 内容 一个块 */
+
+.listModel{
+  /* padding-bottom: 20px; */
+  /* background: #DBDBDB; */
+  width: 100%;
+  padding:0 20rpx ;
+  box-sizing: border-box;
+}
+.tab_content_list {
+  position: relative;
+}
+
+.tab_left{
+  width: 360rpx;
+  width: 49%;
+  float: left;
+}
+.tab_right {
+  width: 360rpx;
+  width: 49%;
+  float: right;
+}
+.tab_content_list:after{
+  /*伪元素是行内元素 正常浏览器清除浮动方法*/
+  content: "";
+  display: block;
+  height: 0;
+  clear:both;
+  visibility: hidden;
+}
+.isNull{
+  text-align: center;
+  width: 100%;
+  padding: 10px 0;
+  font-size: 24rpx;
+  color: #ccc;
+}
+.MatchImgList{
+  margin-top: 14rpx;
+  border-radius: 6rpx;
+  overflow: hidden;
+  max-height: 380rpx;
+}

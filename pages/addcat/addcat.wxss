@@ -1,0 +1,85 @@
+/* pages/enrollpage/enrollpage.wxss */
+page{
+  --cell-large-vertical-padding:40rpx;
+  background-color: rgba(232, 232, 232, 1);
+  width: 100%;
+  height: 100%;
+}
+.cat_detail{
+  margin-bottom: 20rpx;
+  background: #fff;
+} 
+.e_title{
+  font-size: 16px;
+  color: #333;
+  font-weight: 600;
+  padding: 14px 10px;
+  letter-spacing: 2px;
+}
+.inputStyle{
+  padding: 10px 0;
+}
+.e_block .van-field {
+  padding: 10px 0;
+}
+.labelClass{
+  width: 120px;
+}
+.uplodaStyle{
+  padding:0 10px;
+}
+.button_{
+  padding: 20px;
+  background: #fff;
+}
+.ov_text{
+  overflow: hidden;
+  overflow: hidden;
+text-overflow:ellipsis;
+white-space: nowrap;
+}
+
+/* 标签 */
+.poupList{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+.listStyle{
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  flex: 1;
+  overflow-y: auto;
+}
+.listname{
+  border: 1px solid #e7e4e4;
+  padding: 10rpx 20rpx;
+  margin: 10rpx;
+  border-radius: 10rpx;
+  font-size: 24rpx;
+}
+.suer{
+  border: 1px solid var(--button-warning-background-color);
+  color: var(--button-warning-background-color);
+}
+.button_list{
+    background:var(--button-warning-background-color) ;
+    width: 80%;
+    margin: 20rpx auto;
+    flex-shrink: 0;
+    height: 80rpx;
+    line-height: 80rpx;
+    text-align: center;
+    color: #fff;
+    border-radius: 40rpx;
+}
+.is-dongtai {
+  padding: 20rpx 0;
+  padding-left: 20rpx;
+  color: #FF6A6E;
+}

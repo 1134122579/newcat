@@ -1,0 +1,48 @@
+<view>
+<block wx:if="{{list.length>0}}">
+  <block wx:for="{{list}}" wx:key="index">
+    <view class="order_block">
+      <view class="flexbetween ">
+        <view class="order-content">
+          <view> 姓名：<text class="order_text">{{item.cat_name}}</text></view>
+          <view> 订单编号：<text class="order_text">{{item.order_no}}</text></view>
+          <view> 订单金额：<text class="order_text order_price">{{item.price}}</text></view>
+          <view> 创建时间：<text class="order_text">{{item.create_time}}</text></view>
+          <view class="flexastart"> 订单状态：
+          <view class="order_text order_price" wx:if="{{item.status==1}}">已参赛</view>
+          <!-- <view class="order_text order_price" wx:if="{{item.status==2}}">待支付</view> -->
+          <view class="order_text order_price" wx:if="{{item.status==3}}">未支付</view>
+          <!-- <view class="order_text order_price" wx:if="{{item.status==4}}">退款失败</view>
+          <view class="order_text order_price" wx:if="{{item.status==5}}">取消支付</view> -->
+          </view>
+          <!-- 1 已参赛  2 删除  3 未支付  -->
+        </view>
+        <view class="order-button flexcenter">
+          <view class="look" bindtap="lookbutton" data-id="{{item.order_no}}">
+            查看
+          </view>
+          <view class="look errorstyle" wx:if="{{item.status==3}}" bindtap="delbutton" data-id="{{item.order_no}}">
+            删除
+          </view>
+        </view>
+      </view>
+      <view class="order_foolter" wx:if="{{orderdetailorder_no==item.order_no}}">
+        <view class="order_detail">订单详情</view>
+        <block wx:for="{{item.group_names}}" wx:key="id" wx:for-item="group">
+          <view>
+            <view class="flexbetween">
+              <view class="order_list">参赛组别：<text class="order_text">{{group.name}}</text></view>
+              <view class="order_list">组别金额：<text class="order_text order_price">{{group.price}}</text></view>
+              <view class="order_list">参赛类型：<text class="order_text">{{group.type==1?'杯赛':'环赛'}}</text></view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </block>
+  <view class="isnulllist" wx:if="{{!isnulllist}}"> 暂无更多</view>
+</block>
+<block wx:else>
+  <van-empty description="暂无订单" />
+</block>
+</view>

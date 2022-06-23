@@ -1,0 +1,31 @@
+<view class="listModel">
+  <view class="tab_content_list">
+    <view class="tab_left">
+      <block wx:for="{{leftList}}" wx:key="index">
+        <!-- 猫舍 -->
+        <MyCatModel item="{{item}}" wx:if="{{listType=='mycathouse'}}" bind:join_vote="join_vote" />
+        <!-- 首页 -->
+        <HomeBlockModel item="{{item}}" isdele="{{isdele}}" bind:ondele="ondele" wx:if="{{listType=='homeblockmodel'}}" bind:join_vote="join_vote" />
+        <!-- 精彩瞬间 -->
+        <view class="MatchImgList" wx:if="{{listType=='MatchImgList'}}">
+          <image mode="widthFix" style="width: 100%; border-radius: 6rpx;display: block;overflow: hidden;" src="{{item.url}}" data-url="{{item.url}}" bindtap="previewImage"></image>
+        </view>
+        <!-- <CatModel item="{{item}}"  bind:join_vote="join_vote"  isticket="{{isticket}}"/> -->
+      </block>
+    </view>
+    <view class="tab_right">
+      <block wx:for="{{rightList}}" wx:key="index">
+        <!-- 猫舍 -->
+        <MyCatModel item="{{item}}" wx:if="{{listType=='mycathouse'}}" bind:join_vote="join_vote" />
+        <!-- 首页 -->
+        <HomeBlockModel isdele="{{isdele}}" item="{{item}}"  bind:ondele="ondele" wx:if="{{listType=='homeblockmodel'}}" bind:join_vote="join_vote" />
+        <!-- 精彩瞬间 -->
+        <view class="MatchImgList" wx:if="{{listType=='MatchImgList'}}">
+          <image mode="widthFix" style="width: 100%; border-radius: 6rpx;display: block;overflow: hidden;" src="{{item.url}}" data-url="{{item.url}}" bindtap="previewImage"></image>
+        </view>
+        <!-- <CatModel item="{{item}}"  bind:join_vote="join_vote" isticket="{{isticket}}"/> -->
+      </block>
+    </view>
+  </view>
+  <view class="isNull" hidden="{{alllist.length>0}}">暂无更多~</view>
+</view>

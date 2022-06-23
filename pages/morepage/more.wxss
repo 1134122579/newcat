@@ -1,0 +1,164 @@
+/* pages/morepage/more.wxss */
+
+page {
+  /* background: #f7f8fa; */
+  background: #fff;
+  --grid-item-content-background-color: rgba(0, 0, 0, 0)
+}
+
+.more_header {
+  width: 100%;
+  min-height: 589rpx;
+  background-size: 100% 100%;
+  background: #FF5C39;
+  position: relative;
+  overflow: hidden;
+  border-bottom-right-radius: 27.1em 1.9em;
+  border-bottom-left-radius: 27.1em 1.9em;
+}
+
+.num {
+  font-size: 36rpx;
+}
+
+.header_bg {
+  width: 100%;
+  min-height: 589rpx;
+  display: block;
+
+}
+
+.user_content {
+  position: absolute;
+  width: 100%;
+  bottom: -1px;
+  /* display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: column; */
+}
+
+.user_content_t {
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 40rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: #fff;
+}
+
+.listBlock {
+  width: 25%;
+  font-weight: bold;
+}
+
+.header_footer {
+  margin: 0 20rpx;
+  margin-top: 45rpx;
+  box-sizing: border-box;
+  background: url('http://cdn.catcius.com/bgm.png') no-repeat;
+  background-size: 100% 100%;
+  color: #fff;
+  font-size: 24rpx;
+  padding: 20rpx;
+  border-radius: 20rpx 20rpx 0 0;
+  overflow: hidden;
+}
+
+.numname {
+  font-weight: normal;
+}
+
+.hf_title_r {
+  width: 100rpx;
+  height: 38rpx;
+}
+
+.userName {
+  padding: 0 20rpx;
+  font-size: 38rpx;
+}
+
+.morerpage {
+  width: 100%;
+  height: 100%;
+  padding-bottom: 100px;
+  position: relative;
+  /* box-sizing: border-box; */
+}
+
+.marginTop {
+  margin-top: 20rpx;
+}
+
+/* <!-- 卡券   车辆 --> */
+
+.cardStyle {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 156rpx;
+  box-sizing: border-box;
+  margin: 20rpx 40rpx;
+}
+
+.imageStyle {
+  width: 48%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 20rpx;
+}
+
+.imageStyle image {
+  width: 100%;
+  height: 100%;
+}
+
+
+.function_title {
+  font-size: 36rpx;
+  font-weight: 600;
+  padding: 20rpx;
+}
+
+.contact {
+  position: fixed;
+  right: 20rpx;
+  top: 80%;
+
+  /* width: 80rpx;
+  height:80rpx ; */
+  /* overflow: hidden; */
+  border-radius: 50%;
+}
+
+.button_style {
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 50%;
+  background-color: #D13127;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+
+}
+
+.contactButton {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.shop {
+  margin: 20rpx 0;
+  font-size: 30rpx;
+}
+
+.iconstyle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
