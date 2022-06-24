@@ -63,6 +63,19 @@ Page({
         isbutton: false,
       },
       {
+        title: "日历排班",
+        icon: "dingdanjihe",
+        to: "../../pages/calendar/calendar",
+        linktype: "navigateTo",
+        value: "",
+        isborder: true,
+        marginTop: "",
+        is_power: "user",
+        isshare: false,
+        isLink: false,
+        isbutton: false,
+      },
+      {
         title: "分享推荐",
         icon: "share",
         to: "",
@@ -176,7 +189,7 @@ Page({
    */
   onHide: function () {
     wx.hideLoading({
-      success: (res) => {},
+      success: res => {},
     });
   },
 

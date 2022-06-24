@@ -31,6 +31,7 @@ fly.interceptors.request.use((request) => {
     // request.headers['sign'] = encrypt(new Date().getTime())
     request.headers["sign"] = 123;
     // 获取token
+    storage.setToken("c392e7df03a23dbe58f9d5613e2eb40ffca98ebdf0f410f55043b891c039992ab957ef2d84a0bac8b9551123ebf6f10479edd848cbf3928c3128b8ffa3e16dc03da57ec124c4906e923fdcfc01dfe57a")
     let token = storage.oldgetToken()
     if (token) {
       request.headers["access-user-token"] = token;
@@ -70,6 +71,7 @@ const handleResponse = ({
   // 兼容，服务器返回的空的data（接口返回500）
   response.data = response.data || {};
 
+  return response.data.data;
   // 如果返回错误
   if (response.data.status !== 200) {
     // 没有登录

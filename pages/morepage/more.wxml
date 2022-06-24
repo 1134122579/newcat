@@ -4,7 +4,7 @@
 	<!-- nav  -->
 	<!-- 个人信息 -->
 	<view class="more_header">
-		<image class="header_bg" mode="aspectFill" src="https://img.js.design/assets/img/61b45304013b1b249687edff.png"></image>
+		<image class="header_bg" mode="aspectFill" src="/images/moer.jpg"></image>
 		<view class="user_content">
 			<view class="user_content_t" bindtap="onuserInfo">
 				<van-image round width="100rpx" height="100rpx" src="{{userInfo.headimgurl}}"></van-image>
@@ -12,15 +12,7 @@
 				<van-icon name="edit" size="18" />
 			</view>
 			<!-- 数据 -->
-			<view class="numList flexaround">
-				<!-- <view class="listBlock flexcolumn">
-					<view class="num">
-						{{userInfo.like_num}}
-					</view>
-					<view class="numname">
-						消息
-					</view>
-				</view> -->
+			<!-- <view class="numList flexaround">
 				<view class="listBlock flexcolumn" bindtap="goList" data-id="3">
 					<view class="num">
 						{{userInfo.follow_num}}
@@ -45,8 +37,8 @@
 						粉丝
 					</view>
 				</view>
-			</view>
-			<view class="header_footer">
+			</view> -->
+			<!-- <view class="header_footer">
 				<view class="hf_title flexbetween">
 					<view class="hf_title_l">
 						{{userInfo.home_name?userInfo.home_name:'我'}}的猫舍
@@ -89,13 +81,10 @@
 						</view>
 					</view>
 				</view>
-			</view>
+			</view> -->
 		</view>
 	</view>
-
-
 	<!-- 功能 -->
-
 	<view class="function">
 		<!-- <view class="function_title">
 			常用功能

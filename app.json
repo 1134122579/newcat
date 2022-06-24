@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/morepage/more",
     "pages/calendar/calendar",
     "pages/home/home",
     "pages/enroll/enroll",
@@ -29,7 +30,6 @@
     "pages/scanpage/scanpage",
     "pages/setting/setting",
     "pages/spacepage/space",
-    "pages/morepage/more",
     "pages/orderpage/order",
     "pages/login/login",
     "pages/OrderLog/OrderLog",

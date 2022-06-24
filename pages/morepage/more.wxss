@@ -25,6 +25,7 @@ page {
   width: 100%;
   min-height: 589rpx;
   display: block;
+  filter: blur(2px);
 
 }
 
