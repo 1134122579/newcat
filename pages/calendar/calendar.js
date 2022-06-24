@@ -7,7 +7,7 @@ Page({
     day: new Date().getDate(), // 日期
     header: true, // 日历标题
     lunar: true, // 显示农历
-    more: true, // 显示非当前月日期
+    more: false, // 显示非当前月日期
     week_title: true, // 显示周标题
     next: true, // 显示下个月
     prev: true, // 显示上个月
@@ -27,17 +27,27 @@ Page({
     showViewStyle: "",
     buttonStyle: "",
     userList: [
-    {name:'小明哈哈'},
-    {name:'小明哈哈'},
-    {name:'小明哈哈小明哈哈小明哈哈小明哈哈'},
-    {name:'小明哈哈'},
-    {name:'小明哈哈'},
-    {name:'小明哈哈'},
-    {name:'小明哈哈'},
-    {name:'小明哈哈'},
-    {name:'小明哈哈'},
-    {name:'小明哈哈'},
-
+      [
+        { name: "小哈" },
+        { name: "小明哈哈" },
+        { name: "小明哈哈小明哈哈小明哈哈小明哈哈" },
+        { name: "小明哈哈" },
+        { name: "小明哈哈" },
+        { name: "小明哈哈" }, { name: "小哈" },
+        { name: "小明哈哈" },
+        { name: "小明哈哈小明哈哈小明哈哈小明哈哈" },
+        { name: "小明哈哈" },
+        { name: "小明哈哈" },
+        { name: "小明哈哈" },
+      ],
+      [
+        { name: "小哈" },
+        { name: "小明哈哈" },
+        { name: "小明哈哈小明哈哈小明哈哈小明哈哈" },
+        { name: "小明哈哈" },
+        { name: "小明哈哈" },
+        { name: "小明哈哈" },
+      ],
     ],
   },
 
@@ -93,7 +103,12 @@ Page({
     });
   },
   catchtap() {},
-
+  // 重置
+  resveclick(){
+    this.setData({
+      
+    })
+  },
   /**
    * 点击下个月
    */
@@ -160,10 +175,10 @@ Page({
     let { style } = this.data;
 
     this.setData({
-      activeDate: event.detail.date 
-    })
+      activeDate: event.detail.date,
+    });
 
-console.log("当前选中的日期",event)
+    console.log("当前选中的日期", event);
 
     return;
 
@@ -190,42 +205,39 @@ console.log("当前选中的日期",event)
 
     // console.log(this.data.buttonStyle)
   },
-  setUser(e){
-    console.log(e)
-    let {info}=e.currentTarget.dataset
-    let {activeDate,style}=this.data
-    if(!activeDate){
+  setUser(e) {
+    console.log(e);
+    let { info } = e.currentTarget.dataset;
+    let { activeDate, style } = this.data;
+    if (!activeDate) {
       wx.showToast({
-        title: '请先选择日期',
-        icon:'none'
-      })
-      return
+        title: "请先选择日期",
+        icon: "none",
+      });
+      return;
     }
     let is_date = JSON.stringify(style).indexOf(activeDate) > -1;
-    let newStyle=[]
+    let newStyle = [];
     if (!is_date) {
-      newStyle= style.concat({
-        date:activeDate,
+      newStyle = style.concat({
+        date: activeDate,
         other: info.name,
         otherColor: "#4ECA8E",
         badgeColor: "#4ECA8E",
         background: "rgba(59,139,242,0.1)",
       });
-   
-    }else{
-      newStyle=style.map(item=>{
-        if(item.date==activeDate){
-          item.other=info.name
+    } else {
+      newStyle = style.map(item => {
+        if (item.date == activeDate) {
+          item.other = info.name;
         }
-        return item
-      })
-
+        return item;
+      });
     }
     this.setData({
       style: newStyle,
     });
-    console.log(this.data.style)
-
+    console.log(this.data.style);
   },
 
   closeAction: function () {

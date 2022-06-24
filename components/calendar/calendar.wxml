@@ -35,7 +35,7 @@
 
 						<view class="calendar-cell" style="background: {{day.background}}; width: {{cellSize}}px; height: {{cellSize}}px;" wx:if="{{day.day <= 0}}"></view>
 
-						<view class="calendar-cell {{activedate==day.date&&'activedatestyle'}}" style="background: {{day.background}}; width: {{cellSize}}px; height: {{cellSize}}px; border-radius: 6px;" wx:else bindtap="dayClick" data-day="{{day}}">
+						<view class="calendar-cell border {{activedate==day.date&&'activedatestyle'}}" style="background: {{day.background}}; width: {{cellSize}}px; height: {{cellSize}}px; border-radius: 6px;" wx:else bindtap="dayClick" data-day="{{day}}">
 							<!-- 上月  -->
 							<block wx:if="{{day.info == 'prev'}}">
 								<view class="today" style="background: {{day.selectedColor}}">
@@ -69,9 +69,6 @@
 								<view class="badge" wx:if="{{day.badgeColor}}" style="background:{{day.badgeColor}};"></view>
 							</block>
 						</view>
-
-
-
 					</block>
 				</view>
 			</block>

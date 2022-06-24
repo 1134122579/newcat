@@ -13,7 +13,8 @@ actives:[激活的日期]
 
 更多事件函数请参考JS页代码文档
 -->
-<view class="plugin">
+<view class="calender">
+	<view class="plugin">
 	<view catchtap="catchtap">
 		<calendar year="{{year}}"  month="{{month}}" startDate="2022-05" day="{{day}}" today="{{true}}" header="{{header}}" next="{{next}}" prev="{{prev}}" addon="mixed" days-addon="{{days_addon}}" weeks="{{week_title}}" weeks-type="{{title_type}}" show-more-days="{{more}}" lunar="{{lunar}}" cell-size="{{cs}}" days-color="{{style}}" active-type="{{activeType}}" next-month='hi' bindnextMonth='nextMonth' bindprevMonth='prevMonth' binddateChange='dateChange' binddayClick='dayClick' />
 	</view>
@@ -25,13 +26,14 @@ actives:[激活的日期]
 </view>
 <view class="user_bottom">
 	<view class="user_header">
-		<van-button type="default" size="mini">重置</van-button>
+		<van-button type="default" size="mini" bind:click="resveclick" >重置</van-button>
 		<van-button type="warning" size="mini">完成</van-button>
 	</view>
 	<swiper class="user-swiper">
+	<block wx:for="{{userList}}" wx:for-index="idx" wx:for-item="swiperItemList"  wx:key="idx">
 		<swiper-item>
 			<view class="blocklist">
-				<block wx:for="{{userList}}" wx:key="index">
+				<block wx:for="{{swiperItemList}}" wx:key="index">
 					<view class="block-info" bindtap="setUser" data-info="{{item}}">
 						<van-image width="80rpx" round height="80rpx" fit="cover" src="/images/catimg.png" />
 						<view class="block-name">
@@ -41,6 +43,8 @@ actives:[激活的日期]
 				</block>
 			</view>
 		</swiper-item>
+	</block>
 	</swiper>
 
+</view>
 </view>

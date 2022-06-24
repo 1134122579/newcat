@@ -85,20 +85,21 @@ background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAigAAAG4CAY
 .calendar-row {
     display: flex;
     justify-content: space-around;
-    margin-top: 10rpx;
+    margin-top: 8rpx;
 }
 
 /**
  * 日历单个日期项
  */
-
+ .border{
+    box-sizing:border-box;
+    margin: 0 1px;
+}
 .calendar-cell {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    /* margin-top: 10rpx; */
-    /* margin-bottom: 5rpx;     */
     text-align: center;
     /*相对定位 */
     position: relative;
