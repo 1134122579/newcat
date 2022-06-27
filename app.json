@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/morepage/more",
+    "pages/location/location",
     "pages/calendar/calendar",
     "pages/home/home",
     "pages/enroll/enroll",
@@ -64,21 +65,12 @@
     "color": "#272822",
     "selectedColor": "#D13027",
     "list": [{
-        "pagePath": "pages/home/home",
-        "text": "首页"
-      },
-      {
-        "pagePath": "pages/orderpage/order",
-        "text": "订单"
+        "pagePath": "pages/location/location",
+        "text": "地图"
       },
       {
         "pagePath": "pages/releasepage/releasepage",
         "text": "会员"
-      },
-      {
-        "pagePath": "pages/spacepage/space",
-        "text": "空间"
-
       },
       {
         "pagePath": "pages/morepage/more",

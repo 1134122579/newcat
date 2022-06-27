@@ -1,6 +1,4 @@
-// pages/releasepage/releasepage.js
-let App = getApp()
-import storage from '../../utils/cache'
+// pages/location/location.js
 Page({
 
   /**
@@ -8,23 +6,6 @@ Page({
    */
   data: {
 
-  },
-  goaddcat() {
-    wx.showLoading({
-      title: '进入中..',
-    })
-    storage.removeInfo('CARPZ')
-    wx.navigateTo({
-      url: '/pages/addcat/addcat',
-    })
-  },
-  godongtai() {
-    wx.showLoading({
-      title: '进入中..',
-    })
-    wx.navigateTo({
-      url: '/pages/dongtai/dongtai',
-    })
   },
 
   /**
@@ -45,14 +26,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    App.tabbershow(this, 1);
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    wx.hideLoading({})
+
   },
 
   /**

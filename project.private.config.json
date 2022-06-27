@@ -11,7 +11,22 @@
       "list": []
     },
     "miniprogram": {
-      "list":[]
+      "list": [
+        {
+          "name": "",
+          "pathName": "pages/catdetail/catdetail",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "详情",
+          "pathName": "pages/catdetail/catdetail",
+          "query": "user_id=38&cat_id=180",
+          "scene": null,
+          "launchMode": "default"
+        }
+      ]
     }
   }
 }

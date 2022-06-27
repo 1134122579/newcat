@@ -14,14 +14,14 @@
 				<van-field required input-align="right" readonly value="{{ birthday}}" placeholder="请输入生日" label="生日" />
 			</picker> -->
 		</view>
-		<van-field model:value="{{ home_name }}" required input-align="right" label="猫舍名字" placeholder="请输入猫舍名字" border="{{ false }}" />
+		<!-- <van-field model:value="{{ home_name }}" required input-align="right" label="猫舍名字" placeholder="请输入猫舍名字" border="{{ false }}" /> -->
 		<!-- <van-field model:value="{{ address }}"  required input-align="right" label="地址" placeholder="请输入地址" border="{{ false }}" /> -->
-		<van-field model:value="{{ desc }}" autosize="{{autosize}}" type="textarea" required input-align="right" label="猫舍简介" placeholder="请输入猫舍简介" border="{{ false }}" />
-		<van-cell class="cell" title="猫舍背景" border="{{ false}}">
+		<!-- <van-field model:value="{{ desc }}" autosize="{{autosize}}" type="textarea" required input-align="right" label="猫舍简介" placeholder="请输入猫舍简介" border="{{ false }}" /> -->
+		<!-- <van-cell class="cell" title="猫舍背景" border="{{ false}}">
 			<view>
 				<van-uploader file-list="{{fileListcat_bg}}" max-count="1"  use-before-read bind:before-read='beforeRead' bind:after-read="aftercat_bgRead" accept="image" bind:delete="deletecat_bgImage" />
 			</view>
-		</van-cell>
+		</van-cell> -->
 	</van-cell-group>
 
 	<van-popup show="{{ isshow }}" position="bottom" round>
