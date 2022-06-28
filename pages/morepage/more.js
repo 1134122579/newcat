@@ -11,7 +11,7 @@ Page({
     userInfo: {},
     list: [
       {
-        title: "我的动态",
+        title: "我的发布",
         icon: "xiaohongshushoucang",
         to: "../../pages/dynamicpage/dynamicpage",
         linktype: "navigateTo",

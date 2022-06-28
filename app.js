@@ -11,6 +11,7 @@ App({
   getStorage: $Storage.get,
   setStorage: $Storage.set,
   rmStorage: $Storage.rm,
+  
   // 设置自定义下标 id
   tabbershow($this, selected) {
     if (typeof $this.getTabBar === "function" && $this.getTabBar()) {
@@ -99,6 +100,7 @@ App({
     const logs = wx.getStorageSync("logs") || [];
     logs.unshift(Date.now());
     wx.setStorageSync("logs", logs);
+    storage.setToken("c392e7df03a23dbe58f9d5613e2eb40ffca98ebdf0f410f55043b891c039992ab957ef2d84a0bac8b9551123ebf6f10479edd848cbf3928c3128b8ffa3e16dc03da57ec124c4906e923fdcfc01dfe57a")
     if (storage.getUserInfo()) {
       this.globalData.userInfo = storage.getUserInfo();
     }

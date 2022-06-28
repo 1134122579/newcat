@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/location/location",
     "pages/morepage/more",
     "pages/maplocation/location",
     "pages/visitingCard/visitingCard",
-    "pages/location/location",
     "pages/calendar/calendar",
     "pages/home/home",
     "pages/enroll/enroll",

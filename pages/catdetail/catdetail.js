@@ -70,6 +70,11 @@ Page({
     previewImage(e) {
       var index = e.target.dataset.index;
       wx.previewImage({
+        current:'../../images/moer.jpg',
+        uels:['/images/moer.jpg']
+      })
+      return
+      wx.previewImage({
         current: this.data.getdata.img[index], //当前点击的图片链接
         urls: this.data.getdata.img, //图片数组
       });
