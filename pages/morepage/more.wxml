@@ -38,7 +38,7 @@
 					</view>
 				</view>
 			</view> -->
-			<view class="header_footer">
+			<!-- <view class="header_footer">
 				<view class="hf_title flexbetween">
 					<view class="hf_title_l">
 						{{userInfo.home_name?userInfo.home_name:'我'}}的猫舍
@@ -81,7 +81,7 @@
 						</view>
 					</view>
 				</view>
-			</view>
+			</view> -->
 		</view>
 	</view>
 	<!-- 功能 -->

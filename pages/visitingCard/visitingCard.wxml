@@ -1,0 +1,45 @@
+<view class="card">
+  <!-- 头像 -->
+  <view class="card-item">
+    <view class="card-left">
+      <image class="header-image" src="/images/cathome.png"></image>
+    </view>
+    <view class="card-right">
+      某某某某
+    </view>
+  </view>
+  <!-- 简介 -->
+  <view class="card-item desc">
+    <view class="card-left title">
+      某某某某某某某某某某某某某某某某某某某某某某某某
+    </view>
+    <view class="card-right">
+      某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某某
+    </view>
+  </view>
+  <!-- 用户信息 -->
+  <view class="userinfo">
+    <view class="info-li">
+      地址：地址地址地址地址地址地址地址地址
+    </view>
+    <view class="info-li">
+      电话：18438627291
+    </view>
+    <view class="info-li">
+      手机：115451841
+    </view>
+    <view class="info-li">
+      邮箱：115451841
+    </view>
+    <view class="info-li">
+      客服电话：115451841
+    </view>
+    <view class="info-li">
+      网址：115451841
+    </view>
+  </view>
+</view>
+<!-- 操作 -->
+<view class="button">
+    
+</view>

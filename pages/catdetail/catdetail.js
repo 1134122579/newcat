@@ -176,10 +176,8 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    let { getdata } = this.data;
     return {
-      title: getdata.title,
-      imageUrl: getdata.cover,
+      title: "某某投喂点",
     };
   },
 });
