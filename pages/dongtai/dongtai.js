@@ -3,15 +3,15 @@ let App = getApp();
 import Api from "../../api/index";
 import { getDate } from "../../utils/util";
 import storgae from "../../utils/cache";
-let time
+let time;
 
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    isnopush:false,
-    ispush:false,
+    isnopush: false,
+    ispush: false,
     show: false,
     maxcount: 8,
     title: "",
@@ -19,23 +19,7 @@ Page({
     match_id: "",
     label: "",
     type: 1,
-    sex: null, //性别
-    cat_name: "", //姓名
-    color: "", //颜色
-    birthday: "", //生日
-    eye_color: "", //眼睛颜色
-    register_no: "", //编号
-    father_name: "", //
-    father_pz: "",
-    father_color: "",
-    father_register_no: "",
-    mother_pz: "",
-    mother_color: "",
-    mother_name: "",
-    mother_register_no: "",
-    group_id: "", //组别*
-    match_id: "", //FUN SHOW
-    desc: "",
+    introduction: "", //简介
     level: "",
     levelIndex: null,
     sexIndex: null,
@@ -45,39 +29,10 @@ Page({
       minHeight: 100,
     },
     isnoTimelocation: false,
-    locationObj: {}, // 暂存定位
+    latitude:'',//经纬度
+    longitude:'', //经纬度
     endTime: "2022-01-01",
-    levelList: [
-      {
-        id: 1,
-        text: "第一级别",
-      },
-      {
-        id: 2,
-        text: "第二级别",
-      },
-    ],
     PzList: [],
-    voteList: [
-      {
-        id: 1,
-        text: "第一期",
-      },
-      {
-        id: 2,
-        text: "第二期",
-      },
-    ],
-    sexList: [
-      {
-        id: 1,
-        text: "公",
-      },
-      {
-        id: 2,
-        text: "母",
-      },
-    ],
   },
   showPopup() {
     wx.navigateTo({
@@ -86,63 +41,34 @@ Page({
     // this.setData({ show: true });
   },
   onclosebuttonPopup() {
-    this.setData({ show: false });
+    this.setData({
+      show: false,
+    });
   },
 
   onClose() {
-    this.setData({ show: false });
-  },
-
-  // 获取标签
-  getHotLable() {
-    Api.getHotLable().then((res) => {
-      this.setData({
-        PzList: res,
-      });
+    this.setData({
+      show: false,
     });
   },
   // 获取个位置
   getlocation() {
     let that = this;
-    let { isnoTimelocation, locationObj } = this.data;
-    if (isnoTimelocation) {
-      const latitude = locationObj.latitude;
-      const longitude = locationObj.longitude;
+    App.isGetlocation(res => {
+      let { latitude, longitude } = res;
       wx.chooseLocation({
         latitude,
         longitude,
-        success(res) {
+        success(chooseLocationres) {
+          console.log(chooseLocationres);
           that.setData({
-            address: res.address,
-            isnoTimelocation: true,
+            latitude:chooseLocationres.latitude,
+            longitude:chooseLocationres.longitude,
+            address: chooseLocationres.address,
           });
         },
       });
-    } else {
-      App.isGetlocation((res) => {
-        this.setData({
-          locationObj: res,
-        });
-        const latitude = res.latitude;
-        const longitude = res.longitude;
-        wx.chooseLocation({
-          latitude,
-          longitude,
-          success(res) {
-            console.log(res);
-            that.setData({
-              address: res.address,
-              isnoTimelocation: true,
-            });
-            setTimeout(() => {
-              that.setData({
-                isnoTimelocation: false,
-              });
-            }, 30000);
-          },
-        });
-      });
-    }
+    });
   },
   // 上传前
   beforeread(event) {
@@ -210,7 +136,11 @@ Page({
             });
             return;
           }
-          that.uploadFile({ url: tempFilePath, size, duration });
+          that.uploadFile({
+            url: tempFilePath,
+            size,
+            duration,
+          });
         },
         complete(res) {
           console.log(res, "complete");
@@ -218,51 +148,54 @@ Page({
       });
       return;
     }
-    let fileArray = file.map((item) => {
+    let fileArray = file.map(item => {
       item["isupload"] = true;
       return item;
     });
     let promiseall = [];
-    fileArray.forEach((item) => {
+    fileArray.forEach(item => {
       promiseall.push(that.uploadFilenew(item));
     });
     wx.showLoading({
-      title: '上传中..',
-    })
-    Promise.all(promiseall).then((res) => {
-      that.setData({
-        fileList: fileList.concat(res),
-      });
-      wx.hideLoading()
-    }).catch(err=>{
-      wx.hideLoading()
+      title: "上传中..",
     });
+    Promise.allSettled(promiseall)
+      .then(res => {
+        that.setData({
+          fileList: fileList.concat(res),
+        });
+        wx.hideLoading();
+      })
+      .catch(err => {
+        wx.hideLoading();
+      });
   },
   // 文件上传
   uploadFile(file) {
     let that = this;
-    // wx.showLoading({
-    //   title: "上传中..",
-    //   mask: true,
-    // });
     const { fileList = [] } = this.data;
-    console.log(fileList, "前数据");
+    let token = storgae.getToken();
+    let filearr = file.map(item => item.url);
     wx.uploadFile({
-      url: App.globalData.baseUrl + "upImage", // 接口地址
-      filePath: file.url,
-      name: "file",
+      url: App.globalData.baseUrl + "/client/media/pv", // 接口地址
+      filePath: filearr,
+      header: {
+        token,
+      },
+      name: "files",
       success(res) {
-        // 上传完成需要更新 fileList
-        res = JSON.parse(res.data);
-        fileList.push({
-          ...file,
-          url: res.data.imgLink,
-          isupload: false,
-        });
-        console.log(fileList, "数据");
-        that.setData({
-          fileList,
-        });
+        console.log("上传完成", res);
+        // // 上传完成需要更新 fileList
+        // res = JSON.parse(res.data);
+        // fileList.push({
+        //     ...file,
+        //     url: res.data.imgLink,
+        //     isupload: false,
+        // });
+        // console.log(fileList, "数据");
+        // that.setData({
+        //     fileList,
+        // });
       },
       complete() {
         wx.hideLoading();
@@ -270,13 +203,18 @@ Page({
     });
   },
   uploadFilenew(file) {
+    let token = storgae.getToken();
     return new Promise((resolve, reject) => {
       wx.uploadFile({
-        url: App.globalData.baseUrl + "upImage", // 接口地址
+        url: App.globalData.baseUrl + "/client/media/pv", // 接口地址
         filePath: file.url,
-        name: "file",
+        header: {
+          token,
+        },
+        name: "files",
         success(res) {
           // 上传完成需要更新 fileList
+          console.log(res, "上传完成需要更新");
           res = JSON.parse(res.data);
           resolve({
             ...file,
@@ -292,16 +230,8 @@ Page({
     let { fileList } = this.data;
     let delitem = e.detail;
     this.setData({
-      fileList: fileList.filter((item) => item.url != delitem.file.url),
+      fileList: fileList.filter(item => item.url != delitem.file.url),
       maxcount: fileList.length <= 0 || fileList[0].type == "image" ? 8 : 1,
-    });
-  },
-  // 品种
-  bindpzChange(event) {
-    let { PzList } = this.data;
-    this.setData({
-      // sexIndex: event.detail.value,
-      label: PzList[event.detail.value]["name"],
     });
   },
   // 性别
@@ -339,29 +269,35 @@ Page({
     let {
       label = "",
       fileList = [],
-      desc = "",
+      introduction = "",
       title = "",
       type = "",
       ispush,
-      isnopush
+      isnopush,
     } = this.data;
-    let link_url = fileList.map((item) => item.url);
+    let link_url = fileList.map(item => item.url);
     if (this.checkUpQuery()) {
-      if(ispush||isnopush)return
+      wx.showToast({
+        title: "添加成功，将自动返回",
+        icon: "none",
+        mask: true,
+      });
+      return;
+      if (ispush || isnopush) return;
       wx.showLoading({
         title: "发布中..",
         mask: true,
       });
       this.setData({
-        ispush:true
-      })
+        ispush: true,
+      });
       Api.addDynamic({
         label,
         link_url,
-        desc,
+        introduction,
         title,
         type,
-      }).then((res) => {
+      }).then(res => {
         wx.hideLoading();
         wx.showToast({
           title: "添加成功，将自动返回",
@@ -369,10 +305,10 @@ Page({
           mask: true,
         });
         this.setData({
-          ispush:false,
-    isnopush:true,
-        })
-        time=  setTimeout(() => {
+          ispush: false,
+          isnopush: true,
+        });
+        time = setTimeout(() => {
           wx.navigateBack({
             delta: 1,
           });
@@ -391,7 +327,7 @@ Page({
       fileList,
       label,
       address,
-      desc,
+      introduction,
       birthday,
       eye_color,
       register_no,
@@ -428,7 +364,7 @@ Page({
     //   });
     //   return;
     // }
-    if (!desc) {
+    if (!introduction) {
       wx.showToast({
         title: "请输入内容",
         icon: "none",
@@ -463,7 +399,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.getHotLable();
     this.setData({
       endTime: getDate(new Date()),
     });
@@ -482,14 +417,14 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    clearTimeout(time)
+    clearTimeout(time);
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    clearTimeout(time)
+    clearTimeout(time);
     storgae.removeInfo("CARPZ");
   },
 

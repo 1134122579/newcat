@@ -1,1 +1,15 @@
 /* pages/location/location.wxss */
+
+
+.location{
+    position:fixed;
+    bottom: 160rpx;
+    right: 34rpx;
+    background: #ffffff;
+    z-index: 99;
+    padding: 10rpx;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -5,7 +5,7 @@
 
 <!-- 我的动态 -->
 
-<block wx:if="{{list.length>0}}">
+<!-- <block wx:if="{{list.length>0}}">
   <view class="liststyle">
     <block wx:for="{{list}}" wx:key="index">
       <DongtaiModel item="{{item}}" isdele="{{isdele}}" bind:ondele="ondele" />
@@ -15,4 +15,7 @@
 </block>
 <block wx:else>
   <van-empty description="暂无动态" />
+</block> -->
+<block >
+  <van-empty description="暂无" />
 </block>

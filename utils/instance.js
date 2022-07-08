@@ -1,7 +1,6 @@
 import Fly from "./fly";
 import storage from "./cache";
 
-
 // import {
 //     encrypt
 // } from './crypto.js'
@@ -21,40 +20,35 @@ function loadingFun(loadingNum) {
   }
 }
 
-fly.config.baseURL = "https://api.catcius.com/api/v3/" // 开发
+fly.config.baseURL = "http://106.14.159.176:8080"; // 开发
 // fly.config.baseURL = "https://carshop.nxcsoft.top/api/v1/"; // 生产
 // 添加请求拦截器，加入微信用户sessionId头部
-fly.interceptors.request.use((request) => {
+fly.interceptors.request.use(request => {
   //loding
   try {
-    request.headers["app-type"] = "ios";
+    // request.headers["app-type"] = "ios";
     // request.headers['sign'] = encrypt(new Date().getTime())
-    request.headers["sign"] = 123;
+    // request.headers["sign"] = 123;
+    request.headers["Content-Type"] = request["Content-Type"] || "";
     // 获取token
-    storage.setToken("c392e7df03a23dbe58f9d5613e2eb40ffca98ebdf0f410f55043b891c039992ab957ef2d84a0bac8b9551123ebf6f10479edd848cbf3928c3128b8ffa3e16dc03da57ec124c4906e923fdcfc01dfe57a")
-    let token = storage.oldgetToken()
+    let token = storage.oldgetToken();
     if (token) {
-      request.headers["access-user-token"] = token;
+      request.headers["token"] = token;
     }
-
-
     return request;
   } catch (e) {}
 });
 
 // 添加响应拦截器，统一处理错误
 fly.interceptors.response.use(
-  (response) => {},
-  (err) => {
+  response => {},
+  err => {
     return Promise.resolve(err);
   }
 );
 
 // 拦截处理
-const handleResponse = ({
-  config,
-  response
-}) => {
+const handleResponse = ({ config, response }) => {
   if (!config.loading) {
     loadingNum--;
     loadingFun(loadingNum); //loding
@@ -67,22 +61,21 @@ const handleResponse = ({
   if (config.isThree) {
     return response;
   }
-
   // 兼容，服务器返回的空的data（接口返回500）
   response.data = response.data || {};
-
-  return response.data.data;
   // 如果返回错误
-  if (response.data.status !== 200) {
+  if (response.data.code !== 200) {
     // 没有登录
-    if (response.data.status == 203) {
+    if (response.data.status == 401) {
       try {
+        storage.removeToken()
         wx.navigateTo({
           url: "/pages/login/login",
         });
         return;
       } catch (e) {
         console.error(e);
+        storage.removeToken()
       }
     }
     // 统一报错
@@ -98,24 +91,27 @@ const handleResponse = ({
   return response.data.data;
 };
 
-const fly_request = (config) => {
+const fly_request = config => {
+  console.log("请求配置", config);
   let url = config.url;
   const method = (config.method || "").toLowerCase();
   let params = config.params || {};
+  let options = config?.headers || {};
   // 是否显示loading
   if (!config.loading) {
     loadingNum++;
     loadingFun(loadingNum);
   }
-  return fly[method](url, params)
-    .then((response) => {
+  fly.config.headers=config?.headers||{}
+  return fly[method](url, params,options)
+    .then(response => {
       return Promise.resolve({
         config,
         response,
       });
     })
     .then(handleResponse)
-    .catch((error) => {
+    .catch(error => {
       return Promise.reject(error);
     });
 };

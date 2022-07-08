@@ -11,6 +11,7 @@ App({
   getStorage: $Storage.get,
   setStorage: $Storage.set,
   rmStorage: $Storage.rm,
+  
   // 设置自定义下标 id
   tabbershow($this, selected) {
     if (typeof $this.getTabBar === "function" && $this.getTabBar()) {
@@ -22,9 +23,21 @@ App({
   // 获取定位权限
   isGetlocation(cb) {
     var that = this;
+    console.log(new Date().getTime())
+    let locationTime=this.globalData.locationTime+300000
+    let newTime=new Date().getTime()
+    let  longitude=this.globalData.longitude
+    let  latitude=this.globalData.latitude
+    if(newTime<=locationTime){
+        cb({longitude,latitude})
+        return
+    }
     wx.getLocation({
       success(res) {
         console.log(res);
+        that.globalData.locationTime=new Date().getTime()
+        that.globalData.longitude=res.longitude
+        that.globalData.latitude=res.latitude
         cb(res);
       },
       fail() {
@@ -200,12 +213,13 @@ App({
     this.globalData.statusBarHeight = wx.getSystemInfoSync().statusBarHeight;
   },
   globalData: {
+    locationTime:0,
+    longitude: "",
+    latitude: "",
     menuButtonObject: {},
     is_location: false,
     is_login: true,
-    longitude: "",
-    latitude: "",
-    baseUrl: "https://api.catcius.com/api/v2/",
+    baseUrl: "http://106.14.159.176:8080",
     userInfo: null,
     statusBarHeight: null,
     redBg: "#ff0000",
