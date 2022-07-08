@@ -50,12 +50,12 @@
         "minifyWXML": true,
         "showES6CompileOption": false,
         "useCompilerPlugins": false,
-        "ignoreUploadUnusedFiles": false,
+        "ignoreUploadUnusedFiles": true,
         "useStaticServer": true
     },
     "compileType": "miniprogram",
     "libVersion": "2.24.6",
-    "appid": "wx6546a49276cf32f8",
+    "appid": "wx43281cff7a596159",
     "projectname": "%E7%8C%AB%E5%92%AA%E6%8A%95%E5%96%82",
     "condition": {
         "search": {

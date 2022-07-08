@@ -1,14 +1,17 @@
 <map
 id="map"
 style="width: 100%; height:100%;"
-scale="18"
+scale="{{scale}}"
 markers="{{markers}}"
-longitude="116.336590"
-latitude="39.941127"
+longitude="{{longitude}}"
+latitude="{{latitude}}"
 bindregionchange="bindregionchange" 
 bindtap="bindtapMap"
 bindmarkertap="onMarkerTap"
 bindcallouttap="bindcallouttap"
 bindanchorpointtap="bindanchorpointtap"
 show-location>
+<view class="location" bindtap="getNewLocation">
+    <van-icon name="aim" size="30" />
+</view>
 </map>

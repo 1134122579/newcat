@@ -1,71 +1,85 @@
 <view class="saishipage flexcolumn">
-  <Navheader />
-  <!-- 头部 -->
-  <view class="headerImage">
-    <swiper class="headerImage" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-      <block wx:for="{{getdata.img}}" wx:key="*this">
-        <swiper-item>
-          <view class="headerImage">
-            <image class="imageStyle" src="/images/moer.jpg" data-index='{{index}}' mode="aspectFill" bindtap="previewImage"></image>
-          </view>
-        </swiper-item>
-      </block>
-    </swiper>
-  </view>
-
-  <!-- 信息 -->
-  <view class="content ">
-    <view class="new_content">
-      <!-- 名字 -->
-      <view class="headerName">
-        <view class="name">
-          <view>{{getdata.cat_name}}</view>
-        </view>
-      </view>
-      <!-- 地点  -->
-      <view class="location flexastart">
-        <image class="locationicon" src="/images/locationicon.png"></image>
-        上海市徐汇区某某某某某
-      </view>
+    <Navheader />
+    <!-- 头部 -->
+    <view class="headerImage">
+        <swiper class="headerImage" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+            <block wx:for="{{3}}" wx:key="*this">
+                <swiper-item>
+                    <view class="headerImage">
+                        <image class="imageStyle" src="/images/moer.jpg" data-index='{{index}}' mode="aspectFill" bindtap="previewImage"></image>
+                    </view>
+                </swiper-item>
+            </block>
+        </swiper>
     </view>
-    <!-- 成员-->
-    <view class="new_content">
-      <view class="typetitle">
-        成员
-      </view>
-      <view class="flexastart">
-        <view class="label">
-          创始人：
+
+    <!-- 信息 -->
+    <view class="content ">
+        <view class="new_content">
+            <!-- 名字 -->
+            <view class="headerName">
+                <view class="name">
+                    <view>{{getdata.cat_name||"投喂点标题投喂点标题投喂点标题投喂点标题投喂点标题投喂点标题投喂点标题投喂点标题投喂点标题投喂点标题"}}</view>
+                </view>
+            </view>
+            <!-- 地点  -->
+            <view class="location flexastart">
+                <image class="locationicon" src="/images/locationicon.png"></image>
+                上海市徐汇区某某某某某
+            </view>
         </view>
-        <image class="user-csr" src="/images/catimg.png"></image>
-      </view>
-      <view class="flexastart">
-        <view class="label">
-          队员：
-        </view>
-        <view class="imageList flexastart">
-          <image wx:for="{{10}}" class="user-csr" src="/images/catimg.png"></image>
-        </view>
-        <label for="">
-          <view class="addbutton flexcolumn">
-            <van-icon name="plus"  size="20"/>
-        </view>
-        <button open-type="share"></button>
-        </label>
-  
-      </view>
-      <!-- <view class="typeList flexastart">
+        <!-- 成员-->
+        <view class="new_content">
+            <view class="typetitle">
+                成员
+            </view>
+            <view class="flexastart">
+                <view class="label">
+                    创始人：
+                </view>
+                <image class="user-csr" src="/images/catimg.png"></image>
+            </view>
+            <view class="flexastart">
+                <view class="label">
+                    队员：
+                </view>
+                <view class="imageList flexastart">
+                    <image wx:for="{{10}}" class="user-csr" src="/images/catimg.png"></image>
+                </view>
+                <label for="">
+                    <view class="addbutton flexcolumn">
+                        <van-icon name="plus" size="20" />
+                    </view>
+                    <button open-type="share"></button>
+                </label>
+
+            </view>
+            <!-- <view class="typeList flexastart">
         图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图
       </view> -->
+        </view>
+        <!-- 内容  精彩瞬间-->
+        <view class="new_content">
+            <view class="typetitle">
+                简介
+            </view>
+            <view class="typeList flexastart">
+                投喂点简介投喂点简介投喂点简介投喂点简介投喂点简介投喂点简介投喂点简介投喂点简介投喂点简介投喂点简介投喂点简介
+            </view>
+        </view>
+        <!--投喂记录-->
+        <view class="new_content">
+            <view class="typetitle">
+                投喂记录
+            </view>
+            <view class="typeList flexastart">
+                投喂点简介投喂点简介投喂点简介投喂点简介投喂点简介投喂点简介投喂点简介投喂点简介投喂点简介投喂点简介投喂点简介
+            </view>
+        </view>
     </view>
-    <!-- 内容  精彩瞬间-->
-    <view class="new_content">
-      <view class="typetitle">
-        简介
-      </view>
-      <view class="typeList flexastart">
-        图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图
-      </view>
+
+    <!-- 投喂  -->
+    <view class="tw ">
+        <image class="tw-Image" mode="aspectFit" src="/images/touwei.png"></image>
     </view>
-  </view>
 </view>

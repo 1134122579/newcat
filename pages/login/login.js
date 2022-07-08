@@ -59,20 +59,17 @@ Page({
       desc: '用于完善资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
       lang: 'zh_CN',
       success: (res) => {
-        console.log(res)
         let obj = res
         obj.code = that.data.code
-        console.log(obj)
+        // console.log(obj)
         wx.showLoading({
           title: '登陆中..',
         })
-  
         Api.wx_mini_login(obj).then(res => {
           console.log(res)
           // 获取用户信息
-          Cache.setToken(res.token)
-          Api.getUserInfo().then(res => {
-     
+        //   Cache.setToken(res.token)
+          Api.getUserInfo({...obj,...res}).then(res => {
             Cache.setUserInfo(res)
             wx.hideLoading()
             that.setData({

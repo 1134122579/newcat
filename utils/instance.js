@@ -21,23 +21,22 @@ function loadingFun(loadingNum) {
   }
 }
 
-fly.config.baseURL = "https://api.catcius.com/api/v3/" // 开发
+fly.config.baseURL = "http://106.14.159.176:8080" // 开发
 // fly.config.baseURL = "https://carshop.nxcsoft.top/api/v1/"; // 生产
 // 添加请求拦截器，加入微信用户sessionId头部
 fly.interceptors.request.use((request) => {
   //loding
+  console.log(request)
   try {
-    request.headers["app-type"] = "ios";
+    // request.headers["app-type"] = "ios";
     // request.headers['sign'] = encrypt(new Date().getTime())
-    request.headers["sign"] = 123;
+    // request.headers["sign"] = 123;
+    // request.headers["Content-Type"] = "application/x-www-form-urlencoded";
     // 获取token
-    storage.setToken("c392e7df03a23dbe58f9d5613e2eb40ffca98ebdf0f410f55043b891c039992ab957ef2d84a0bac8b9551123ebf6f10479edd848cbf3928c3128b8ffa3e16dc03da57ec124c4906e923fdcfc01dfe57a")
     let token = storage.oldgetToken()
-    if (token) {
-      request.headers["access-user-token"] = token;
-    }
-
-
+    // if (token) {
+    //   request.headers["access-user-token"] = token;
+    // }
     return request;
   } catch (e) {}
 });

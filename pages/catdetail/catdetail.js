@@ -11,29 +11,6 @@ Page({
     user_id: "",
     cat_id: "",
     detile_userid: "",
-    // 1 长毛组 2  中长毛组  3  短毛组  4  东方体别  5  无毛组别
-    levelList: [
-      {
-        id: 1,
-        text: "长毛组",
-      },
-      {
-        id: 2,
-        text: "中长毛组",
-      },
-      {
-        id: 3,
-        text: "短毛组",
-      },
-      {
-        id: 4,
-        text: "东方体别",
-      },
-      {
-        id: 5,
-        text: "无毛组别",
-      },
-    ],
     indicatorDots: true,
     vertical: false,
     autoplay: false,
