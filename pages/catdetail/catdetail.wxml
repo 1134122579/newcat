@@ -7,6 +7,7 @@
                 <swiper-item>
                     <view class="headerImage">
                         <image class="imageStyle" wx:if="{{item.mediaType=='PIC'}}" src="{{item.url}}" data-index='{{index}}' mode="aspectFill" bindtap="previewImage"></image>
+
                         <!-- <video class="imageStyle" wx:if="{{item.mediaType=='VIDEO'}}" controls="false" src="{{item.url}}" data-index='{{index}}' mode="aspectFill" bindtap="previewImage"></image> -->
                     </view>
                 </swiper-item>
@@ -56,7 +57,7 @@
                     <image wx:for="{{getdata.feedMemberVos}}" class="user-csr" src="{{item.avatarUrl||'/images/catimg.png'}}"></image>
                 </view>
                 <view class="imageList flexastart" wx:else style="font-size: 26rpx;">
-                        暂无队员
+                    暂无队员
                 </view>
                 <label for="" wx:if="{{my_id== getdata.createBy}}">
                     <view class="addbutton flexcolumn">
@@ -70,6 +71,9 @@
                     </view>
                 </label>
 
+            </view>
+            <view class="" style="margin-top: 20rpx;">
+                <van-button  round size="small" plain  block>投喂排班</van-button>
             </view>
         </view>
         <!-- 内容  精彩瞬间-->
@@ -86,8 +90,17 @@
             <view class="typetitle">
                 投喂记录
             </view>
-            <view class="typeList flexastart">
-                投喂点简介投喂点简介投喂点简介投喂点简介投喂点简介投喂点简介投喂点简介投喂点简介投喂点简介投喂点简介投喂点简介
+            <view class="typeList ">
+                <block wx:for="{{recordTodayList}}" wx:key="index">
+                    <view class="recordTodayList-block flexbetween">
+                        <van-image round width="120rpx" height="120rpx" fit="cover" src="{{item.avatarUrl}}" />
+                        <view class="touwei-user">
+                            <view class="nickName">{{item.nickName}}</view>
+                            <view class="feedTime">{{item.feedTime}}</view>
+                        </view>
+                        <van-tag type="success " mark plain size="medium">已投喂</van-tag>
+                    </view>
+                </block>
             </view>
         </view>
     </view>

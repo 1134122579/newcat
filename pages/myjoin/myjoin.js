@@ -1,5 +1,6 @@
 import storage from "../../utils/cache";
 import Api from "../../api/index";
+import{formatTime} from '../../utils/util'
 
 // pages/dynamicpage/dynamicpage.js
 Page({
@@ -55,10 +56,14 @@ Page({
   getlist() {
     let { user_id } = storage.getUserInfo();
     let { page: pageIndex, list, pageSize } = this.data;
-    Api.myRecord({ pageSize, pageIndex }).then((res) => {
+    Api.recordMe({ pageSize, pageIndex }).then((res) => {
       this.setData({
         ismore: res.length > 0 ? false : true,
       });
+      res=res.list.map(item=>{
+          item['feedTime']=formatTime(item['feedTime'])
+          return item
+      })
       if (pageIndex == 1) {
         this.setData({
           list: res,

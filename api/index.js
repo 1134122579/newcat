@@ -45,8 +45,11 @@ export default {
     },
     myRecord(params) {
         return fly({
-            url: `/client/feed/record/me`,
-            method: "post",
+            url: `/client/care/feedpoint/me`,
+            method: "get",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
             params,
             loading: false,
             isThree: false,
@@ -55,6 +58,15 @@ export default {
     feedmemberJoin(params) {
         return fly({
             url: `/client/care/feedmember/join`,
+            method: "post",
+            params,
+            loading: false,
+            isThree: false,
+        });
+    },
+    feedpointEdit(params) {
+        return fly({
+            url: `/client/care/feedpoint/edit`,
             method: "post",
             params,
             loading: false,
@@ -70,9 +82,30 @@ export default {
             isThree: false,
         });
     },
+    feedpointDelete(params) {
+        return fly({
+            url: `/client/care/feedpoint/delete`,
+            method: "get",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            params,
+            loading: false,
+            isThree: false,
+        });
+    },
     recordfeed(params) {
         return fly({
             url: `/client/feed/record/feed`,
+            method: "post",
+            params,
+            loading: false,
+            isThree: false,
+        });
+    },
+    recordMe(params) {
+        return fly({
+            url: `/client/feed/record/me`,
             method: "post",
             params,
             loading: false,

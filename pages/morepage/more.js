@@ -22,6 +22,18 @@ Page({
         isLink: false,
         isbutton: false,
         isshare: false,
+      },    {
+        title: "投喂记录",
+        icon: "xiaohongshushoucang",
+        to: "../../pages/myjoin/myjoin",
+        linktype: "navigateTo",
+        value: "",
+        isborder: true,
+        marginTop: "",
+        is_power: "admin",
+        isLink: false,
+        isbutton: false,
+        isshare: false,
       },
       // {
       //   title: "投票活动",

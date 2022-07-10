@@ -390,3 +390,20 @@ box-shadow: 0 0  30rpx #787878;
 .joinContent-foolter-button{
     width: 49%;
 }
+.recordTodayList-block{
+    width: 100%;
+    margin-top: 18rpx;
+}
+.touwei-user{
+    height: 100%;
+    line-height: 2;
+    flex: 1;
+    margin-left: 20rpx;
+}
+.nickName{
+    font-size: 32rpx;
+}
+.feedTime{
+    font-size: 28rpx;
+    color: #787878;
+}

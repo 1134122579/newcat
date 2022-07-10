@@ -10,7 +10,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    disabled:false,
+    edit_id: "",
+    isedit: false,
+    disabled: false,
     maxcount: 8,
     title: "",
     address: "",
@@ -21,8 +23,8 @@ Page({
       maxHeight: 200,
       minHeight: 100,
     },
-    latitude:'',//经纬度
-    longitude:'', //经纬度
+    latitude: "", //经纬度
+    longitude: "", //经纬度
     PzList: [],
   },
   onClose() {
@@ -33,7 +35,7 @@ Page({
   // 获取个位置
   getlocation() {
     let that = this;
-    App.isGetlocation(res => {
+    App.isGetlocation((res) => {
       let { latitude, longitude } = res;
       wx.chooseLocation({
         latitude,
@@ -41,8 +43,8 @@ Page({
         success(chooseLocationres) {
           console.log(chooseLocationres);
           that.setData({
-            latitude:chooseLocationres.latitude,
-            longitude:chooseLocationres.longitude,
+            latitude: chooseLocationres.latitude,
+            longitude: chooseLocationres.longitude,
             address: chooseLocationres.address,
           });
         },
@@ -118,29 +120,29 @@ Page({
       });
       return;
     }
-    let fileArray = file.map(item => {
+    let fileArray = file.map((item) => {
       item["isupload"] = true;
       return item;
     });
     let promiseall = [];
-    fileArray.forEach(item => {
+    fileArray.forEach((item) => {
       promiseall.push(that.uploadFilenew(item));
     });
     wx.showLoading({
       title: "上传中..",
     });
     Promise.allSettled(promiseall)
-      .then(res => {
-          res=res.map(item=>{
-              return {...item.value}
-          })
-          console.log("全部上传成功",res,fileList)
+      .then((res) => {
+        res = res.map((item) => {
+          return { ...item.value };
+        });
+        console.log("全部上传成功", res, fileList);
         that.setData({
           fileList: fileList.concat(res),
         });
         wx.hideLoading();
       })
-      .catch(err => {
+      .catch((err) => {
         wx.hideLoading();
       });
   },
@@ -149,7 +151,7 @@ Page({
     let that = this;
     const { fileList = [] } = this.data;
     let token = storgae.getToken();
-    let filearr = file.map(item => item.url);
+    let filearr = file.map((item) => item.url);
     wx.uploadFile({
       url: App.globalData.baseUrl + "/client/media/pv", // 接口地址
       filePath: filearr,
@@ -204,24 +206,24 @@ Page({
     let { fileList } = this.data;
     let delitem = e.detail;
     this.setData({
-      fileList: fileList.filter(item => item.url != delitem.file.url),
+      fileList: fileList.filter((item) => item.url != delitem.file.url),
       maxcount: fileList.length <= 0 || fileList[0].type == "image" ? 8 : 1,
     });
   },
-
- 
 
   // 提交
   onClick() {
     let {
       fileList = [],
+      isedit,
+      edit_id: id,
       longitude,
       latitude,
       address,
       introduction = "",
       title = "",
     } = this.data;
-    let urls = fileList.map(item => item.url);
+    let urls = fileList.map((item) => item.url);
     if (this.checkUpQuery()) {
       wx.showToast({
         title: "添加成功，将自动返回",
@@ -232,33 +234,56 @@ Page({
         title: "发布中..",
         mask: true,
       });
-    //   introduction,longitude,latitude,address,urls
-      Api.addDynamic({
-        introduction,longitude,latitude,address,urls
-      }).then(res => {
-        wx.hideLoading();
-        wx.showToast({
-          title: "添加成功，1s后将自动返回",
-          icon: "none",
-          mask: true,
-        });
-        this.setData({buttondisabled:true})
-        time = setTimeout(() => {
-          wx.navigateBack({
-            delta: 1,
+      //   introduction,longitude,latitude,address,urls
+      if (isedit) {
+        Api.feedpointEdit({
+          id,
+          introduction,
+          longitude,
+          latitude,
+          address,
+          urls,
+        }).then((res) => {
+          wx.hideLoading();
+          wx.showToast({
+            title: "修改成功，1s后将自动返回",
+            icon: "none",
+            mask: true,
           });
-        }, 1000);
-      });
+          this.setData({ buttondisabled: true });
+          time = setTimeout(() => {
+            wx.navigateBack({
+              delta: 1,
+            });
+          }, 1000);
+        });
+      } else {
+        Api.addDynamic({
+          introduction,
+          longitude,
+          latitude,
+          address,
+          urls,
+        }).then((res) => {
+          wx.hideLoading();
+          wx.showToast({
+            title: "添加成功，1s后将自动返回",
+            icon: "none",
+            mask: true,
+          });
+          this.setData({ buttondisabled: true });
+          time = setTimeout(() => {
+            wx.navigateBack({
+              delta: 1,
+            });
+          }, 1000);
+        });
+      }
     }
   },
   // 校验上传数据
   checkUpQuery() {
-    let {
-      title,
-      fileList,
-      introduction,
-      address
-    } = this.data;
+    let { title, fileList, introduction, address } = this.data;
     let img = fileList?.[0]?.url;
     if (!img) {
       wx.showToast({
@@ -274,7 +299,7 @@ Page({
       });
       return;
     }
- 
+
     if (!introduction) {
       wx.showToast({
         title: "请输入内容",
@@ -296,8 +321,8 @@ Page({
       label: e.currentTarget.dataset.item.name,
     });
   },
-// 获取投喂点详情
-getCatdetails(id) {
+  // 获取投喂点详情
+  getCatdetails(id) {
     App.isGetlocation((location) => {
       let { longitude, latitude } = location;
       Api.getCatdetails({
@@ -306,15 +331,19 @@ getCatdetails(id) {
         latitude,
       }).then((res) => {
         console.log(res);
-        //   let fileList=res.map(item=>{
-        //       return {
-        //           item.
-        //       }
-        //   })
+        let {
+          introduction,
+          address,
+          feedPointMedias: fileList,
+          latitude,
+          longitude,
+        } = res;
         this.setData({
-            introduction,
-            address,
-            fileList
+          introduction,
+          address,
+          fileList,
+          latitude,
+          longitude,
         });
       });
     });
@@ -323,11 +352,15 @@ getCatdetails(id) {
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      let {id}=options
-  console.log(options)
-  if(id){
-    
-  }
+    let { id } = options;
+    console.log(options);
+    if (id) {
+      this.getCatdetails(id);
+      this.setData({
+        isedit: true,
+        edit_id: id,
+      });
+    }
   },
 
   /**
