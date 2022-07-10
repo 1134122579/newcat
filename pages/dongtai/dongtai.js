@@ -10,42 +10,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-    isnopush: false,
-    ispush: false,
-    show: false,
+    disabled:false,
     maxcount: 8,
     title: "",
     address: "",
-    match_id: "",
     label: "",
     type: 1,
     introduction: "", //简介
-    level: "",
-    levelIndex: null,
-    sexIndex: null,
-    voteIndex: null,
     autoSize: {
       maxHeight: 200,
       minHeight: 100,
     },
-    isnoTimelocation: false,
     latitude:'',//经纬度
     longitude:'', //经纬度
-    endTime: "2022-01-01",
     PzList: [],
   },
-  showPopup() {
-    wx.navigateTo({
-      url: "/pages/CatClasspage/CatClasspage?cat_pz=" + this.data.label,
-    });
-    // this.setData({ show: true });
-  },
-  onclosebuttonPopup() {
-    this.setData({
-      show: false,
-    });
-  },
-
   onClose() {
     this.setData({
       show: false,
@@ -109,15 +88,6 @@ Page({
     const { file } = event.detail;
     const { fileList = [] } = that.data;
     // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
-    // if (fileList.length > 0) {
-    //   if (fileList[0].type == "image" && file[0].type == "video") {
-    //     wx.showToast({
-    //       title: "已上传图片无法选择视频",
-    //       icon: "none",
-    //     });
-    //     return;
-    //   }
-    // }
     // 视频裁剪
     if (file[0].type == "video") {
       wx.openVideoEditor({
@@ -161,6 +131,10 @@ Page({
     });
     Promise.allSettled(promiseall)
       .then(res => {
+          res=res.map(item=>{
+              return {...item.value}
+          })
+          console.log("全部上传成功",res,fileList)
         that.setData({
           fileList: fileList.concat(res),
         });
@@ -214,11 +188,11 @@ Page({
         name: "files",
         success(res) {
           // 上传完成需要更新 fileList
-          console.log(res, "上传完成需要更新");
           res = JSON.parse(res.data);
+          console.log(res, "上传完成需要更新");
           resolve({
             ...file,
-            url: res.data.imgLink,
+            url: res.data[0],
             isupload: false,
           });
         },
@@ -234,80 +208,41 @@ Page({
       maxcount: fileList.length <= 0 || fileList[0].type == "image" ? 8 : 1,
     });
   },
-  // 性别
-  bindsexChange(event) {
-    let { sexList } = this.data;
-    this.setData({
-      sexIndex: event.detail.value,
-      sex: sexList[event.detail.value]["id"],
-    });
-  },
-  // 投票期数
-  bindvoteChange(event) {
-    let { voteList } = this.data;
-    this.setData({
-      voteIndex: event.detail.value,
-      match_id: voteList[event.detail.value]["id"],
-    });
-  },
-  // 级别
-  bindlevelChange(event) {
-    let { levelList } = this.data;
-    this.setData({
-      levelIndex: event.detail.value,
-      level: levelList[event.detail.value]["id"],
-    });
-  },
-  // 生日
-  bindDateChange: function (e) {
-    this.setData({
-      birthday: e.detail.value,
-    });
-  },
+
+ 
+
   // 提交
   onClick() {
     let {
-      label = "",
       fileList = [],
+      longitude,
+      latitude,
+      address,
       introduction = "",
       title = "",
-      type = "",
-      ispush,
-      isnopush,
     } = this.data;
-    let link_url = fileList.map(item => item.url);
+    let urls = fileList.map(item => item.url);
     if (this.checkUpQuery()) {
       wx.showToast({
         title: "添加成功，将自动返回",
         icon: "none",
         mask: true,
       });
-      return;
-      if (ispush || isnopush) return;
       wx.showLoading({
         title: "发布中..",
         mask: true,
       });
-      this.setData({
-        ispush: true,
-      });
+    //   introduction,longitude,latitude,address,urls
       Api.addDynamic({
-        label,
-        link_url,
-        introduction,
-        title,
-        type,
+        introduction,longitude,latitude,address,urls
       }).then(res => {
         wx.hideLoading();
         wx.showToast({
-          title: "添加成功，将自动返回",
+          title: "添加成功，1s后将自动返回",
           icon: "none",
           mask: true,
         });
-        this.setData({
-          ispush: false,
-          isnopush: true,
-        });
+        this.setData({buttondisabled:true})
         time = setTimeout(() => {
           wx.navigateBack({
             delta: 1,
@@ -319,28 +254,10 @@ Page({
   // 校验上传数据
   checkUpQuery() {
     let {
-      level,
-      sex,
-      cat_name,
-      color,
       title,
       fileList,
-      label,
-      address,
       introduction,
-      birthday,
-      eye_color,
-      register_no,
-      father_name,
-      father_pz,
-      father_color,
-      father_register_no,
-      mother_pz,
-      mother_color,
-      mother_name,
-      mother_register_no,
-      group_id,
-      match_id,
+      address
     } = this.data;
     let img = fileList?.[0]?.url;
     if (!img) {
@@ -357,13 +274,7 @@ Page({
       });
       return;
     }
-    // if (!label.trim()) {
-    //   wx.showToast({
-    //     title: "请选择标签",
-    //     icon: "none",
-    //   });
-    //   return;
-    // }
+ 
     if (!introduction) {
       wx.showToast({
         title: "请输入内容",
@@ -371,13 +282,13 @@ Page({
       });
       return;
     }
-    // if (!address) {
-    //   wx.showToast({
-    //     title: "请选择地点",
-    //     icon: "none",
-    //   });
-    //   return;
-    // }
+    if (!address) {
+      wx.showToast({
+        title: "请选择地点",
+        icon: "none",
+      });
+      return;
+    }
     return true;
   },
   bindbqclick(e) {
@@ -385,14 +296,38 @@ Page({
       label: e.currentTarget.dataset.item.name,
     });
   },
-
+// 获取投喂点详情
+getCatdetails(id) {
+    App.isGetlocation((location) => {
+      let { longitude, latitude } = location;
+      Api.getCatdetails({
+        id,
+        longitude,
+        latitude,
+      }).then((res) => {
+        console.log(res);
+        //   let fileList=res.map(item=>{
+        //       return {
+        //           item.
+        //       }
+        //   })
+        this.setData({
+            introduction,
+            address,
+            fileList
+        });
+      });
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // this.setData({
-    //   match_id: options?.match_id
-    // })
+      let {id}=options
+  console.log(options)
+  if(id){
+    
+  }
   },
 
   /**

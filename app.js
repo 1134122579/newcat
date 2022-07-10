@@ -88,7 +88,14 @@ App({
   },
   // 获取用户信息
   getUserinfoFn(cb) {
-    Api.getUserInfo().then((res) => {
+      if(!storage.getToken){
+        wx.navigateTo({
+          url: '/pages/login/login',
+        }) 
+        return
+      }
+      let {id}=storage.getUserInfo()
+    Api.getNewUserInfo({id}).then((res) => {
       this.globalData.userInfo = res;
       storage.setUserInfo(res);
       cb();

@@ -82,7 +82,7 @@ const handleResponse = ({ config, response }) => {
     !config.noToastError &&
       wx.hideLoading() &&
       wx.showToast({
-        title: response.data.message || "系统错误",
+        title: response.data.msg || "系统错误",
         mask: true,
         icon: "none",
       });

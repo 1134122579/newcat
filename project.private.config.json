@@ -30,7 +30,21 @@
                 {
                     "name": "添加投喂点",
                     "pathName": "pages/dongtai/dongtai",
+                    "query": "id=9",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "我的发布",
+                    "pathName": "pages/dynamicpage/dynamicpage",
                     "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "投喂点详情",
+                    "pathName": "pages/catdetail/catdetail",
+                    "query": "cat_id=4",
                     "launchMode": "default",
                     "scene": null
                 }

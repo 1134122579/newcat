@@ -31,9 +31,67 @@ export default {
             isThree: false,
         });
     },
+    getNewUserInfo(params) {
+        return fly({
+            url: `/client/user/detail`,
+            method: "get",
+            params,
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            loading: false,
+            isThree: false,
+        });
+    },
+    myRecord(params) {
+        return fly({
+            url: `/client/feed/record/me`,
+            method: "post",
+            params,
+            loading: false,
+            isThree: false,
+        });
+    },
+    feedmemberJoin(params) {
+        return fly({
+            url: `/client/care/feedmember/join`,
+            method: "post",
+            params,
+            loading: false,
+            isThree: false,
+        });
+    },
+    recordToday(params) {
+        return fly({
+            url: `/client/feed/record/today`,
+            method: "post",
+            params,
+            loading: false,
+            isThree: false,
+        });
+    },
+    recordfeed(params) {
+        return fly({
+            url: `/client/feed/record/feed`,
+            method: "post",
+            params,
+            loading: false,
+            isThree: false,
+        });
+    },
+
     ckeckToken(params) {
         return fly({
             url: `checkToken`,
+            method: "post",
+            params,
+            loading: false,
+            isThree: false,
+        });
+    },
+    save(params) {
+        return fly({
+            url: `/client/feed/back/save`,
             method: "post",
             params,
             loading: false,
@@ -453,7 +511,7 @@ export default {
     },
     editUserInfo(params) {
         return fly({
-            url: `editUserInfo`,
+            url: `/client/user/update`,
             method: "post",
             params,
             loading: false,
@@ -667,9 +725,19 @@ export default {
             isThree: false,
         });
     },
+    
     cacheFollow(params) {
         return fly({
             url: `cacheFollow`,
+            method: "post",
+            params,
+            loading: true,
+            isThree: false,
+        });
+    },
+    nearBy(params) {
+        return fly({
+            url: `/client/care/feedpoint/nearBy`,
             method: "post",
             params,
             loading: true,
@@ -687,7 +755,7 @@ export default {
     },
     addDynamic(params) {
         return fly({
-            url: `addDynamic`,
+            url: `/client/care/feedpoint/post`,
             method: "post",
             params,
             loading: false,
@@ -705,7 +773,7 @@ export default {
     },
     getCatdetails(params) {
         return fly({
-            url: `getCatdetails`,
+            url: `/client/care/feedpoint/detail`,
             method: "post",
             params,
             loading: false,

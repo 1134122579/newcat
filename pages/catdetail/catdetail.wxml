@@ -3,10 +3,11 @@
     <!-- 头部 -->
     <view class="headerImage">
         <swiper class="headerImage" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-            <block wx:for="{{3}}" wx:key="*this">
+            <block wx:for="{{getdata.feedPointMedias}}" wx:key="*this">
                 <swiper-item>
                     <view class="headerImage">
-                        <image class="imageStyle" src="/images/moer.jpg" data-index='{{index}}' mode="aspectFill" bindtap="previewImage"></image>
+                        <image class="imageStyle" wx:if="{{item.mediaType=='PIC'}}" src="{{item.url}}" data-index='{{index}}' mode="aspectFill" bindtap="previewImage"></image>
+                        <!-- <video class="imageStyle" wx:if="{{item.mediaType=='VIDEO'}}" controls="false" src="{{item.url}}" data-index='{{index}}' mode="aspectFill" bindtap="previewImage"></image> -->
                     </view>
                 </swiper-item>
             </block>
@@ -19,13 +20,21 @@
             <!-- 名字 -->
             <view class="headerName">
                 <view class="name">
-                    <view>{{getdata.cat_name||"投喂点标题投喂点标题投喂点标题投喂点标题投喂点标题投喂点标题投喂点标题投喂点标题投喂点标题投喂点标题"}}</view>
+                    <view>{{getdata.introduction}}</view>
                 </view>
             </view>
             <!-- 地点  -->
             <view class="location flexastart">
                 <image class="locationicon" src="/images/locationicon.png"></image>
-                上海市徐汇区某某某某某
+                <view class="flexbetween" style="flex:1">
+                    <view>
+                        {{getdata.address}} </view>
+                    <view style="color: #787878;">
+                        距离：{{getdata.showDistance}}
+
+                    </view>
+                </view>
+                <image style="margin-left: 10rpx;" class="locationicon" bindtap="gouserlocation" src="/images/location_icon.png"></image>
             </view>
         </view>
         <!-- 成员-->
@@ -37,26 +46,31 @@
                 <view class="label">
                     创始人：
                 </view>
-                <image class="user-csr" src="/images/catimg.png"></image>
+                <image class="user-csr" src="{{getdata.owner.avatarUrl||'/images/catimg.png'}}"></image>
             </view>
             <view class="flexastart">
                 <view class="label">
                     队员：
                 </view>
-                <view class="imageList flexastart">
-                    <image wx:for="{{10}}" class="user-csr" src="/images/catimg.png"></image>
+                <view class="imageList flexastart" wx:if="{{getdata.feedMemberVos.length>0}}">
+                    <image wx:for="{{getdata.feedMemberVos}}" class="user-csr" src="{{item.avatarUrl||'/images/catimg.png'}}"></image>
                 </view>
-                <label for="">
+                <view class="imageList flexastart" wx:else style="font-size: 26rpx;">
+                        暂无队员
+                </view>
+                <label for="" wx:if="{{my_id== getdata.createBy}}">
                     <view class="addbutton flexcolumn">
                         <van-icon name="plus" size="20" />
                     </view>
                     <button open-type="share"></button>
                 </label>
+                <label for="" wx:if="{{my_id!= getdata.createBy}}">
+                    <view class="addbutton flexcolumn" bindtap="joincat">
+                        <van-icon name="plus" size="20" />
+                    </view>
+                </label>
 
             </view>
-            <!-- <view class="typeList flexastart">
-        图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图图
-      </view> -->
         </view>
         <!-- 内容  精彩瞬间-->
         <view class="new_content">
@@ -64,7 +78,7 @@
                 简介
             </view>
             <view class="typeList flexastart">
-                投喂点简介投喂点简介投喂点简介投喂点简介投喂点简介投喂点简介投喂点简介投喂点简介投喂点简介投喂点简介投喂点简介
+                {{getdata.introduction}}
             </view>
         </view>
         <!--投喂记录-->
@@ -80,6 +94,29 @@
 
     <!-- 投喂  -->
     <view class="tw ">
-        <image class="tw-Image" mode="aspectFit" src="/images/touwei.png"></image>
+        <image class="tw-Image" bindtap="recordfeed" mode="aspectFit" src="/images/touwei.png"></image>
     </view>
 </view>
+
+<!-- 加入投喂点 -->
+<van-popup show="{{ isjoinPounp }}" bind:close="onClose" closeable round style="border-radius: 20rpx;" bind:close="onClose">
+    <view class="joinContent">
+        <view class="joinContent-title">
+            加入提示
+        </view>
+        <view class="joinContent-content ">
+            <image class="user-csr" src="{{getdata.owner.avatarUrl||'/images/catimg.png'}}"></image>
+            <view class="joinContent-text">
+                立即加入<text class="nickname">{{getdata.owner.nickName}}</text>创建的投喂点。
+            </view>
+        </view>
+        <view class="joinContent-foolter flexbetween">
+            <view class="joinContent-foolter-button">
+                <van-button type="default" block size="small" bind:click="nojoincat">暂不加入</van-button>
+            </view>
+            <view class="joinContent-foolter-button">
+                <van-button type="primary" block size="small" bind:click="feedmemberJoin">立即加入</van-button>
+            </view>
+        </view>
+    </view>
+</van-popup>

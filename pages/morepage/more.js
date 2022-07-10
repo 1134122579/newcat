@@ -160,14 +160,16 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {},
+  onReady: function () {
+    appInst.getUserinfoFn(() => {});
+  },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
     appInst.tabbershow(this, 2);
-    appInst.getUserinfoFn(() => {});
+   
     let { powerlist } = this.data;
     let { is_admin } = appInst.globalData.userInfo;
     if (is_admin == 1) {

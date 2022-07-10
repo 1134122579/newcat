@@ -71,20 +71,17 @@ Page({
             that.setData({
               userInfo: res.data.data,
             });
+            Cache.setUserInfo(res.data.data)
             App.globalData.userInfo = res.data.data;
             App.globalData.is_login = false;
             Api.getUserInfo({
               sessionKey,
-              // code: that.data.code,
               openId: openid,
               iv,
               encryptedData,
-              // rawData,
               signature,
             }).then(res => {
               wx.hideLoading();
-              App.globalData.userInfo = res;
-              App.globalData.is_login = false;
               wx.switchTab({
                 url: "/pages/location/location",
               });

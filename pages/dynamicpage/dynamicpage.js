@@ -13,6 +13,7 @@ Page({
     isStatus: 1,
     list: [],
     page: 1,
+    pageSize:20,
     ismore: false,
   },
   // onpull(){
@@ -21,12 +22,12 @@ Page({
   // },
   getlist() {
     let { user_id } = storage.getUserInfo();
-    let { page, list } = this.data;
-    Api.getDynamic({ user_id, page }).then((res) => {
+    let { page:pageIndex, list,pageSize } = this.data;
+    Api.myRecord({ pageSize, pageIndex }).then((res) => {
       this.setData({
         ismore: res.length > 0 ? false : true,
       });
-      if (page == 1) {
+      if (pageIndex == 1) {
         this.setData({
           list: res,
         });

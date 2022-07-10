@@ -1,6 +1,8 @@
 // pages/location/location.js
 
 let App = getApp()
+import api from "../../api/index";
+import Api from "../../api/index";
 Page({
 
     /**
@@ -53,18 +55,42 @@ Page({
             }
         ]
     },
+    // 获取当前坐标
     getNewLocation() {
         // 创建 map 上下文 MapContext 对象。建议使用 wx.createSelectorQuery 获取 context 对象
         // 获取地图，map要与wxml页面的id名一致。注意：不需要#符号
         // 将地图缩放值改为初始值
         App.isGetlocation(res => {
             console.log(res)
+            let {
+                latitude,
+                longitude
+            } = res
             let mpCtx = wx.createMapContext('map')
             // 将地图中心移置当前定位点，此时需设置地图组件 show-location 为true。'2.8.0' 起支持将地图中心移动到指定位置。
-            mpCtx.moveToLocation()
-            this.setData({
-                ...res,
-                scale: 17
+            Api.nearBy({
+                latitude,
+                longitude
+            }).then(res => {
+                console.log(res)
+                let markers = res.map(item => {
+                    return {
+                        id: item.id,
+                        iconPath: "../../images/location.png",
+                        latitude: item.latitude,
+                        longitude: item.longitude,
+                        width: 40, //图片显示宽度
+                        height: 40, //图片显示高度
+                        title: '猫咪投喂点',
+                    }
+                })
+                mpCtx.moveToLocation()
+                this.setData({
+                    latitude,
+                    longitude,
+                    markers,
+                    scale: 17
+                })
             })
         })
     },
@@ -95,8 +121,9 @@ Page({
     },
     onMarkerTap(e) {
         console.log('=onMarkerTap=', e)
+        let {markerId}=e.detail
         wx.navigateTo({
-            url: '/pages/catdetail/catdetail?user_id=38&cat_id=180',
+            url: `/pages/catdetail/catdetail?cat_id=${markerId}`,
         })
     },
 
@@ -104,7 +131,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        this.getNewLocation()
     },
 
     /**

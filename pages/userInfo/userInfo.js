@@ -3,6 +3,7 @@
 var cropper;
 import Api from "../../api/index";
 import Cache from "../../utils/cache";
+import { Storage } from "../../utils/storage";
 import utils from "../../utils/util";
 import { getDate } from "../../utils/util";
 let App = getApp();
@@ -165,12 +166,12 @@ Page({
   getUserinfo() {
     let userInfo = Cache.getUserInfo();
     let {
-      mobile,
-      name,
+      phone: mobile,
+      nickName: name,
       birthday,
       signature,
       photo,
-      headimgurl,
+      avatarUrl: headimgurl,
       address,
       desc,
       home_name,
@@ -215,19 +216,19 @@ Page({
   },
   editUser() {
     let {
-      mobile="",
-      name="",
-      birthday="",
-      signature="",
-      photo="",
-      address="",
-      fileList=[],
-      fileListcat_bg=[],
-      desc="",
-      home_name="",
+      mobile = "",
+      name = "",
+      birthday = "",
+      signature = "",
+      photo = "",
+      address = "",
+      fileList = [],
+      fileListcat_bg = [],
+      desc = "",
+      home_name = "",
     } = this.data;
     photo = fileList?.[0]?.url;
-    let cat_bg = fileListcat_bg?.[0]?.url||'';
+    let cat_bg = fileListcat_bg?.[0]?.url || "";
     if (!photo) {
       wx.showToast({
         title: "请上传头像！",
@@ -257,28 +258,18 @@ Page({
     //   });
     //   return;
     // }
-    if (!home_name) {
-      wx.showToast({
-        title: "请输入猫舍名字",
-        icon: "none",
-      });
-      return;
-    }
-    // if (!signature) {
-    //   wx.showToast({
-    //     title: '请输入签名',
-    //   })
-    // }
+
     wx.showLoading({
       title: "上传中",
       mask: true,
     });
+    let {id}=Cache.getUserInfo()
     Api.editUserInfo({
-      mobile,
-      name,
+        phone:mobile,
+        nickName:name,id,
       birthday,
       signature,
-      photo,
+      avatarUrl:photo,
       address,
       desc,
       home_name,

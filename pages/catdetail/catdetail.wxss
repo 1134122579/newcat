@@ -155,6 +155,7 @@ page {
   display: block;
   flex-shrink: 0;
   margin-right: 14rpx;
+  border-radius: 50%;
 }
 
 .imageList {
@@ -349,4 +350,43 @@ box-shadow: 0 0  30rpx #787878;
     width: 80rpx;
     height: 80rpx;
     margin: 0 auto;
+}
+.joinContent{
+    /* 加如投喂点 */
+
+    /* padding: 15rpx; */
+    margin: 20rpx 40rpx;
+    width: 460rpx;
+    border-radius: 20rpx;
+}
+.joinContent-title{
+    text-align: center;
+    font-size: 40rpx;
+}
+.nickname{
+    font-size: 30rpx;
+    font-weight: 800;
+    padding:0 10rpx;
+}
+.joinContent-content{
+ /* margin-top: 20rpx 0; */
+ display: flex;
+ width: 100%;
+ margin: 20rpx 0;
+ justify-content: center;
+ align-items: center;
+ flex-direction: column;
+}
+.joinContent-text{
+    width: 100%;
+    text-indent: 60rpx;
+    margin-top: 20rpx;
+
+}
+.joinContent-foolter {
+    /* margin-top: 40rpx; */
+    width: 100%;
+}
+.joinContent-foolter-button{
+    width: 49%;
 }

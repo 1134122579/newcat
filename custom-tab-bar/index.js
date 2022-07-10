@@ -77,7 +77,6 @@ Component({
     },
     onChange(e) {
       const data = e.currentTarget.dataset;
-      console.log(storage.getToken(), "token");
       const url = data.path;
       if (!storage.getToken()) {
         wx.navigateTo({

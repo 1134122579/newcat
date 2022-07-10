@@ -1,14 +1,19 @@
 // pages/matchdetail/matchdetail.js
 import Api from "../../api/index";
-import { formatDate } from "../../utils/util";
+import { formatDate,formatTime } from "../../utils/util";
 import storgae from "../../utils/cache";
+let App = getApp();
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    ismyid:'',
+    recordTodayList: [], //今日投喂记录
+    isjoinPounp: false,
+    createdUSerinfo: {}, //创建人信息
+    ismyid: "",
     user_id: "",
+    my_id: "",
     cat_id: "",
     detile_userid: "",
     indicatorDots: true,
@@ -32,69 +37,77 @@ Page({
     });
     return value;
   },
-  // 查看详情
-  gocatDetail(event){
-    console.log(event)
-    let {item}=event.currentTarget.dataset
-    wx.showLoading({
-      title: '加载中..',
-    })
-    wx.navigateTo({
-      url:`/pages/catdetail/catdetail?user_id=${item.user_id}&cat_id=${item.id}`,
-    })
-  },
-    //预览图片
-    previewImage(e) {
-      var index = e.target.dataset.index;
-      wx.previewImage({
-        current:'../../images/moer.jpg',
-        uels:['/images/moer.jpg']
-      })
-      return
-      wx.previewImage({
-        current: this.data.getdata.img[index], //当前点击的图片链接
-        urls: this.data.getdata.img, //图片数组
-      });
-    },
-  // 倒计时
-  oncountChange(e) {
-    this.setData({
-      timeData: e.detail,
+
+  //预览图片
+  previewImage(e) {
+    var index = e.target.dataset.index;
+    wx.previewImage({
+      current: "../../images/moer.jpg",
+      uels: ["/images/moer.jpg"],
+    });
+    return;
+    wx.previewImage({
+      current: this.data.getdata.img[index], //当前点击的图片链接
+      urls: this.data.getdata.img, //图片数组
     });
   },
-  goBaobutton() {
-    let { id } = this.data.getdata;
-    wx.showLoading({
-      title: '加载中...',
-    })
-    wx.navigateTo({
-      url: `/pages/matchenroll/matchenroll?match_id=${id}`,
-    });
-  },
+
   // 修改详情
   goedit() {
-    let { user_id, cat_id } = this.data;
+    let { cat_id } = this.data;
     wx.navigateTo({
-      url: `/pages/addcat/addcat?cat_id=${cat_id}`,
-    })
+      url: `/pages/dongtai/dongtai?cat_id=${cat_id}`,
+    });
   },
   getCatdetails() {
     let { user_id, cat_id } = this.data;
-    Api.getCatdetails({
-      user_id,
-      cat_id,
-    }).then((res) => {
-      console.log(res, "猫咪详情");
-      let desclength=res.desc.length
-      this.setData({
-        getdata: res,
+    App.isGetlocation((location) => {
+      let { longitude, latitude } = location;
+      Api.getCatdetails({
+        id: cat_id,
+        longitude,
+        latitude,
+      }).then((res) => {
+        console.log(res);
+        this.setData({
+          getdata: res,
+        });
+        this.recordToday();
+
       });
     });
   },
+  //   获取创建人信息
+  getCreatedUserinfo(id) {
+    Api.getNewUserInfo({ id }).then((res) => {
+      console.log("获取创建人信息", res);
+      this.setData({
+        createdUSerinfo: res,
+      });
+    });
+  },
+  //   导航
+  gouserlocation() {
+    let { latitude, longitude, address } = this.data.getdata;
+    try {
+      wx.openLocation({
+        latitude, // 纬度，范围为-90~90，负数表示南纬
+        longitude, // 经度，范围为-180~180，负数表示西经
+        scale: 18, // 缩放比例
+        name: "猫咪投喂点",
+        address,
+      });
+    } catch (error) {
+      wx.showToast({
+        title: "请刷新后从新点击",
+        icon: "none",
+      });
+    }
+  },
   // 删除
-  delCat(){
-    let id =this.data.cat_id
-    Api.delCat({id}).then(res=>{
+  delCat() {
+    let id = this.data.cat_id;
+    Api.delCat({ id }).then((res) => {
       wx.showToast({
         title: "删除成功，1.5秒自动返回",
         icon: "none",
@@ -105,20 +118,75 @@ Page({
           delta: 1,
         });
       }, 1500);
-    })
+    });
+  },
+  nojoincat() {
+    this.setData({
+      isjoinPounp: false,
+    });
+  },
+  onClose() {
+    this.setData({
+      isjoinPounp: false,
+    });
+  },
+  //   加入投入点
+  joincat() {
+    this.setData({
+      isjoinPounp: true,
+    });
+  },
+  feedmemberJoin() {
+    let { id: feedPointId } = this.data.getdata;
+    Api.feedmemberJoin({ feedPointId }).then((res) => {
+      wx.showToast({
+        title: "加入成功",
+      });
+      this.nojoincat();
+      this.getCatdetails();
+    });
+  },
+  // 今日投喂记录
+  recordToday() {
+    let { id: feedPointId } = this.data.getdata;
+    console.log("recordTodayList",feedPointId,this.data.getdata)
+    Api.recordToday({ feedPointId }).then((res) => {
+        res=res.map(item=>{
+            item['feedTime']=formatTime(item['feedTime'])
+            return item
+        })
+      this.setData({
+        recordTodayList: res,
+      });
+    });
+  },
+  // 立即投喂
+  recordfeed() {
+    let { id: feedPointId } = this.data.getdata;
+    App.isGetlocation((location) => {
+      let { longitude, latitude } = location;
+      Api.recordfeed({
+        feedPointId,
+        longitude,
+        latitude,
+      }).then((res) => {
+        wx.showToast({
+          title: "投喂成功！",
+        });
+      });
+    });
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let { user_id, cat_id } = options;
+    let { cat_id } = options;
     this.setData({
-      user_id,
+      my_id: storgae.getUserInfo().id,
       cat_id,
       detile_userid: storgae.getUserInfo().user_id,
     });
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -130,8 +198,8 @@ Page({
   onShow: function () {
     this.getCatdetails();
     this.setData({
-      ismyid:storgae.getUserInfo().user_id
-    })
+      ismyid: storgae.getUserInfo().user_id,
+    });
   },
 
   /**
