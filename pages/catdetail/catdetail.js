@@ -1,6 +1,6 @@
 // pages/matchdetail/matchdetail.js
 import Api from "../../api/index";
-import { formatDate,formatTime } from "../../utils/util";
+import { formatDate, formatTime } from "../../utils/util";
 import storgae from "../../utils/cache";
 let App = getApp();
 Page({
@@ -30,7 +30,7 @@ Page({
     let { levelList } = this.data;
     let value = "";
 
-    levelList.forEach((item) => {
+    levelList.forEach(item => {
       if (item.id == data) {
         value = item.text;
       }
@@ -41,15 +41,47 @@ Page({
   //预览图片
   previewImage(e) {
     var index = e.target.dataset.index;
-    console.log(index)
-    let imageList=this.data.getdata.feedPointMedias
-    imageList=imageList.map(item=>item.url)
-    console.log(imageList,imageList[index])
-
+    console.log(index);
+    let imageList = this.data.getdata.feedPointMedias;
+    imageList = imageList.map(item => item.url);
+    console.log(imageList, imageList[index]);
     wx.previewImage({
       current: imageList[index],
-      urls:imageList,
+      urls: imageList,
     });
+  },
+  //   预览图片视频
+
+  previewMedia(e) {
+    var index = e.target.dataset.index;
+    let imageList = this.data.getdata.feedPointMedias;
+    let bannerArr = imageList.map(item => {
+      if (item.mediaType == "PIC") {
+        return {
+          url: item.url,
+          type: "image",
+        };
+      }
+      if (item.mediaType == "VEDIO") {
+        return {
+          url: item.url,
+          type: "video",
+          // poster:item.picUrl// 封面
+        };
+      }
+    });
+    if (wx.canIUse("previewMedia")) {
+      wx.previewMedia({
+        sources: bannerArr,
+        current: index, // 当前显示图片的http链接
+      });
+    } else {
+      wx.showModal({
+        title: "提示",
+        content:
+          "当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。",
+      });
+    }
   },
 
   // 修改详情
@@ -60,26 +92,26 @@ Page({
     });
   },
   getCatdetails() {
-    let { user_id, cat_id } = this.data;
-    App.isGetlocation((location) => {
+    let { cat_id } = this.data;
+    console.log(cat_id);
+    App.isGetlocation(location => {
       let { longitude, latitude } = location;
       Api.getCatdetails({
         id: cat_id,
         longitude,
         latitude,
-      }).then((res) => {
+      }).then(res => {
         console.log(res);
         this.setData({
           getdata: res,
         });
         this.recordToday();
-
       });
     });
   },
   //   获取创建人信息
   getCreatedUserinfo(id) {
-    Api.getNewUserInfo({ id }).then((res) => {
+    Api.getNewUserInfo({ id }).then(res => {
       console.log("获取创建人信息", res);
       this.setData({
         createdUSerinfo: res,
@@ -107,7 +139,7 @@ Page({
   // 删除
   delCat() {
     let id = this.data.cat_id;
-    Api.delCat({ id }).then((res) => {
+    Api.delCat({ id }).then(res => {
       wx.showToast({
         title: "删除成功，1.5秒自动返回",
         icon: "none",
@@ -138,7 +170,7 @@ Page({
   },
   feedmemberJoin() {
     let { id: feedPointId } = this.data.getdata;
-    Api.feedmemberJoin({ feedPointId }).then((res) => {
+    Api.feedmemberJoin({ feedPointId }).then(res => {
       wx.showToast({
         title: "加入成功",
       });
@@ -149,12 +181,12 @@ Page({
   // 今日投喂记录
   recordToday() {
     let { id: feedPointId } = this.data.getdata;
-    console.log("recordTodayList",feedPointId,this.data.getdata)
-    Api.recordToday({ feedPointId }).then((res) => {
-        res=res.map(item=>{
-            item['feedTime']=formatTime(item['feedTime'])
-            return item
-        })
+    console.log("recordTodayList", feedPointId, this.data.getdata);
+    Api.recordToday({ feedPointId }).then(res => {
+      res = res.map(item => {
+        item["feedTime"] = formatTime(item["feedTime"]);
+        return item;
+      });
       this.setData({
         recordTodayList: res,
       });
@@ -163,13 +195,13 @@ Page({
   // 立即投喂
   recordfeed() {
     let { id: feedPointId } = this.data.getdata;
-    App.isGetlocation((location) => {
+    App.isGetlocation(location => {
       let { longitude, latitude } = location;
       Api.recordfeed({
         feedPointId,
         longitude,
         latitude,
-      }).then((res) => {
+      }).then(res => {
         wx.showToast({
           title: "投喂成功！",
         });
@@ -184,8 +216,8 @@ Page({
     this.setData({
       my_id: storgae.getUserInfo().id,
       cat_id,
-      detile_userid: storgae.getUserInfo().user_id,
     });
+    this.getCatdetails();
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -196,9 +228,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getCatdetails();
     this.setData({
-      ismyid: storgae.getUserInfo().user_id,
+      ismyid: storgae.getUserInfo().id,
     });
   },
 

@@ -14,36 +14,36 @@ actives:[激活的日期]
 更多事件函数请参考JS页代码文档
 -->
 <view class="calender">
-	<view class="plugin">
-	<view catchtap="catchtap">
-		<calendar year="{{year}}"  month="{{month}}" startDate="2022-05" day="{{day}}" today="{{true}}" header="{{header}}" next="{{next}}" prev="{{prev}}" addon="mixed" days-addon="{{days_addon}}" weeks="{{week_title}}" weeks-type="{{title_type}}" show-more-days="{{more}}" lunar="{{lunar}}" cell-size="{{cs}}" days-color="{{style}}" active-type="{{activeType}}" next-month='hi' bindnextMonth='nextMonth' bindprevMonth='prevMonth' binddateChange='dateChange' binddayClick='dayClick' />
-	</view>
-	<!-- <view class="button" style="{{buttonStyle}}" wx:if="{{showAction}}" bindtap="closeAction">
+    <view class="plugin">
+        <view catchtap="catchtap">
+            <calendar year="{{year}}" month="{{month}}" startDate="2022-05" day="{{day}}" today="{{true}}" header="{{header}}" next="{{next}}" prev="{{prev}}" addon="mixed" days-addon="{{days_addon}}" weeks="{{week_title}}" weeks-type="{{title_type}}" show-more-days="{{more}}" lunar="{{lunar}}" cell-size="{{cs}}" days-color="{{style}}" active-type="{{activeType}}" next-month='hi' bindnextMonth='nextMonth' bindprevMonth='prevMonth' binddateChange='dateChange' binddayClick='dayClick' />
+        </view>
+        <!-- <view class="button" style="{{buttonStyle}}" wx:if="{{showAction}}" bindtap="closeAction">
 		<image style="width:15px;height:15px" src="../image/canlender_close.png"></image>
 	</view> -->
-	<!-- <view class="actionView" style="{{showViewStyle}}" wx:if="{{showAction}}">为所欲为</view> -->
-	<van-popup show="{{ showAction }}" bind:close="closeAction">为所欲为</van-popup>
-</view>
-<view class="user_bottom">
-	<view class="user_header">
-		<van-button type="default" size="mini" bind:click="resveclick" >重置</van-button>
-		<van-button type="warning" size="mini">完成</van-button>
-	</view>
-	<swiper class="user-swiper">
-	<block wx:for="{{userList}}" wx:for-index="idx" wx:for-item="swiperItemList"  wx:key="idx">
-		<swiper-item>
-			<view class="blocklist">
-				<block wx:for="{{swiperItemList}}" wx:key="index">
-					<view class="block-info" bindtap="setUser" data-info="{{item}}">
-						<van-image width="80rpx" round height="80rpx" fit="cover" src="/images/catimg.png" />
-						<view class="block-name">
-							{{item.name}}{{index+1}}
-						</view>
-					</view>
-				</block>
-			</view>
-		</swiper-item>
-	</block>
-	</swiper>
-</view>
+        <!-- <view class="actionView" style="{{showViewStyle}}" wx:if="{{showAction}}">为所欲为</view> -->
+        <van-popup show="{{ showAction }}" bind:close="closeAction">为所欲为</van-popup>
+    </view>
+    <view class="user_bottom">
+        <view class="user_header">
+            <van-button type="default" size="mini" bind:click="resveclick">重置</van-button>
+            <van-button type="warning" size="mini">完成</van-button>
+        </view>
+        <swiper class="user-swiper">
+            <block wx:for="{{userList}}" wx:for-index="idx" wx:for-item="swiperItemList" wx:key="idx">
+                <swiper-item>
+                    <view class="blocklist">
+                        <block wx:for="{{swiperItemList}}" wx:key="index">
+                            <view class="block-info" bindtap="setUser" data-info="{{item}}">
+                                <van-image width="80rpx" round height="80rpx" fit="cover" src="/images/catimg.png" />
+                                <view class="block-name">
+                                    {{item.name}}{{index+1}}
+                                </view>
+                            </view>
+                        </block>
+                    </view>
+                </swiper-item>
+            </block>
+        </swiper>
+    </view>
 </view>

@@ -1,35 +1,35 @@
 <!-- 投票界面登记 -->
 
 <view class="enroll">
-  <view class="cat_detail">
-    <view class="e_title">
-      猫咪图片/视频 <text style="font-size: 24rpx;font-weight: normal;">最多8张图或者1个视频</text>
+    <view class="cat_detail">
+        <view class="e_title">
+            猫咪图片/视频 <text style="font-size: 24rpx;font-weight: normal;">最多8张图或者1个视频</text>
+        </view>
+        <view class="uplodaStyle">
+            <van-uploader preview-size="210rpx" file-list="{{ fileList }}" multiple max-count="{{maxcount}}" accept="media" bind:before-read="beforeread" use-before-read="true" bind:after-read="afterRead" bind:delete="deleteImage" compressed="false" />
+        </view>
     </view>
-    <view class="uplodaStyle">
-      <van-uploader preview-size="110px" file-list="{{ fileList }}"  multiple  max-count="{{maxcount}}" accept="media" bind:before-read="beforeread" use-before-read="true" bind:after-read="afterRead" bind:delete="deleteImage" compressed="false"/>
-    </view>
-  </view>
 
-  <van-field model:value="{{ title }}" size="large" maxlength="{{30}}" label-class="labelClass" custom-style="inputStyle" placeholder="添加标题 (最长30字)" border="{{ true }}" input-align="left" />
-  <view class="cat_detail">
-    <!-- <view class="e_title">
+    <van-field model:value="{{ title }}" size="large" maxlength="{{30}}" label-class="labelClass" custom-style="inputStyle" placeholder="添加标题 (最长30字)" border="{{ true }}" input-align="left" />
+    <view class="cat_detail">
+        <!-- <view class="e_title">
       简介信息
     </view> -->
-    <van-field model:value="{{ introduction }}" type="textarea" placeholder="添加内容" autosize="{{autoSize}}" border="{{ true }}" />
-    <label for="">
-      <view class="dreass flexbetween" bindtap="getlocation">
-        <view class="left flexastart">
-          <van-icon name="location-o" />
-          <view class="lable_title">
-            {{address||'添加地点'}}
-          </view>
-        </view>
-        <van-icon name="arrow" />
-      </view>
-    </label>
-  </view>
+        <van-field model:value="{{ introduction }}" type="textarea" placeholder="添加内容" autosize="{{autoSize}}" border="{{ true }}" />
+        <label for="">
+            <view class="dreass flexbetween" bindtap="getlocation">
+                <view class="left flexastart">
+                    <van-icon name="location-o" />
+                    <view class="lable_title">
+                        {{address||'添加地点'}}
+                    </view>
+                </view>
+                <van-icon name="arrow" />
+            </view>
+        </label>
+    </view>
 
-  <view class="button_">
-    <van-button block round disabled="{{disabled}}"  type="warning" bind:click="onClick">发布</van-button>
-  </view>
+    <view class="button_">
+        <van-button block round disabled="{{disabled}}" size="small" type="warning" bind:click="onClick">发布</van-button>
+    </view>
 </view>

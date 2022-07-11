@@ -44,8 +44,7 @@ background-color: rgb(212, 211, 211);
 border-radius: 30rpx;
 }
 .dreass{
-  padding: 18rpx;
-  
+  padding:30rpx 18rpx;
 }
 .lable_title{
   margin-left: 10rpx;

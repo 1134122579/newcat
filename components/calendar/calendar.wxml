@@ -6,7 +6,6 @@
 		</text> -->
 		<van-icon name="arrow-left"wx:elif="{{prev}}"   bindtap="prevMonth" />
 		<text wx:else></text>
-
 		<picker mode="date" value="{{year}}-{{month}}" start="{{startDate}}" end="{{endDate}}" bindchange="dateChange" fields="month">
 			<text>{{year}}年{{month}}月</text>
 		</picker>
@@ -17,7 +16,6 @@
 		<van-icon name="arrow"wx:elif="{{prev}}"   bindtap="nextMonth" />
 		<text wx:else></text>
 	</view>
-
 	<!--日历面板-->
 	<!-- bindtouchstart='touchStart' bindtouchmove='touchMove' bindtouchend="touchEnd" -->
 	<view class="calendar-board board-style " >
@@ -34,7 +32,6 @@
 					<block wx:for="{{days_array[i]}}" wx:for-item="day" wx:key="date">
 
 						<view class="calendar-cell" style="background: {{day.background}}; width: {{cellSize}}px; height: {{cellSize}}px;" wx:if="{{day.day <= 0}}"></view>
-
 						<view class="calendar-cell border {{activedate==day.date&&'activedatestyle'}}" style="background: {{day.background}}; width: {{cellSize}}px; height: {{cellSize}}px; border-radius: 6px;" wx:else bindtap="dayClick" data-day="{{day}}">
 							<!-- 上月  -->
 							<block wx:if="{{day.info == 'prev'}}">

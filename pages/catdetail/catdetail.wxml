@@ -6,9 +6,7 @@
             <block wx:for="{{getdata.feedPointMedias}}" wx:key="*this">
                 <swiper-item>
                     <view class="headerImage">
-                        <image class="imageStyle" wx:if="{{item.mediaType=='PIC'}}" src="{{item.url}}" data-index='{{index}}' mode="aspectFill" bindtap="previewImage"></image>
-
-                        <!-- <video class="imageStyle" wx:if="{{item.mediaType=='VIDEO'}}" controls="false" src="{{item.url}}" data-index='{{index}}' mode="aspectFill" bindtap="previewImage"></image> -->
+                        <image class="imageStyle" src="{{item.url}}" data-index='{{index}}' mode="aspectFill" bindtap="previewMedia"></image>
                     </view>
                 </swiper-item>
             </block>
@@ -32,7 +30,6 @@
                         {{getdata.address}} </view>
                     <view style="color: #787878;">
                         距离：{{getdata.showDistance}}
-
                     </view>
                 </view>
                 <image style="margin-left: 10rpx;" class="locationicon" bindtap="gouserlocation" src="/images/location_icon.png"></image>
@@ -54,7 +51,7 @@
                     队员：
                 </view>
                 <view class="imageList flexastart" wx:if="{{getdata.feedMemberVos.length>0}}">
-                    <image wx:for="{{getdata.feedMemberVos}}" class="user-csr" src="{{item.avatarUrl||'/images/catimg.png'}}"></image>
+                    <image wx:for="{{getdata.feedMemberVos}}" wx:key="index" class="user-csr" src="{{item.avatarUrl||'/images/catimg.png'}}"></image>
                 </view>
                 <view class="imageList flexastart" wx:else style="font-size: 26rpx;">
                     暂无队员
@@ -79,7 +76,7 @@
         <!-- 内容  精彩瞬间-->
         <view class="new_content">
             <view class="typetitle">
-                简介
+                投喂点简介
             </view>
             <view class="typeList flexastart">
                 {{getdata.introduction}}
@@ -90,10 +87,11 @@
             <view class="typetitle">
                 投喂记录
             </view>
-            <view class="typeList ">
-                <block wx:for="{{recordTodayList}}" wx:key="index">
+            <view class="typeList " >
+            <block wx:if="{{recordTodayList.length>0}}">
+                <block wx:for="{{recordTodayList}}"  wx:key="index">
                     <view class="recordTodayList-block flexbetween">
-                        <van-image round width="120rpx" height="120rpx" fit="cover" src="{{item.avatarUrl}}" />
+                        <van-image round width="90rpx" height="90rpx" fit="cover" src="{{item.avatarUrl}}" />
                         <view class="touwei-user">
                             <view class="nickName">{{item.nickName}}</view>
                             <view class="feedTime">{{item.feedTime}}</view>
@@ -101,6 +99,10 @@
                         <van-tag type="success " mark plain size="medium">已投喂</van-tag>
                     </view>
                 </block>
+            </block>
+            <block wx:else>
+                <van-empty description="暂无记录" />
+            </block>
             </view>
         </view>
     </view>
