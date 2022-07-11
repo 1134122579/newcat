@@ -44,7 +44,14 @@
                 {
                     "name": "投喂点详情",
                     "pathName": "pages/catdetail/catdetail",
-                    "query": "cat_id=4",
+                    "query": "cat_id=5",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "日历排班",
+                    "pathName": "pages/calendar/calendar",
+                    "query": "id=2",
                     "launchMode": "default",
                     "scene": null
                 }

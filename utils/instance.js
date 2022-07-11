@@ -92,7 +92,6 @@ const handleResponse = ({ config, response }) => {
 };
 
 const fly_request = config => {
-  console.log("请求配置", config);
   let url = config.url;
   const method = (config.method || "").toLowerCase();
   let params = config.params || {};

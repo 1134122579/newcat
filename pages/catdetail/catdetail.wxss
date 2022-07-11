@@ -149,8 +149,8 @@ page {
 }
 
 .user-csr {
-    width: 100rpx;
-    height: 100rpx;
+    width: 95rpx;
+    height: 95rpx;
     display: block;
     flex-shrink: 0;
     margin-right: 14rpx;

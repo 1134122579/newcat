@@ -1,7 +1,10 @@
+import Api from "../../api/index";
+
 const App = getApp();
 
 Page({
   data: {
+    feedPointId: "", //日历
     year: new Date().getFullYear(), // 年份
     month: new Date().getMonth() + 1, // 月份
     day: new Date().getDate(), // 日期
@@ -26,36 +29,60 @@ Page({
     bottom: 0,
     showViewStyle: "",
     buttonStyle: "",
-    userList: [
-      [
-        { name: "小哈" },
-        { name: "小明哈哈" },
-        { name: "小明哈哈小明哈哈小明哈哈小明哈哈" },
-        { name: "小明哈哈" },
-        { name: "小明哈哈" },
-        { name: "小明哈哈" }, { name: "小哈" },
-        { name: "小明哈哈" },
-        { name: "小明哈哈小明哈哈小明哈哈小明哈哈" },
-        { name: "小明哈哈" },
-        { name: "小明哈哈" },
-        { name: "小明哈哈" },
-      ],
-      [
-        { name: "小哈" },
-        { name: "小明哈哈" },
-        { name: "小明哈哈小明哈哈小明哈哈小明哈哈" },
-        { name: "小明哈哈" },
-        { name: "小明哈哈" },
-        { name: "小明哈哈" },
-      ],
-    ],
+    userList: [],
+  },
+  //   获取投喂点人员列表
+  feedmemberList(feedPointId) {
+    Api.feedmemberList({ feedPointId }).then(res => {
+      res.ownerVo.isAdmin = true;
+      let List = [res.ownerVo].concat(res.memberVos);
+      let len = Math.ceil(List.length / 12);
+      let userList = [];
+      console.log(List, len);
+      for (let index = 0; index < len; index++) {
+        const element = List.splice(12 * index, 12);
+        userList.push(element);
+      }
+      this.setData({
+        userList,
+      });
+    });
+  },
+  // 获取当前月份的排班表
+  calendarList() {
+    let { feedPointId: feedpointId, year, month } = this.data;
+    Api.calendarList({
+      feedpointId,
+      year,
+      month,
+    }).then(res => {
+      if (Array.isArray(res)) {
+        res = res.map(item => {
+          return {
+            date: "2022-07-11",
+            other: item.nickName,
+            otherColor: "#4ECA8E",
+            badgeColor: "#4ECA8E",
+            background: "rgba(59,139,242,0.1)",
+          };
+        });
+        this.setData({
+          style: res,
+        });
+      }
+      console.log("calendarList", res);
+    });
   },
 
-  onLoad: function () {
+  onLoad: function (options) {
+    let { id } = options;
     //顶部高度
     this.setData({
       windowHeight: App.globalData.windowHeight,
+      feedPointId: id,
     });
+    this.feedmemberList(id);
+    this.calendarList();
     //样式
     this.setData({
       style: [
@@ -104,10 +131,8 @@ Page({
   },
   catchtap() {},
   // 重置
-  resveclick(){
-    this.setData({
-      
-    })
+  resveclick() {
+    this.setData({});
   },
   /**
    * 点击下个月
@@ -130,7 +155,6 @@ Page({
    * 点击上个月
    */
   prevMonth: function (event) {
-    console.log(event);
     const currentYear = event.detail.currentYear;
     const currentMonth = event.detail.currentMonth;
     const prevMonth = event.detail.prevMonth;
@@ -221,7 +245,7 @@ Page({
     if (!is_date) {
       newStyle = style.concat({
         date: activeDate,
-        other: info.name,
+        other: info.nickName,
         otherColor: "#4ECA8E",
         badgeColor: "#4ECA8E",
         background: "rgba(59,139,242,0.1)",
@@ -229,7 +253,7 @@ Page({
     } else {
       newStyle = style.map(item => {
         if (item.date == activeDate) {
-          item.other = info.name;
+          item.other = info.nickName;
         }
         return item;
       });

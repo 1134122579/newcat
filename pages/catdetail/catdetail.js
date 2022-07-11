@@ -38,6 +38,12 @@ Page({
     return value;
   },
 
+//   前往排版
+gocalendar(){
+    wx.navigateTo({
+      url: `/pages/calendar/calendar?id=${this.data.getdata.id}`,
+    })
+},
   //预览图片
   previewImage(e) {
     var index = e.target.dataset.index;

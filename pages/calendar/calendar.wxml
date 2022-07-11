@@ -35,9 +35,9 @@ actives:[激活的日期]
                     <view class="blocklist">
                         <block wx:for="{{swiperItemList}}" wx:key="index">
                             <view class="block-info" bindtap="setUser" data-info="{{item}}">
-                                <van-image width="80rpx" round height="80rpx" fit="cover" src="/images/catimg.png" />
+                                <van-image width="80rpx" round height="80rpx" fit="cover" src="{{item.avatarUrl||'/images/catimg.png'}}" />
                                 <view class="block-name">
-                                    {{item.name}}{{index+1}}
+                                    {{item.nickName||"未知"}}
                                 </view>
                             </view>
                         </block>

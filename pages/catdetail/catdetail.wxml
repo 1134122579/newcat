@@ -6,7 +6,7 @@
             <block wx:for="{{getdata.feedPointMedias}}" wx:key="*this">
                 <swiper-item>
                     <view class="headerImage">
-                        <image class="imageStyle" src="{{item.url}}" data-index='{{index}}' mode="aspectFill" bindtap="previewMedia"></image>
+                        <image class="imageStyle" src="{{item.url+'?imageView2/1/w/600/h/300'}}" data-index='{{index}}' mode="aspectFill" bindtap="previewMedia"></image>
                     </view>
                 </swiper-item>
             </block>
@@ -70,7 +70,7 @@
 
             </view>
             <view class="" style="margin-top: 20rpx;">
-                <van-button  round size="small" plain  block>投喂排班</van-button>
+                <van-button  round size="small" plain  block bind:click="gocalendar">投喂排班</van-button>
             </view>
         </view>
         <!-- 内容  精彩瞬间-->
