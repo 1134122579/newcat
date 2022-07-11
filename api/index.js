@@ -43,9 +43,30 @@ export default {
       isThree: false,
     });
   },
+  feedmemberLeave(params) {
+    return fly({
+      url: `/client/care/feedmember/leave`,
+      method: "get",
+      params,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      loading: false,
+      isThree: false,
+    });
+  },
   myRecord(params) {
     return fly({
       url: `/client/care/feedpoint/me`,
+      method: "post",
+      params,
+      loading: false,
+      isThree: false,
+    });
+  },
+  feedpointjoinList(params) {
+    return fly({
+      url: `/client/care/feedpoint/me/joinList`,
       method: "post",
       params,
       loading: false,

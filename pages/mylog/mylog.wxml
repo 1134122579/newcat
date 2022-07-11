@@ -1,0 +1,25 @@
+<!-- 我的动态
+<view>
+  <ListModel list="{{catList}}" isdele="{{isdele}}" bind:ondele="ondele" listType="{{listType}}" isStatus="{{isStatus}}" />
+</view> -->
+
+<!-- 我的动态 -->
+
+<block wx:if="{{list.length>0}}">
+    <view class="typeList ">
+                <block wx:for="{{list}}" wx:key="index">
+                    <view class="recordTodayList-block flexbetween">
+                        <van-image round width="110rpx" height="110rpx" fit="cover" src="{{item.avatarUrl}}" />
+                        <view class="touwei-user">
+                            <view class="nickName">{{item.nickName}}</view>
+                            <view class="feedTime">{{item.feedTime}}</view>
+                        </view>
+                        <van-tag type="success " mark plain size="medium">投喂成功</van-tag>
+                    </view>
+                </block>
+            </view>
+    <view class="ismore" hidden="{{!ismore}}">暂无更多</view>
+</block>
+<block wx:else>
+    <van-empty description="暂无发布" />
+</block>

@@ -26,7 +26,6 @@ page{
     overflow: hidden;
 }
 .card-desc{
- text-indent: 40rpx;
 }
 
 .card-address {
@@ -41,7 +40,8 @@ page{
 
 .createTime {
     color: #787878;
-    margin-right: 10rpx;
+    font-size: 22rpx;
+    margin-right: 8rpx;
 }
 .vancard{
     margin-bottom: 20rpx;

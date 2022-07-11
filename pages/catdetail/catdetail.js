@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    is_share:0,
     recordTodayList: [], //今日投喂记录
     isjoinPounp: false,
     createdUSerinfo: {}, //创建人信息
@@ -200,6 +201,7 @@ Page({
     let { id: feedPointId } = this.data.getdata;
     console.log("recordTodayList", feedPointId, this.data.getdata);
     Api.recordToday({ feedPointId }).then(res => {
+        if(!res)return
       res = res.map(item => {
         item["feedTime"] = formatTime(item["feedTime"]);
         return item;
@@ -229,10 +231,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let { cat_id } = options;
+    let { cat_id ,is_share} = options;
     this.setData({
       my_id: storgae.getUserInfo().id,
       cat_id,
+      is_share,
     });
     this.getCatdetails();
   },
@@ -277,7 +280,7 @@ Page({
     let { getdata } = this.data;
     return {
       title: `${getdata.title}`,
-      path:`/pages/catdetail/catdetail?cat_id=${getdata.id}`
+      path:`/pages/catdetail/catdetail?cat_id=${getdata.id}&is_share=1`
     };
   },
 });

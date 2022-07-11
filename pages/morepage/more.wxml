@@ -6,11 +6,12 @@
     <view class="more_header">
         <image class="header_bg" mode="aspectFill" src="/images/moer.jpg"></image>
         <view class="user_content">
-            <view class="user_content_t" bindtap="onuserInfo">
-                <van-image round width="120rpx" height="120rpx" src="{{userInfo.avatarUrl}}"></van-image>
-                <view class="userName">{{userInfo.nickName||'未认证'}}</view>
+            <view class="user_content_t" bindtap="onuserInfo"> 
+                <van-image round width="120rpx" height="120rpx" src="{{userInfo.avatarUrl||'/images/catimg.png'}}"></van-image>
+                <view class="userName">{{userInfo.nickName||'登录/注册'}}</view>
                 <van-icon name="edit" size="18" />
             </view>
+            
             <!-- 数据 -->
             <!-- <view class="numList flexaround">
 				<view class="listBlock flexcolumn" bindtap="goList" data-id="3">

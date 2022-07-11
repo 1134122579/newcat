@@ -2,6 +2,7 @@
   "pages": [
     "pages/location/location",
     "pages/myjoin/myjoin",
+    "pages/mylog/mylog",
     "pages/morepage/more",
     "pages/maplocation/location",
     "pages/visitingCard/visitingCard",

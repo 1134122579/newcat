@@ -107,7 +107,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  position: relative;
+}
+.huangguan{
+    position: absolute;
+    top: -25rpx;
+    margin: 0 auto;
+    z-index: 2;
+}
+.huangguanicon{
+    width:40rpx;
 }
 
 .block-name {

@@ -22,9 +22,16 @@ Page({
     wx.showLoading({
       title: '进入中..',
     })
-    wx.navigateTo({
-      url: '/pages/dongtai/dongtai',
-    })
+    if(storage.getToken()){
+        wx.navigateTo({
+            url: '/pages/dongtai/dongtai',
+          })
+    }else{
+        wx.navigateTo({
+          url: '/pages/login/login',
+        })
+    }
+  
   },
 
   /**

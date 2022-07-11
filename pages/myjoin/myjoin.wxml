@@ -6,20 +6,39 @@
 <!-- 我的动态 -->
 
 <block wx:if="{{list.length>0}}">
-    <view class="typeList ">
-                <block wx:for="{{list}}" wx:key="index">
-                    <view class="recordTodayList-block flexbetween">
-                        <van-image round width="120rpx" height="120rpx" fit="cover" src="{{item.avatarUrl}}" />
-                        <view class="touwei-user">
-                            <view class="nickName">{{item.nickName}}</view>
-                            <view class="feedTime">{{item.feedTime}}</view>
-                        </view>
-                        <van-tag type="success " mark plain size="medium">投喂成功</van-tag>
+    <view class="liststyle">
+        <block wx:for="{{list}}" wx:key="index">
+            <!-- <DongtaiModel item="{{item}}" isdele="{{isdele}}" bind:ondele="ondele" /> -->
+            <block>
+                <van-card thumb-mode="scaleToFill" custom-class="vancard" thumb="{{item.cover||'/images/catimg.png'}}" thumb-link="{{'/pages/catdetail/catdetail?cat_id='+item.id}}" title-class="card-title">
+                    <view slot="title" class="card-title">
+                        {{item.title||'投喂点'}}
                     </view>
-                </block>
-            </view>
-    <view class="ismore" hidden="{{!ismore}}">暂无更多</view>
+                    <view slot="tag" class="card-tag">
+                        <van-tag mark type="success">{{item.identifyStatus}}</van-tag>
+                    </view>
+                    <view slot="desc" class="card-title card-desc" style="color: #787878;">
+                        {{item.introduction}}
+                    </view>
+                    <view slot="price" class="card-address">
+                        {{item.address}}
+                    </view>
+                    <!-- <view slot="bottom">
+                        {{item.createTime}}
+                    </view> -->
+                    <view slot="footer" class="footer flexbetween">
+                        <view class="createTime">
+                            {{item.createTime}}
+                        </view>
+                        <!-- <van-button size="mini" data-id="{{item.id}}" bind:click="editcat">编辑</van-button> -->
+                        <van-button size="mini" type="warning" style="margin-left: 10rpx;" data-id="{{item.id}}" bind:click="catDelete">退出</van-button>
+                    </view>
+                </van-card>
+            </block>
+        </block>
+    </view>
+    <view class="ismore" hidden="{{!isLastPage}}">暂无更多</view>
 </block>
 <block wx:else>
-    <van-empty description="暂无发布" />
+    <van-empty description="暂未加投喂点" />
 </block>

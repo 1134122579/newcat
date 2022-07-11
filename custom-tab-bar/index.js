@@ -19,18 +19,11 @@ Component({
     list: [
       {
         pagePath: "pages/location/location",
-        text: "地图",
+        text: "投喂点",
         iconPath: "../images/dt.png",
         selectedIconPath: "../images/dt-a.png",
         isnavigatetominiprogram: false,
       },
-      // {
-      //   pagePath: "pages/orderpage/order",
-      //   text: "赛事",
-      //   iconPath: "../images/jbicon.png",
-      //   selectedIconPath: "../images/jbicon_s.png",
-      //   isnavigatetominiprogram: false,
-      // },
       {
         pagePath: "pages/releasepage/releasepage",
         text: "",
@@ -39,14 +32,6 @@ Component({
         isnavigatetominiprogram: false,
         is_content: true,
       },
-      // {
-      //   // pages/spacepage/space
-      //   pagePath: "",
-      //   text: "商城",
-      //   iconPath: "../images/shopicon.png",
-      //   selectedIconPath: "../images/shopicon_s.png",
-      //   isnavigatetominiprogram: true,
-      // },
       {
         pagePath: "pages/morepage/more",
         text: "我的",
@@ -78,24 +63,23 @@ Component({
     onChange(e) {
       const data = e.currentTarget.dataset;
       const url = data.path;
-      if (!storage.getToken()) {
-        wx.navigateTo({
-          url: "/pages/login/login", //能够带参数，在登陆页面接收
-        });
-      } else {
+    //   if (!storage.getToken()) {
+    //     wx.navigateTo({
+    //       url: "/pages/login/login", //能够带参数，在登陆页面接收
+    //     });
+    //   } else {
         var appInst = getApp();
-        appInst.globalData.userInfo = storage.getUserInfo();
-        if (data.isnavigatetominiprogram) {
-          this.navigateToMiniProgram();
-          return;
+        if(storage.getUserInfo()){
+            appInst.globalData.userInfo = storage.getUserInfo();
         }
+
         this.setData({
           selected: data.index,
         });
         wx.switchTab({
           url: "/" + url,
         });
-      }
+    //   }
     },
   },
 });

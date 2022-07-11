@@ -62,22 +62,23 @@ const handleResponse = ({ config, response }) => {
     return response;
   }
   // 兼容，服务器返回的空的data（接口返回500）
-  response.data = response.data || {};
+  response.data =response?.data ||response?.response?.data|| {};
   // 如果返回错误
+  console.log( response )
   if (response.data.code !== 200) {
     // 没有登录
-    if (response.data.status == 401) {
-      try {
-        storage.removeToken()
-        wx.navigateTo({
-          url: "/pages/login/login",
-        });
-        return;
-      } catch (e) {
-        console.error(e);
-        storage.removeToken()
+    if (response.data.code == 401) {
+        try {
+          storage.removeToken()
+          wx.navigateTo({
+            url: "/pages/login/login",
+          });
+          return;
+        } catch (e) {
+          console.error(e);
+          storage.removeToken()
+        }
       }
-    }
     // 统一报错
     !config.noToastError &&
       wx.hideLoading() &&

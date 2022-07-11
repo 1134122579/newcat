@@ -56,7 +56,7 @@
                 <view class="imageList flexastart" wx:else style="font-size: 26rpx;">
                     暂无队员
                 </view>
-                <label for="" >
+                <label for=""  wx:if="{{my_id== getdata.createBy}}" >
                     <view class="addbutton flexcolumn">
                         <van-icon name="plus" size="20" />
                     </view>
@@ -69,8 +69,8 @@
                 </label> -->
             </view>
             <view class="flexbetween" style="margin-top: 20rpx;">
-                <van-button  style="flex: 1;margin-right: 20rpx;"  round size="small" plain  block bind:click="gocalendar">投喂排班</van-button>
-                <van-button  style="flex: 1;"  round size="small" plain color="#54D0C7" block bind:click="joincat">立即加入</van-button>
+                <van-button  style="flex: 1;"  round size="small" plain  block bind:click="gocalendar">投喂排班</van-button>
+                <van-button  style="flex: 1;margin-left: 20rpx;" wx:if="{{is_share}}" round size="small" plain color="#54D0C7" block bind:click="joincat">立即加入</van-button>
             </view>
         </view>
         <!-- 内容  精彩瞬间-->
@@ -109,7 +109,11 @@
 
     <!-- 投喂  -->
     <view class="tw ">
-        <image class="tw-Image" bindtap="recordfeed" mode="aspectFit" src="/images/touwei.png"></image>
+    <view class="maoliangpen" bindtap="recordfeed">
+        <iconfont slot="icon" name="maoliangpen"  size="42" />
+        <text>投喂</text>
+    </view>
+            <!-- <image class="tw-Image"  mode="aspectFit" src="/images/touwei.png"></image> -->
     </view>
 </view>
 

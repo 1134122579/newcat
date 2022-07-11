@@ -32,7 +32,7 @@ Component({
       }
       if (pages.length == 1) {
         wx.switchTab({
-          url: '/pages/home/home',
+          url: '/pages/location/location',
         })
       }
     }

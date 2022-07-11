@@ -73,7 +73,10 @@ Page({
       console.log("calendarList", res);
     });
   },
+// 移除或者退出投喂点
+feedmemberLeave(){
 
+},
   onLoad: function (options) {
     let { id } = options;
     //顶部高度

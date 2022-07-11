@@ -47,6 +47,13 @@
                     "query": "id=2",
                     "launchMode": "default",
                     "scene": null
+                },
+                {
+                    "name": "我加入的投喂点",
+                    "pathName": "pages/myjoin/myjoin",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
                 }
             ]
         }

@@ -1,0 +1,33 @@
+/* pages/dynamicpage/dynamicpage.wxss */
+.liststyle{
+  padding: 24rpx;
+  width: 100%;
+  box-sizing: border-box;
+  /* display: flex;
+  justify-content: space-between;
+  align-items: flex-start; */
+  flex-wrap: wrap;
+}
+.ismore{
+  font-size: 24rpx;
+  color: #ccc;
+  padding: 20rpx;
+  text-align: center;
+}
+.recordTodayList-block{
+    width: 100%;
+    box-sizing: border-box;
+    padding:10rpx 20rpx;
+}
+.touwei-user {
+    flex: 1;
+    margin-left: 18rpx;
+    line-height: 2;
+}
+.nickName{
+    font-size: 32rpx;
+}
+.feedTime{
+    font-size: 28rpx;
+    color: #787878;
+}

@@ -34,7 +34,7 @@ Page({
   },
   noUser() {
     wx.switchTab({
-      url: "/pages/home/home",
+      url: "/pages/location/location",
     });
   },
   getUserProfile(e) {

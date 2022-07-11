@@ -1,7 +1,6 @@
 // pages/location/location.js
 
 let App = getApp()
-import api from "../../api/index";
 import Api from "../../api/index";
 Page({
 
@@ -11,48 +10,48 @@ Page({
     data: {
         longitude: 116.336590,
         latitude: 39.941127,
-        scale: 18,
+        scale: 28,
         markers: [
-            //貘科动物馆
-            {
-                id: 0,
-                iconPath: "../../images/location.png",
-                latitude: 39.941127,
-                longitude: 116.336590,
-                width: 40, //图片显示宽度
-                height: 40, //图片显示高度
-                title: '猫咪投喂点',
-            },
-            //犀鸟馆
-            {
-                id: 1,
-                iconPath: "../../images/location.png",
-                latitude: 39.940826,
-                longitude: 116.335109,
-                width: 30,
-                height: 30,
-                title: '猫咪投喂点'
-            },
-            //火烈鸟馆
-            {
-                id: 2,
-                iconPath: "../../images/location.png",
-                latitude: 39.940578,
-                longitude: 116.335977,
-                width: 30,
-                height: 30,
-                title: '猫咪投喂点'
-            },
-            //鹦鹉馆
-            {
-                id: 3,
-                iconPath: "../../images/location.png",
-                latitude: 39.941573,
-                longitude: 116.335544,
-                width: 30,
-                height: 30,
-                title: '猫咪投喂点'
-            }
+            // //貘科动物馆
+            // {
+            //     id: 0,
+            //     iconPath: "../../images/location.png",
+            //     latitude: 39.941127,
+            //     longitude: 116.336590,
+            //     width: 40, //图片显示宽度
+            //     height: 40, //图片显示高度
+            //     title: '猫咪投喂点',
+            // },
+            // //犀鸟馆
+            // {
+            //     id: 1,
+            //     iconPath: "../../images/location.png",
+            //     latitude: 39.940826,
+            //     longitude: 116.335109,
+            //     width: 30,
+            //     height: 30,
+            //     title: '猫咪投喂点'
+            // },
+            // //火烈鸟馆
+            // {
+            //     id: 2,
+            //     iconPath: "../../images/location.png",
+            //     latitude: 39.940578,
+            //     longitude: 116.335977,
+            //     width: 30,
+            //     height: 30,
+            //     title: '猫咪投喂点'
+            // },
+            // //鹦鹉馆
+            // {
+            //     id: 3,
+            //     iconPath: "../../images/location.png",
+            //     latitude: 39.941573,
+            //     longitude: 116.335544,
+            //     width: 30,
+            //     height: 30,
+            //     title: '猫咪投喂点'
+            // }
         ]
     },
     // 获取当前坐标
@@ -89,7 +88,7 @@ Page({
                     latitude,
                     longitude,
                     markers,
-                    scale: 17
+                    scale: 14
                 })
             })
         })
@@ -145,7 +144,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        App.tabbershow(this, 0);
     },
 
     /**

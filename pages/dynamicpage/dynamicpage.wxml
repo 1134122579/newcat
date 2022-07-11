@@ -37,7 +37,7 @@
             </block>
         </block>
     </view>
-    <view class="ismore" hidden="{{ismore}}">暂无更多</view>
+    <view class="ismore" hidden="{{!isLastPage}}">暂无更多</view>
 </block>
 <block wx:else>
     <van-empty description="暂无发布" />
