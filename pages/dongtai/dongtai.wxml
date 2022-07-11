@@ -5,8 +5,9 @@
         <view class="e_title">
             猫咪图片/视频 <text style="font-size: 24rpx;font-weight: normal;">最多8张图或者1个视频</text>
         </view>
+        <!-- <image mode="aspectFit"></image> -->
         <view class="uplodaStyle">
-            <van-uploader preview-size="210rpx" file-list="{{ fileList }}" multiple max-count="{{maxcount}}" accept="media" bind:before-read="beforeread" use-before-read="true" bind:after-read="afterRead" bind:delete="deleteImage" compressed="false" />
+            <van-uploader preview-size="210rpx" image-fit="aspectFill" file-list="{{ fileList }}" multiple max-count="{{maxcount}}" accept="media" bind:before-read="beforeread" use-before-read="true" bind:after-read="afterRead" bind:delete="deleteImage" compressed="false" />
         </view>
     </view>
 

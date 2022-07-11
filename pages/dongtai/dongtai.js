@@ -35,7 +35,7 @@ Page({
   // 获取个位置
   getlocation() {
     let that = this;
-    App.isGetlocation((res) => {
+    App.isGetlocation(res => {
       let { latitude, longitude } = res;
       wx.chooseLocation({
         latitude,
@@ -61,15 +61,16 @@ Page({
     let typenum = type == "image" ? 1 : 2;
     const { fileList = [] } = that.data;
     // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
-    if (fileList.length > 0) {
-      if (file[0].type == "video") {
-        wx.showToast({
-          title: "已上传图片无法选择视频",
-          icon: "none",
-        });
-        return;
-      }
-    }
+    // 禁止视频图片同时存在
+    // if (fileList.length > 0) {
+    //   if (file[0].type == "video") {
+    //     wx.showToast({
+    //       title: "已上传图片无法选择视频",
+    //       icon: "none",
+    //     });
+    //     return;
+    //   }
+    // }
     console.log(fileList, file, type, this.data.maxcount, "视频");
     this.setData({
       maxcount: type == "image" ? 8 : 1,
@@ -91,50 +92,50 @@ Page({
     const { fileList = [] } = that.data;
     // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
     // 视频裁剪
-    if (file[0].type == "video") {
-      wx.openVideoEditor({
-        filePath: file[0].url,
-        success(res) {
-          // duration	number	剪辑后生成的视频文件的时长，单位毫秒（ms）
-          // size	number	剪辑后生成的视频文件大小，单位字节数（byte）
-          // tempFilePath	string	编辑后生成的视频文件的临时路径
-          // tempThumbPath	string	编辑后生成的缩略图文件的临时路径
-          let { duration, size, tempFilePath, tempThumbPath } = res;
-          let isSize = size / 1024 / 1024;
-          //判断大小
-          if (isSize > 20) {
-            wx.showToast({
-              title: "视频不能超过20m",
-            });
-            return;
-          }
-          that.uploadFile({
-            url: tempFilePath,
-            size,
-            duration,
-          });
-        },
-        complete(res) {
-          console.log(res, "complete");
-        },
-      });
-      return;
-    }
-    let fileArray = file.map((item) => {
+    // if (file[0].type == "video") {
+    //   wx.openVideoEditor({
+    //     filePath: file[0].url,
+    //     success(res) {
+    //       // duration	number	剪辑后生成的视频文件的时长，单位毫秒（ms）
+    //       // size	number	剪辑后生成的视频文件大小，单位字节数（byte）
+    //       // tempFilePath	string	编辑后生成的视频文件的临时路径
+    //       // tempThumbPath	string	编辑后生成的缩略图文件的临时路径
+    //       let { duration, size, tempFilePath, tempThumbPath } = res;
+    //       let isSize = size / 1024 / 1024;
+    //       //判断大小
+    //       if (isSize > 20) {
+    //         wx.showToast({
+    //           title: "视频不能超过20m",
+    //         });
+    //         return;
+    //       }
+    //       that.uploadFilenew({
+    //         url: tempFilePath,
+    //         size,
+    //         duration,
+    //       });
+    //     },
+    //     complete(res) {
+    //       console.log(res, "complete");
+    //     },
+    //   });
+    //   return;
+    // }
+    let fileArray = file.map(item => {
       item["isupload"] = true;
       return item;
     });
     let promiseall = [];
-    fileArray.forEach((item) => {
+    fileArray.forEach(item => {
       promiseall.push(that.uploadFilenew(item));
     });
     wx.showLoading({
       title: "上传中..",
     });
     Promise.allSettled(promiseall)
-      .then((res) => {
-        res = res.map((item) => {
-          return { ...item.value };
+      .then(res => {
+        res = res.map(item => {
+          return { ...item.value, isupload: true };
         });
         console.log("全部上传成功", res, fileList);
         that.setData({
@@ -142,7 +143,7 @@ Page({
         });
         wx.hideLoading();
       })
-      .catch((err) => {
+      .catch(err => {
         wx.hideLoading();
       });
   },
@@ -151,7 +152,7 @@ Page({
     let that = this;
     const { fileList = [] } = this.data;
     let token = storgae.getToken();
-    let filearr = file.map((item) => item.url);
+    let filearr = file.map(item => item.url);
     wx.uploadFile({
       url: App.globalData.baseUrl + "/client/media/pv", // 接口地址
       filePath: filearr,
@@ -206,7 +207,7 @@ Page({
     let { fileList } = this.data;
     let delitem = e.detail;
     this.setData({
-      fileList: fileList.filter((item) => item.url != delitem.file.url),
+      fileList: fileList.filter(item => item.url != delitem.file.url),
       maxcount: fileList.length <= 0 || fileList[0].type == "image" ? 8 : 1,
     });
   },
@@ -223,7 +224,7 @@ Page({
       introduction = "",
       title = "",
     } = this.data;
-    let urls = fileList.map((item) => item.url);
+    let urls = fileList.map(item => item.url);
     if (this.checkUpQuery()) {
       wx.showToast({
         title: "添加成功，将自动返回",
@@ -238,12 +239,13 @@ Page({
       if (isedit) {
         Api.feedpointEdit({
           id,
+          title,
           introduction,
           longitude,
           latitude,
           address,
           urls,
-        }).then((res) => {
+        }).then(res => {
           wx.hideLoading();
           wx.showToast({
             title: "修改成功，1s后将自动返回",
@@ -263,8 +265,9 @@ Page({
           longitude,
           latitude,
           address,
+          title,
           urls,
-        }).then((res) => {
+        }).then(res => {
           wx.hideLoading();
           wx.showToast({
             title: "添加成功，1s后将自动返回",
@@ -323,13 +326,13 @@ Page({
   },
   // 获取投喂点详情
   getCatdetails(id) {
-    App.isGetlocation((location) => {
+    App.isGetlocation(location => {
       let { longitude, latitude } = location;
       Api.getCatdetails({
         id,
         longitude,
         latitude,
-      }).then((res) => {
+      }).then(res => {
         console.log(res);
         let {
           introduction,
@@ -337,10 +340,20 @@ Page({
           feedPointMedias: fileList,
           latitude,
           longitude,
+          title,
         } = res;
+        fileList = fileList.map(item => {
+          return {
+            ...item,
+            type: item.mediaType == "PIC" ? "image" : "video",
+            isVideo: item.mediaType == "PIC" ? false : true,
+            isImage: item.mediaType == "PIC" ? true : false,
+          };
+        });
         this.setData({
           introduction,
           address,
+          title,
           fileList,
           latitude,
           longitude,

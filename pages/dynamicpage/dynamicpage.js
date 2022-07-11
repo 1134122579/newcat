@@ -1,5 +1,6 @@
 import storage from "../../utils/cache";
 import Api from "../../api/index";
+import {formatTime} from '../../utils/util'
 
 // pages/dynamicpage/dynamicpage.js
 Page({
@@ -26,6 +27,7 @@ Page({
       url: `/pages/dongtai/dongtai?id=${id}`,
     });
   },
+  
   catDelete(e) {
     let { id } = e.currentTarget.dataset;
     wx.showModal({
@@ -57,8 +59,14 @@ Page({
     let { page: pageIndex, list, pageSize } = this.data;
     Api.myRecord({ pageSize, pageIndex }).then((res) => {
       this.setData({
-        ismore: res.length > 0 ? false : true,
+        ismore: res.length > 0||list.length<20 ? false : true,
       });
+      res=res.map(item=>{
+        item['createTime']=formatTime(item['createTime'])
+          return {
+              ...item,
+          }
+      })
       if (pageIndex == 1) {
         this.setData({
           list: res,

@@ -194,10 +194,14 @@ page {
 
 .typeList {
     flex-wrap: nowrap;
-    font-size: 30rpx;
+    font-size: 28rpx;
     /* margin-top: 28rpx; */
     overflow-x: auto;
     padding: 0 2rpx;
+    line-height: 1.7;
+}
+.typedesc{
+        text-indent: 56rpx;
 }
 
 .type_block {
@@ -364,7 +368,7 @@ page {
 
 .joinContent-title {
     text-align: center;
-    font-size: 40rpx;
+    font-size: 34rpx;
 }
 
 .nickname {
@@ -387,7 +391,7 @@ page {
     width: 100%;
     text-indent: 60rpx;
     margin-top: 20rpx;
-
+    font-size: 26rpx;
 }
 
 .joinContent-foolter {
@@ -413,6 +417,7 @@ page {
 
 .nickName {
     font-size: 30rpx;
+    font-weight: 600;
 }
 
 .feedTime {

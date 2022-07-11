@@ -1,16 +1,55 @@
 /* pages/dynamicpage/dynamicpage.wxss */
-.liststyle{
-  padding: 24rpx;
-  width: 100%;
-  box-sizing: border-box;
-  /* display: flex;
+page{
+    --card-background-color:#fff
+}
+.liststyle {
+    padding: 24rpx;
+    width: 100%;
+    box-sizing: border-box;
+    /* display: flex;
   justify-content: space-between;
   align-items: flex-start; */
-  flex-wrap: wrap;
+    flex-wrap: wrap;
 }
-.ismore{
-  font-size: 24rpx;
-  color: #ccc;
-  padding: 20rpx;
-  text-align: center;
+
+.ismore {
+    font-size: 24rpx;
+    color: #ccc;
+    padding: 20rpx;
+    text-align: center;
+}
+
+.card-title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+.card-desc{
+ text-indent: 40rpx;
+}
+
+.card-address {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.footer {
+    padding-left: 194rpx;
+}
+
+.createTime {
+    color: #787878;
+    margin-right: 10rpx;
+}
+.vancard{
+    margin-bottom: 20rpx;
+    box-shadow: 0 0 20rpx #787878;
+    border-radius: 16rpx;
+}
+.card-tag{
+    position: absolute;
+    top: 20rpx;
+    left: -20rpx;
 }

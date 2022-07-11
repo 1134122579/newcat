@@ -38,12 +38,12 @@ Page({
     return value;
   },
 
-//   前往排版
-gocalendar(){
+  //   前往排版
+  gocalendar() {
     wx.navigateTo({
       url: `/pages/calendar/calendar?id=${this.data.getdata.id}`,
-    })
-},
+    });
+  },
   //预览图片
   previewImage(e) {
     var index = e.target.dataset.index;
@@ -175,7 +175,18 @@ gocalendar(){
     });
   },
   feedmemberJoin() {
-    let { id: feedPointId } = this.data.getdata;
+    let {
+      id: feedPointId,
+      getdata: { createBy },
+      my_id,
+    } = this.data.getdata;
+    if (createBy == my_id) {
+      wx.showToast({
+        title: "队长无需加入！",
+        icon: "none",
+      });
+      return;
+    }
     Api.feedmemberJoin({ feedPointId }).then(res => {
       wx.showToast({
         title: "加入成功",
@@ -263,8 +274,10 @@ gocalendar(){
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    let { getdata } = this.data;
     return {
-      title: "某某投喂点",
+      title: `${getdata.title}`,
+      path:`/pages/catdetail/catdetail?cat_id=${getdata.id}`
     };
   },
 });

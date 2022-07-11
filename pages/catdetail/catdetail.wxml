@@ -19,7 +19,7 @@
             <!-- 名字 -->
             <view class="headerName">
                 <view class="name">
-                    <view>{{getdata.introduction}}</view>
+                    <view>{{getdata.title||'投喂点'}}</view>
                 </view>
             </view>
             <!-- 地点  -->
@@ -56,29 +56,29 @@
                 <view class="imageList flexastart" wx:else style="font-size: 26rpx;">
                     暂无队员
                 </view>
-                <label for="" wx:if="{{my_id== getdata.createBy}}">
+                <label for="" >
                     <view class="addbutton flexcolumn">
                         <van-icon name="plus" size="20" />
                     </view>
                     <button open-type="share"></button>
                 </label>
-                <label for="" wx:if="{{my_id!= getdata.createBy}}">
+                <!-- <label for="" wx:if="{{my_id!= getdata.createBy}}">
                     <view class="addbutton flexcolumn" bindtap="joincat">
                         <van-icon name="plus" size="20" />
                     </view>
-                </label>
-
+                </label> -->
             </view>
-            <view class="" style="margin-top: 20rpx;">
-                <van-button  round size="small" plain  block bind:click="gocalendar">投喂排班</van-button>
+            <view class="flexbetween" style="margin-top: 20rpx;">
+                <van-button  style="flex: 1;margin-right: 20rpx;"  round size="small" plain  block bind:click="gocalendar">投喂排班</van-button>
+                <van-button  style="flex: 1;"  round size="small" plain color="#54D0C7" block bind:click="joincat">立即加入</van-button>
             </view>
         </view>
         <!-- 内容  精彩瞬间-->
         <view class="new_content">
             <view class="typetitle">
-                投喂点简介
+               简介
             </view>
-            <view class="typeList flexastart">
+            <view class="typeList flexastart typedesc">
                 {{getdata.introduction}}
             </view>
         </view>

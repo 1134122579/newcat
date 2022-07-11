@@ -46,10 +46,7 @@ export default {
   myRecord(params) {
     return fly({
       url: `/client/care/feedpoint/me`,
-      method: "get",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
+      method: "post",
       params,
       loading: false,
       isThree: false,

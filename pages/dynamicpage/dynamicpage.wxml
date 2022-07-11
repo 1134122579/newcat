@@ -10,14 +10,26 @@
         <block wx:for="{{list}}" wx:key="index">
             <!-- <DongtaiModel item="{{item}}" isdele="{{isdele}}" bind:ondele="ondele" /> -->
             <block>
-                <van-card tag="{{item.identifyStatus}}" desc="{{item.introduction}}" title="{{item.title||'投喂点'}}" thumb="{{item.feedPointMedias[0].url||'/images/catimg.png'}}" thumb-link="{{'/pages/catdetail/catdetail?cat_id='+item.id}}">
-                    <view slot="price-top">
+                <van-card thumb-mode="scaleToFill" custom-class="vancard" thumb="{{item.cover||'/images/catimg.png'}}" thumb-link="{{'/pages/catdetail/catdetail?cat_id='+item.id}}" title-class="card-title">
+                    <view slot="title" class="card-title">
+                        {{item.title||'投喂点'}}
+                    </view>
+                    <view slot="tag" class="card-tag">
+                        <van-tag mark type="success">{{item.identifyStatus}}</van-tag>
+                    </view>
+                    <view slot="desc" class="card-title card-desc" style="color: #787878;">
+                        {{item.introduction}}
+                    </view>
+                    <view slot="price" class="card-address">
                         {{item.address}}
                     </view>
-                    <view slot="price">
+                    <!-- <view slot="bottom">
                         {{item.createTime}}
-                    </view>
-                    <view slot="footer">
+                    </view> -->
+                    <view slot="footer" class="footer flexbetween">
+                        <view class="createTime">
+                            {{item.createTime}}
+                        </view>
                         <van-button size="mini" data-id="{{item.id}}" bind:click="editcat">编辑</van-button>
                         <van-button size="mini" type="warning" style="margin-left: 10rpx;" data-id="{{item.id}}" bind:click="catDelete">删除</van-button>
                     </view>
@@ -25,7 +37,7 @@
             </block>
         </block>
     </view>
-    <view class="ismore" hidden="{{!ismore}}">暂无更多</view>
+    <view class="ismore" hidden="{{ismore}}">暂无更多</view>
 </block>
 <block wx:else>
     <van-empty description="暂无发布" />

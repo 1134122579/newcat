@@ -14,13 +14,6 @@
                     "scene": null
                 },
                 {
-                    "name": "详情",
-                    "pathName": "pages/catdetail/catdetail",
-                    "query": "user_id=38&cat_id=180",
-                    "launchMode": "default",
-                    "scene": null
-                },
-                {
                     "name": "登录",
                     "pathName": "pages/login/login",
                     "query": "",
@@ -44,7 +37,7 @@
                 {
                     "name": "投喂点详情",
                     "pathName": "pages/catdetail/catdetail",
-                    "query": "cat_id=5",
+                    "query": "cat_id=9",
                     "launchMode": "default",
                     "scene": null
                 },
