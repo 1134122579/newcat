@@ -219,7 +219,7 @@ Page({
             powerlist
         } = this.data;
         this.setData({
-            userInfo: appInst.globalData.userInfo,
+            userInfo: storage.getUserInfo(),
             navHeight: appInst.globalData.navHeight,
         });
     },

@@ -64,6 +64,15 @@ export default {
       isThree: false,
     });
   },
+  calendarRange(params) {
+    return fly({
+      url: `/client/feed/calendar/range`,
+      method: "post",
+      params,
+      loading: false,
+      isThree: false,
+    });
+  },
   feedpointjoinList(params) {
     return fly({
       url: `/client/care/feedpoint/me/joinList`,
@@ -121,6 +130,18 @@ export default {
   feedpointDelete(params) {
     return fly({
       url: `/client/care/feedpoint/delete`,
+      method: "get",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      params,
+      loading: false,
+      isThree: false,
+    });
+  },
+  calendarRemove(params) {
+    return fly({
+      url: `/client/feed/calendar/remove`,
       method: "get",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",

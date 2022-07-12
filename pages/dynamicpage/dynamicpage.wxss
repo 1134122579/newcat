@@ -25,9 +25,6 @@ page{
     -webkit-line-clamp: 2;
     overflow: hidden;
 }
-.card-desc{
-}
-
 .card-address {
     overflow: hidden;
     text-overflow: ellipsis;

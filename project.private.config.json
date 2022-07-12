@@ -54,6 +54,13 @@
                     "query": "",
                     "launchMode": "default",
                     "scene": null
+                },
+                {
+                    "name": "非自己模拟分享的投喂点",
+                    "pathName": "pages/catdetail/catdetail",
+                    "query": "cat_id=1&is_share=1",
+                    "launchMode": "default",
+                    "scene": null
                 }
             ]
         }

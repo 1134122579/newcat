@@ -38,30 +38,34 @@ Page({
         let {
             id
         } = e.currentTarget.dataset;
+        let that=this
         wx.showModal({
             cancelText: "取消",
             confirmText: "确认",
             showCancel: true,
-            title: "是否确认删除",
+            title: "是否确认退出",
             success: (result) => {
                 console.log(result);
                 if (!result.confirm) {
                     return;
                 }
-                Api.feedpointDelete({
+                Api.feedmemberLeave({
                     id
                 }).then((res) => {
                     wx.showToast({
-                        title: "删除成功",
+                        title: "退出成功",
                     });
-                    this.setData({
+                    that.setData({
                         page: 1,
+                        isLastPage:false
                     });
-                    this.getlist();
+                    that.getlist()
                 });
             },
             fail: (res) => {},
-            complete: (res) => {},
+            complete: (res) => {
+              
+            },
         });
     },
     getlist() {
@@ -69,7 +73,7 @@ Page({
             page: pageIndex,
             list,
             pageSize,
-            isLastPage 
+            isLastPage
         } = this.data;
         if (isLastPage) {
             return
@@ -127,7 +131,7 @@ Page({
         let {
             id
         } = e.detail;
-        let that=this
+        let that = this
         wx.showModal({
             cancelColor: "#ccc",
             cancelText: "取消",
@@ -147,7 +151,7 @@ Page({
                     }).then((res) => {
                         that.setData({
                             page: 1,
-                            isLastPage:false
+                            isLastPage: false
                         });
                         that.getlist();
                         wx.showToast({

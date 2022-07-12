@@ -21,6 +21,7 @@ export default {
   },
   removeToken() {
     wx.removeStorageSync(name);
+    wx.removeStorageSync(userName);
   },
   getUserInfo() {
     return wx.getStorageSync(userName);

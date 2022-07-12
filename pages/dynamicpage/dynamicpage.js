@@ -38,6 +38,7 @@ Page({
         let {
             id
         } = e.currentTarget.dataset;
+        let that=this
         wx.showModal({
             cancelText: "取消",
             confirmText: "确认",
@@ -54,10 +55,10 @@ Page({
                     wx.showToast({
                         title: "删除成功",
                     });
-                    this.setData({
+                    that.setData({
                         page: 1,
                     });
-                    this.getlist();
+                    that.getlist();
                 });
             },
             fail: (res) => {},
@@ -145,11 +146,7 @@ Page({
                     Api.delDynamic({
                         dynamic_id: id
                     }).then((res) => {
-                        that.setData({
-                            page: 1,
-                            isLastPage:false
-                        });
-                        that.getlist();
+               ;
                         wx.showToast({
                             title: "删除成功",
                         });
@@ -157,7 +154,13 @@ Page({
                 }
             },
             fail: (res) => {},
-            complete: (res) => {},
+            complete: (res) => {
+                that.setData({
+                    page: 1,
+                    isLastPage:false
+                });
+                that.getlist()
+            },
         });
     },
 

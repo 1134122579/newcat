@@ -29,7 +29,7 @@
  */
 
 /***
- *  style样式
+ *  style 样式
  *  otherColor 其他附加字体颜色
  *  other      其他附加字体
  *  date: 年月日
@@ -630,9 +630,12 @@ Component({
             }
             if (item.other) {
               //附加文字
-
               days[j].other = item.other;
             }
+            if (item.id) {
+                //附加文字
+                days[j].id = item.id;
+              }
             if (item.otherColor) {
               //附加字体颜色
 
@@ -797,6 +800,7 @@ Component({
         year: click_day.year,
         month: click_day.month,
         day: click_day.day,
+        id: click_day.id||"",
         color: click_day.color,
         lunarMonth: click_day.lunarMonth,
         lunarDay: click_day.lunarDay,

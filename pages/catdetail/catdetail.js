@@ -178,7 +178,7 @@ Page({
   feedmemberJoin() {
     let {
       id: feedPointId,
-      getdata: { createBy },
+      createBy,
       my_id,
     } = this.data.getdata;
     if (createBy == my_id) {
