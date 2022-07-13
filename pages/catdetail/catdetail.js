@@ -192,8 +192,8 @@ Page({
       wx.showToast({
         title: "加入成功",
       });
-      this.nojoincat();
       this.getCatdetails();
+      this.nojoincat();
     });
   },
   // 今日投喂记录
@@ -203,7 +203,7 @@ Page({
     Api.recordToday({ feedPointId }).then(res => {
         if(!res)return
       res = res.map(item => {
-        item["feedTime"] = formatTime(item["feedTime"]);
+        item["feedTime"] = formatTime(item["feedTime"]).split(' ')[1];
         return item;
       });
       this.setData({
@@ -224,6 +224,7 @@ Page({
         wx.showToast({
           title: "投喂成功！",
         });
+        this.recordToday()
       });
     });
   },

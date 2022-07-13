@@ -208,7 +208,7 @@ Page({
     let delitem = e.detail;
     this.setData({
       fileList: fileList.filter(item => item.url != delitem.file.url),
-      maxcount: fileList.length <= 0 || fileList[0].type == "image" ? 8 : 1,
+    //   maxcount: fileList.length <= 0 || fileList[0].type == "image" ? 8 : 1,
     });
   },
 
@@ -226,11 +226,7 @@ Page({
     } = this.data;
     let urls = fileList.map(item => item.url);
     if (this.checkUpQuery()) {
-      wx.showToast({
-        title: "添加成功，将自动返回",
-        icon: "none",
-        mask: true,
-      });
+  
       wx.showLoading({
         title: "发布中..",
         mask: true,
@@ -248,15 +244,15 @@ Page({
         }).then(res => {
           wx.hideLoading();
           wx.showToast({
-            title: "修改成功，1s后将自动返回",
+            title: "修改成功，1s后将自动跳转",
             icon: "none",
             mask: true,
           });
           this.setData({ buttondisabled: true });
           time = setTimeout(() => {
-            wx.navigateBack({
-              delta: 1,
-            });
+              wx.redirectTo({
+                url: `/pages/cardList/cardList?cat_id=${id}`,
+              })
           }, 1000);
         });
       } else {
@@ -270,15 +266,15 @@ Page({
         }).then(res => {
           wx.hideLoading();
           wx.showToast({
-            title: "添加成功，1s后将自动返回",
+            title: "添加成功，1s后将跳转",
             icon: "none",
             mask: true,
           });
           this.setData({ buttondisabled: true });
           time = setTimeout(() => {
-            wx.navigateBack({
-              delta: 1,
-            });
+            wx.redirectTo({
+                url: `/pages/cardList/cardList?cat_id=${id}`,
+              })
           }, 1000);
         });
       }

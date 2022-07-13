@@ -23,7 +23,7 @@
                 {
                     "name": "添加投喂点",
                     "pathName": "pages/dongtai/dongtai",
-                    "query": "id=9",
+                    "query": "",
                     "launchMode": "default",
                     "scene": null
                 },
@@ -37,7 +37,7 @@
                 {
                     "name": "投喂点详情",
                     "pathName": "pages/catdetail/catdetail",
-                    "query": "cat_id=9",
+                    "query": "cat_id=28",
                     "launchMode": "default",
                     "scene": null
                 },
@@ -58,7 +58,7 @@
                 {
                     "name": "非自己模拟分享的投喂点",
                     "pathName": "pages/catdetail/catdetail",
-                    "query": "cat_id=1&is_share=1",
+                    "query": "cat_id=31&is_share=1",
                     "launchMode": "default",
                     "scene": null
                 }

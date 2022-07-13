@@ -5,6 +5,8 @@ import storage from "./cache";
 //     encrypt
 // } from './crypto.js'
 
+
+
 let fly = new Fly();
 var loadingNum = 0;
 // 动画加载
@@ -49,7 +51,7 @@ fly.interceptors.response.use(
 
 // 拦截处理
 const handleResponse = ({ config, response }) => {
-  if (!config.loading) {
+  if (config.loading) {
     loadingNum--;
     loadingFun(loadingNum); //loding
   }
@@ -98,7 +100,7 @@ const fly_request = config => {
   let params = config.params || {};
   let options = config?.headers || {};
   // 是否显示loading
-  if (!config.loading) {
+  if (config.loading) {
     loadingNum++;
     loadingFun(loadingNum);
   }

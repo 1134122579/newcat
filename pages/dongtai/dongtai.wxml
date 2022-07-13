@@ -3,7 +3,7 @@
 <view class="enroll">
     <view class="cat_detail">
         <view class="e_title">
-            猫咪图片/视频 <text style="font-size: 24rpx;font-weight: normal;">最多8张图或者1个视频</text>
+            投喂点图片/视频 <text style="font-size: 24rpx;font-weight: normal;">最多8张图或者1个视频</text>
         </view>
         <!-- <image mode="aspectFit"></image> -->
         <view class="uplodaStyle">
@@ -16,7 +16,7 @@
         <!-- <view class="e_title">
       简介信息
     </view> -->
-        <van-field model:value="{{ introduction }}" type="textarea" placeholder="添加内容" autosize="{{autoSize}}" border="{{ true }}" />
+        <van-field model:value="{{ introduction }}" type="textarea" maxlength="{{300}}" placeholder="添加内容 (最长300字)" autosize="{{autoSize}}" border="{{ true }}" />
         <label for="">
             <view class="dreass flexbetween" bindtap="getlocation">
                 <view class="left flexastart">
@@ -31,6 +31,6 @@
     </view>
 
     <view class="button_">
-        <van-button block round disabled="{{disabled}}" size="small" type="warning" bind:click="onClick">发布</van-button>
+        <van-button block round disabled="{{disabled}}"  type="warning" bind:click="onClick">发布</van-button>
     </view>
 </view>

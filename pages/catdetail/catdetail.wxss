@@ -132,13 +132,20 @@ page {
 }
 
 .location {
-    margin-top: 14rpx;
+    margin-top: 20rpx;
     font-size: 22rpx;
 }
 
 .label {
     font-size: 26rpx;
     flex-shrink: 0;
+    width: 120rpx;
+    text-align: justify;
+    text-justify:distribute-all-lines; /* 这行必加，兼容ie浏览器 */
+    text-align-last: justify;
+} 
+.user-row {
+    height: 110rpx;
 }
 
 .locationicon {
@@ -149,8 +156,8 @@ page {
 }
 
 .user-csr {
-    width: 95rpx;
-    height: 95rpx;
+    width: 80rpx;
+    height: 80rpx;
     display: block;
     flex-shrink: 0;
     margin-right: 14rpx;
@@ -187,14 +194,13 @@ page {
     letter-spacing: 2px;
     padding: 5rpx 0;
     font-weight: bold;
-    font-size: 32rpx;
-    /* border-bottom: 4px solid rgba(255, 0, 0, 1); */
+    font-size: 30rpx;
     margin-bottom: 10rpx;
 }
 
 .typeList {
     flex-wrap: nowrap;
-    font-size: 28rpx;
+    font-size: 26rpx;
     /* margin-top: 28rpx; */
     overflow-x: auto;
     padding: 0 2rpx;
@@ -245,11 +251,12 @@ page {
 .name {
     color: rgba(0, 0, 0, 1);
     font-weight: bold;
-    font-size: 36rpx;
+    font-size: 34rpx;
 }
 
 .headerName {
     align-items: flex-end;
+    padding: 10rpx 0;
 }
 
 .desc {

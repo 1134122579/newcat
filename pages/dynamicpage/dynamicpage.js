@@ -95,7 +95,7 @@ Page({
                 if (item.cover.indexOf('.mp4') > 0) {
                     item.cover = item.cover + '?vframe/jpg/offset/1'
                 }
-                item['createTime'] = formatTime(item['createTime'])
+                item['createTime'] =item['createTime']? formatTime(item['createTime']):''
                 return {
                     ...item,
                 }
@@ -115,55 +115,6 @@ Page({
         this.data.page++;
         this.getlist();
     },
-    // getDynamic() {
-    //   let {  user_id } = storage.getUserInfo();
-    //   let { page } = this.data;
-    //   Api.getDynamic({ user_id, page }).then((res) => {
-    //     this.setData({
-    //       catList: res,
-    //     });
-    //   });
-    // },
-    ondele(e) {
-        let {
-            id
-        } = e.detail;
-        let that=this
-        wx.showModal({
-            cancelColor: "#ccc",
-            cancelText: "取消",
-            confirmColor: "#ff0000",
-            confirmText: "确认",
-            content: "此操作将永久删除，是否继续 ？",
-            showCancel: true,
-            title: "操作提示",
-            success: (result) => {
-                console.log(result);
-                let {
-                    confirm
-                } = result;
-                if (confirm) {
-                    Api.delDynamic({
-                        dynamic_id: id
-                    }).then((res) => {
-               ;
-                        wx.showToast({
-                            title: "删除成功",
-                        });
-                    });
-                }
-            },
-            fail: (res) => {},
-            complete: (res) => {
-                that.setData({
-                    page: 1,
-                    isLastPage:false
-                });
-                that.getlist()
-            },
-        });
-    },
-
     /**
      * 生命周期函数--监听页面加载
      */
@@ -173,13 +124,14 @@ Page({
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
-        this.getlist();
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {},
+    onShow: function () {
+        this.getlist();
+    },
 
     /**
      * 生命周期函数--监听页面隐藏

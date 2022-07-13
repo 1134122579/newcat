@@ -1,25 +1,22 @@
-<!-- 我的动态
-<view>
-  <ListModel list="{{catList}}" isdele="{{isdele}}" bind:ondele="ondele" listType="{{listType}}" isStatus="{{isStatus}}" />
-</view> -->
-
-<!-- 我的动态 -->
 
 <block wx:if="{{list.length>0}}">
     <view class="liststyle">
         <block wx:for="{{list}}" wx:key="index">
             <!-- <DongtaiModel item="{{item}}" isdele="{{isdele}}" bind:ondele="ondele" /> -->
             <block>
-                <van-card thumb-mode="scaleToFill" custom-class="vancard" thumb="{{item.cover||'/images/catimg.png'}}" thumb-link="{{'/pages/catdetail/catdetail?cat_id='+item.id}}" title-class="card-title">
+                <van-card thumb-mode="scaleToFill" custom-class="vancard" thumb-link="{{'/pages/catdetail/catdetail?cat_id='+item.id}}" title-class="card-title">
                     <view slot="title" class="card-title">
                         {{item.title||'投喂点'}}
                     </view>
+                    <view slot="thumb" >
+                        <image style="width:160rpx;height:160rpx;border-radius: 10rpx;display: block;" mode="aspectFill" src="{{item.cover||'/images/catimg.png'}}"></image>
+                    </view>
                     <view slot="tag" class="card-tag">
-                        <van-tag mark type="success">{{item.identifyStatus}}</van-tag>
+                        <van-tag mark type="success">已加入</van-tag>
                     </view>
-                    <view slot="desc" class="card-title card-desc" style="color: #787878;">
+                    <!-- <view slot="desc" class="card-title card-desc" style="color: #787878;">
                         {{item.introduction}}
-                    </view>
+                    </view> -->
                     <view slot="price" class="card-address">
                         {{item.address}}
                     </view>

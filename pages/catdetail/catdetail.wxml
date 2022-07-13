@@ -40,15 +40,15 @@
             <view class="typetitle">
                 成员
             </view>
-            <view class="flexastart">
+            <view class="user-row flexastart">
                 <view class="label">
-                    创始人：
+                    创建人：
                 </view>
                 <image class="user-csr" src="{{getdata.owner.avatarUrl||'/images/catimg.png'}}"></image>
             </view>
-            <view class="flexastart">
+            <view class=" user-row flexastart">
                 <view class="label">
-                    队员：
+                    队 员：
                 </view>
                 <view class="imageList flexastart" wx:if="{{getdata.feedMemberVos.length>0}}">
                     <image wx:for="{{getdata.feedMemberVos}}" wx:key="index" class="user-csr" src="{{item.avatarUrl||'/images/catimg.png'}}"></image>
@@ -85,7 +85,7 @@
         <!--投喂记录-->
         <view class="new_content">
             <view class="typetitle">
-                投喂记录
+                今日投喂记录
             </view>
             <view class="typeList " >
             <block wx:if="{{recordTodayList.length>0}}">
