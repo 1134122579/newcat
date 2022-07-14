@@ -251,7 +251,7 @@ Page({
           this.setData({ buttondisabled: true });
           time = setTimeout(() => {
               wx.redirectTo({
-                url: `/pages/cardList/cardList?cat_id=${id}`,
+                url: `/pages/catdetail/catdetail?cat_id=${id}`,
               })
           }, 1000);
         });
@@ -273,7 +273,7 @@ Page({
           this.setData({ buttondisabled: true });
           time = setTimeout(() => {
             wx.redirectTo({
-                url: `/pages/cardList/cardList?cat_id=${id}`,
+                url: `/pages/catdetail/catdetail?cat_id=${res}`,
               })
           }, 1000);
         });

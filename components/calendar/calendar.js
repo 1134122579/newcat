@@ -636,6 +636,10 @@ Component({
                 //附加文字
                 days[j].id = item.id;
               }
+            if (item.calenderId) {
+                //附加参数
+                days[j].calenderId = item.calenderId;
+              }
             if (item.otherColor) {
               //附加字体颜色
 
@@ -801,6 +805,7 @@ Component({
         month: click_day.month,
         day: click_day.day,
         id: click_day.id||"",
+        calenderId:click_day.calenderId||"",
         color: click_day.color,
         lunarMonth: click_day.lunarMonth,
         lunarDay: click_day.lunarDay,

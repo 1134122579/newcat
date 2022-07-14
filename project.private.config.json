@@ -58,7 +58,14 @@
                 {
                     "name": "非自己模拟分享的投喂点",
                     "pathName": "pages/catdetail/catdetail",
-                    "query": "cat_id=31&is_share=1",
+                    "query": "cat_id=27&is_share=1",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "加入===的排班调试",
+                    "pathName": "pages/calendar/calendar",
+                    "query": "id=27",
                     "launchMode": "default",
                     "scene": null
                 }

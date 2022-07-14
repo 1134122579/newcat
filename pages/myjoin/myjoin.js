@@ -98,7 +98,7 @@ Page({
                 if (item.cover.indexOf('.mp4') > 0) {
                     item.cover = item.cover + '?vframe/jpg/offset/1'
                 }
-                item['createTime'] =item['createTime']? formatTime(item['createTime']):''
+                item['joinTime'] =item['joinTime']? formatTime(item['joinTime']):''
                 return {
                     ...item,
                 }

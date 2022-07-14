@@ -22,36 +22,6 @@ Page({
             //     height: 40, //图片显示高度
             //     title: '猫咪投喂点',
             // },
-            // //犀鸟馆
-            // {
-            //     id: 1,
-            //     iconPath: "../../images/location.png",
-            //     latitude: 39.940826,
-            //     longitude: 116.335109,
-            //     width: 30,
-            //     height: 30,
-            //     title: '猫咪投喂点'
-            // },
-            // //火烈鸟馆
-            // {
-            //     id: 2,
-            //     iconPath: "../../images/location.png",
-            //     latitude: 39.940578,
-            //     longitude: 116.335977,
-            //     width: 30,
-            //     height: 30,
-            //     title: '猫咪投喂点'
-            // },
-            // //鹦鹉馆
-            // {
-            //     id: 3,
-            //     iconPath: "../../images/location.png",
-            //     latitude: 39.941573,
-            //     longitude: 116.335544,
-            //     width: 30,
-            //     height: 30,
-            //     title: '猫咪投喂点'
-            // }
         ]
     },
     // 获取当前坐标

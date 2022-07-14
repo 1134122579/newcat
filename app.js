@@ -134,30 +134,7 @@ App({
             that.isTimetoken();
         } catch (error) {}
 
-        // 获取小程序定位问题
-        // try {
-        //   wx.getLocation({
-        //     type: "wgs84",
-        //     success(res) {
-        //   console.error('获取小程序定位权限ok', res)
-        //       that.globalData.longitude = res.longitude;
-        //       that.globalData.latitude = res.latitude;
-        //       that.globalData.is_location=true
-        //     },fail(){
-        //       that.globalData.is_location=false
-        //     }
-        //   })
-        // } catch (error) {
-        //   console.error('获取小程序定位权限', error)
-        // }
-
-        // // 登录
-        // wx.login({
-        //   success: (res) => {
-        //     // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        //     console.log('登录',res)
-        //   },
-        // });
+     
         // 热更新
         if (wx.canIUse("getUpdateManager")) {
             const updateManager = wx.getUpdateManager();
@@ -229,8 +206,8 @@ App({
     },
     globalData: {
         locationTime: 0,
-        longitude: "",
-        latitude: "",
+        longitude: 116.336590,
+        latitude: 39.941127,
         menuButtonObject: {},
         is_location: false,
         is_login: true,
