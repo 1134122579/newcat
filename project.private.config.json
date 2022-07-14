@@ -68,6 +68,13 @@
                     "query": "id=27",
                     "launchMode": "default",
                     "scene": null
+                },
+                {
+                    "name": "我的日历排版",
+                    "pathName": "pages/calendar/calendar",
+                    "query": "id=43",
+                    "launchMode": "default",
+                    "scene": null
                 }
             ]
         }

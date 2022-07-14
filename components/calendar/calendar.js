@@ -218,37 +218,6 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    // 触摸开始事件
-    touchStart: function (e) {
-      let sx = e.touches[0].pageX;
-      let sy = e.touches[0].pageY;
-      this.data.touchS = [sx, sy];
-    },
-    // 触摸滑动事件
-    touchMove: function (e) {
-      console.log("触摸滑动事件");
-      let sx = e.touches[0].pageX;
-      let sy = e.touches[0].pageY;
-      this.data.touchE = [sx, sy];
-    },
-    // 触摸结束事件
-    touchEnd: function (e) {
-      let start = this.data.touchS;
-      let end = this.data.touchE;
-      if (start[0] < end[0] - 50) {
-        // this.prevMonth()
-        console.log(
-          "向右滑，这里可以调用方法，及页面跳转事件",
-          this.data.days_array
-        );
-      } else if (start[0] > end[0] + 50) {
-        // this.nextMonth()
-        console.log("向左滑，这里可以调用方法，及页面跳转事件");
-      } else {
-        // console.log('向上或向下滑动')
-      }
-    },
-
     /**
      * 检查年份
      */
@@ -458,7 +427,6 @@ Component({
      */
     _setDaysColor: function (newDaysColor, oldDaysColor) {
       let {activedate}=this.data
-
       this.setData(
         {
           days_color: newDaysColor,
@@ -469,13 +437,14 @@ Component({
           });
         }
       );
-      if(activedate){
-        console.log('设置日期单元格字体颜色、背景' ,activedate,this.setNewDate(activedate,1))
-        this.setData({
-          activedate:   this.setNewDate(activedate,1)
-        })
-        this.triggerEvent("dayClick", {date: this.setNewDate(activedate,1)});
-    }
+    //   if(activedate){
+    //       console.log(activedate)
+    //       let date= this.setNewDate(activedate,1)
+    //     this.setData({
+    //       activedate:  date
+    //     })
+    //     this.triggerEvent("dayClick", {date});
+    // }
     },
 
     /**
@@ -721,7 +690,6 @@ Component({
       this.setData({
         days_array: this._setCalendarData(this.data.year, this.data.month),
       });
-
       eventDetail["currentYear"] = this.data.year;
       eventDetail["currentMonth"] = this.data.month;
       this.triggerEvent("nextMonth", eventDetail);
@@ -751,6 +719,7 @@ Component({
       });
       eventDetail["currentYear"] = this.data.year;
       eventDetail["currentMonth"] = this.data.month;
+      console.log(eventDetail,"eventDetaileventDetaileventDetaileventDetail")
       this.triggerEvent("prevMonth", eventDetail);
     },
 

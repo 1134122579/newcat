@@ -27,7 +27,7 @@ actives:[激活的日期]
     <view class="user_bottom" wx:if="{{adminUserInfo&&adminUserInfo.id==my_userInfo.id}}">
         <van-transition name="fade-up" show="{{ istransitionshow }}">
         <view class="user_header">
-            <van-button type="default" size="mini" bind:click="onaddclick">重置</van-button>
+            <van-button type="default" size="mini" bind:click="onRever">清除</van-button>
             <view class="title-tag">点击用户头像设置排班</view>
             <van-button type="warning" size="mini"bind:click="onaddclick" >完成</van-button>
         </view>
@@ -58,12 +58,12 @@ actives:[激活的日期]
             <view class="user_header">
                 <van-button type="default" size="mini" bind:click="onaddclick">取消</van-button>
                 <view class="title-tag">加入提示</view>
-                <van-button type="warning" size="mini" bind:click="calendarRange">{{activeconfig.id==my_userInfo.id?'退出':'加入'}}</van-button>
+                <van-button type="warning" size="mini" bind:click="calendarRange">{{isMyOccupy?'退出':'加入'}}</van-button>
             </view>
             <view class="user_tag">
                 请问<image style="display: inline-block;vertical-align:middle; width: 80rpx;border-radius: 50%;" mode="widthFix" src="{{my_userInfo.avatarUrl}}"></image>
                 <text style="font-size: 28rpx;color: #333;font-weight: 700;"> {{my_userInfo.nickName}}</text>
-                是否 <text style="font-size: 28rpx;color: var(--button-warning-background-color,#ff976a);font-weight: 700;">{{activeconfig.id==my_userInfo.id?'退出':'加入'}} </text>  <text style="font-size: 28rpx;color: #333;font-weight: 700;">{{activeDate}}</text>的投喂?
+                是否 <text style="font-size: 28rpx;color: var(--button-warning-background-color,#ff976a);font-weight: 700;">{{isMyOccupy?'退出':'加入'}} </text>  <text style="font-size: 28rpx;color: #333;font-weight: 700;">{{activeDate}}</text>的投喂?
             </view>
         </van-transition>
     </view>

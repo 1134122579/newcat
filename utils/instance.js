@@ -66,7 +66,6 @@ const handleResponse = ({ config, response }) => {
   // 兼容，服务器返回的空的data（接口返回500）
   response.data =response?.data ||response?.response?.data|| {};
   // 如果返回错误
-  console.log( response )
   if (response.data.code !== 200) {
     // 没有登录
     if (response.data.code == 401) {
@@ -75,7 +74,6 @@ const handleResponse = ({ config, response }) => {
           wx.navigateTo({
             url: "/pages/login/login",
           });
-          return;
         } catch (e) {
           console.error(e);
           storage.removeToken()
@@ -89,7 +87,7 @@ const handleResponse = ({ config, response }) => {
         mask: true,
         icon: "none",
       });
-    return Promise.reject(response.data);
+    return Promise.reject(response.data.msg);
   }
   return response.data.data;
 };

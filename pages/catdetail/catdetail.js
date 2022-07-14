@@ -221,10 +221,12 @@ Page({
         longitude,
         latitude,
       }).then(res => {
-        wx.showToast({
-          title: "投喂成功！",
-        });
-        this.recordToday()
+          if(res){
+            wx.showToast({
+                title: "投喂成功！",
+              });
+              this.recordToday()
+          }
       });
     });
   },
