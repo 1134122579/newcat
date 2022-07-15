@@ -22,8 +22,8 @@ function loadingFun(loadingNum) {
   }
 }
 
-fly.config.baseURL = "http://106.14.159.176:8080"; // 开发
-// fly.config.baseURL = "https://carshop.nxcsoft.top/api/v1/"; // 生产
+fly.config.baseURL = "http://106.14.159.176:8888"; // 开发
+// fly.config.baseURL = "https://7ouu.com/"; // 生产
 // 添加请求拦截器，加入微信用户sessionId头部
 fly.interceptors.request.use(request => {
   //loding

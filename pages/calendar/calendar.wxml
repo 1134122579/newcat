@@ -13,43 +13,38 @@ actives:[激活的日期]
 
 更多事件函数请参考JS页代码文档
 -->
-<view class="calender">
+<view class="calender" style="{{istransitionshow&&'padding-bottom:400rpx'}}">
     <view class="plugin">
         <view catchtap="catchtap">
             <calendar year="{{year}}" month="{{month}}" startDate="2022-05" day="{{day}}" today="{{true}}" header="{{header}}" next="{{next}}" prev="{{prev}}" addon="mixed" days-addon="{{days_addon}}" weeks="{{week_title}}" weeks-type="{{title_type}}" show-more-days="{{more}}" lunar="{{lunar}}" cell-size="{{cs}}" days-color="{{style}}" active-type="{{activeType}}" next-month='hi' bindnextMonth='nextMonth' bindprevMonth='prevMonth' binddateChange='dateChange' binddayClick='dayClick' />
         </view>
-        <!-- <view class="button" style="{{buttonStyle}}" wx:if="{{showAction}}" bindtap="closeAction">
-		<image style="width:15px;height:15px" src="../image/canlender_close.png"></image>
-	</view> -->
-        <!-- <view class="actionView" style="{{showViewStyle}}" wx:if="{{showAction}}">为所欲为</view> -->
-        <van-popup show="{{ showAction }}" bind:close="closeAction">为所欲为</van-popup>
     </view>
 
 
     <!-- 人员列表 -->
 
-    <view class="tody-view">
-    <view  class="tody-header">{{activeDate}}排班人员</view>
+    <view class="tody-view" wx:if="{{activeDate}}">
+        <view class="tody-header">{{activeDate}}排班人员</view>
         <block wx:if="{{todyObj.length>0}}">
-        <view   class="todyList">
-            <block wx:for="{{todyObj}}">
-                <view class="flexbetween user-blcok">
-                <view class="flexastart " style="flex: 1;">
-                    <image class="user_image" src="{{item.feedMemberAvatar}}"></image>
-                    <view class="user-feedMemberNickname van-ellipsis">
-                        {{item.feedMemberNickname}}
+            <view class="todyList">
+                <block wx:for="{{todyObj}}">
+                    <view class="flexbetween user-blcok">
+                        <view class="flexastart " style="flex: 1;">
+                            <image class="user_image" src="{{item.feedMemberAvatar}}"></image>
+                            <view class="user-feedMemberNickname van-ellipsis">
+                                {{item.feedMemberNickname}}
+                            </view>
+                        </view>
+                        <van-button type="danger" plain data-user="{{item}}" size="mini" round wx:if="adminUserInfo" bind:click="onReverUser">清除</van-button>
                     </view>
-                </view>
-                <van-button type="danger" plain  size="mini" round wx:if="adminUserInfo">清除</van-button>
-                </view>
-            </block>
-            <view  class="more">暂无更多</view>
-        </view>
+                </block>
+                <view class="more">暂无更多</view>
+            </view>
         </block>
         <block wx:else>
-        <view class="empty">
-            <van-empty description="暂无人员" />
-        </view>
+            <view class="empty">
+                <van-empty description="暂无人员" />
+            </view>
         </block>
     </view>
     <!-- 底部选项 -->
@@ -57,7 +52,7 @@ actives:[激活的日期]
         <view class="user_bottom" wx:if="{{adminUserInfo&&adminUserInfo.id==my_userInfo.id}}">
             <van-transition name="fade-up" show="{{ istransitionshow }}">
                 <view class="user_header">
-                    <van-button type="default" size="mini" bind:click="onRever">清除</van-button>
+                    <van-button type="default" size="mini" bind:click="onRever">取消</van-button>
                     <view class="title-tag">点击用户头像设置排班</view>
                     <van-button type="warning" size="mini" bind:click="onaddclick">完成</van-button>
                 </view>

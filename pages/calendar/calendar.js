@@ -37,7 +37,7 @@ Page({
     userList: [], //人分类 轮播
     everyList: [], //所有人
     rankList: {}, //当月所有选中日期 数据
-    todyObj:[]//当日选中人员列表
+    todyObj: [], //当日选中人员列表
   },
   // 暂不加入
   onaddclick() {
@@ -92,12 +92,34 @@ Page({
       this.calendarList();
     });
   },
+  // 管理员清除当日人员
+  onReverUser(event) {
+    console.log(event);
+    let { user } = event.currentTarget.dataset;
+    let { todyObj } = this.data;
+    Api.calendarRemove({
+      id: user.id,
+    }).then(res => {
+      wx.showToast({
+        title: `已删除`,
+        icon: "none",
+      });
+      this.calendarList();
+      this.setData({
+        todyObj: todyObj.filter(item => item.id != user.id),
+      });
+    });
+  },
 
   /**
    * @param {*} 重置
    */
 
   onRever() {
+    this.setData({
+      istransitionshow: false,
+    });
+    return;
     let { feedPointId: feedpointId, activeDate, style } = this.data;
     let proper = style.find(item => item.date == activeDate);
     if (!proper) {
@@ -141,7 +163,7 @@ Page({
   },
   // 获取当前月份的排班表
   calendarList() {
-    let { feedPointId: feedpointId, year, month } = this.data;
+    let { feedPointId: feedpointId, year, month, activeDate } = this.data;
     let that = this;
     Api.calendarList({
       feedpointId,
@@ -149,21 +171,29 @@ Page({
       month,
     }).then(res => {
       console.log(Object.keys(res), "获取当前月份的排班表");
-        let style = Object.keys(res).map(item => {
-          return {
-            // calenderId: item.id,
-            // id: item.feedMemberId,
-            date: that.returntime(item),
-            // other: item,
-            otherColor: "#4ECA8E",
-            badgeColor: "#4ECA8E",
-            background: "rgba(59,139,242,0.1)",
-          };
-        });
+      let style = Object.keys(res).map(item => {
+        return {
+          date: that.returntime(item),
+          // other: item,
+          otherColor: "#4ECA8E",
+          badgeColor: "#4ECA8E",
+          background: "rgba(59,139,242,0.1)",
+        };
+      });
+
+      this.setData({
+        style,
+        rankList: res,
+      });
+      if (activeDate) {
+        activeDate = activeDate.replaceAll("-", "");
+        let todyObj = res[activeDate] || [];
         this.setData({
           style,
           rankList: res,
+          todyObj,
         });
+      }
     });
   },
   //   处理时间
@@ -234,7 +264,7 @@ Page({
 
   dayClick: function (event) {
     let { id, date } = event.detail;
-    let { my_userInfo, everyList, adminUserInfo, style,rankList } = this.data;
+    let { my_userInfo, everyList, adminUserInfo, style, rankList } = this.data;
     this.setData({
       isMyOccupy: false,
     });
@@ -266,21 +296,22 @@ Page({
       }
     }
     //当日选中人员列表
-    date=date.replaceAll('-','')
-    let todyObj=rankList[date]||[]
+    date = date.replaceAll("-", "");
+    let todyObj = rankList[date] || [];
     this.setData({
       activeDate: event.detail.date,
       activeconfig: event.detail,
       istransitionshow: true,
       month: event.detail.month,
       year: event.detail.year,
-      todyObj
+      todyObj,
     });
-    console.log("当前选中的日期123",rankList,todyObj, this.returntime(date));
+    console.log("当前选中的日期123", rankList, todyObj, this.returntime(date));
   },
   setUser(e) {
     console.log(e);
     let { info } = e.currentTarget.dataset;
+    console.log(info);
     let {
       activeDate,
       style,
@@ -295,9 +326,20 @@ Page({
       });
       return;
     }
+    // 判断是小于当前日期
+    let toDayTime = new Date(new Date().setHours(0, 0, 0, 0)).getTime(); //当天0点的时间戳
+    //   选中的时间戳
+    let activeDateTime = new Date(activeDate).getTime();
+    if (toDayTime > activeDateTime) {
+      wx.showToast({
+        title: "不能低于当前时间",
+        icon: "none",
+      });
+      return;
+    }
     let arrangeTime = activeDate.replaceAll("-", "");
     Api.calendarRange({
-      feedMemberId: my_userInfo.id,
+      feedMemberId: info.createBy || info.id,
       feedpointId,
       arrangeTime,
     }).then(res => {

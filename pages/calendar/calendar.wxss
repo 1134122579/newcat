@@ -2,7 +2,6 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  padding-bottom: 400rpx;
 }
 .plugin {
   flex-shrink: 0;
