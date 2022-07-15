@@ -21,10 +21,6 @@ Page({
         ismore: false,
         total: 0,
     },
-    // onpull(){
-    //   this.data.page++
-    //   this.getDynamic()
-    // },
     editcat(e) {
         let {
             id

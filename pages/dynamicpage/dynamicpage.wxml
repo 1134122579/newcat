@@ -26,9 +26,6 @@
                     <view slot="price" class="card-address">
                         {{item.address}}
                     </view>
-                    <!-- <view slot="bottom">
-                        {{item.createTime}}
-                    </view> -->
                     <view slot="footer" class="footer flexbetween">
                         <view class="createTime">
                             {{item.createTime}}

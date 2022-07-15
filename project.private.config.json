@@ -75,6 +75,13 @@
                     "query": "id=43",
                     "launchMode": "default",
                     "scene": null
+                },
+                {
+                    "name": "自己发布 排班==测试",
+                    "pathName": "pages/calendar/calendar",
+                    "query": "id=28",
+                    "launchMode": "default",
+                    "scene": null
                 }
             ]
         }
