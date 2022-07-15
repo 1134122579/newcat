@@ -36,7 +36,8 @@ Page({
     buttonStyle: "",
     userList: [], //人分类 轮播
     everyList: [], //所有人
-    rankList: {}, //选中的日期 数据
+    rankList: {}, //当月所有选中日期 数据
+    todyObj:[]//当日选中人员列表
   },
   // 暂不加入
   onaddclick() {
@@ -233,28 +234,28 @@ Page({
 
   dayClick: function (event) {
     let { id, date } = event.detail;
-    let { my_userInfo, everyList, adminUserInfo, style } = this.data;
+    let { my_userInfo, everyList, adminUserInfo, style,rankList } = this.data;
     this.setData({
       isMyOccupy: false,
     });
-    // 判断是否有人占用
-    let isoccupy = style.some(item => item.date == date);
-    if (isoccupy) {
-      // 拿出占用的人
-      let proper = style.find(item => item.date == date);
-      console.log("判断是否有人占用", proper);
-      if (proper.id == my_userInfo.id) {
-        // 是自己占用的
-        this.setData({
-          isMyOccupy: true,
-        });
-      } else {
-        wx.showToast({
-          title: "当前日期已有人",
-          icon: "none",
-        });
-      }
-    }
+    // // 判断是否有人占用
+    // let isoccupy = style.some(item => item.date == date);
+    // if (isoccupy) {
+    //   // 拿出占用的人
+    //   let proper = style.find(item => item.date == date);
+    //   console.log("判断是否有人占用", proper);
+    //   if (proper.id == my_userInfo.id) {
+    //     // 是自己占用的
+    //     this.setData({
+    //       isMyOccupy: true,
+    //     });
+    //   } else {
+    //     wx.showToast({
+    //       title: "当前日期已有人",
+    //       icon: "none",
+    //     });
+    //   }
+    // }
     // 先判断自己是不是管理员
     if (adminUserInfo.id != my_userInfo.id) {
       // 先判断自己是不是队员
@@ -264,14 +265,18 @@ Page({
         return;
       }
     }
+    //当日选中人员列表
+    date=date.replaceAll('-','')
+    let todyObj=rankList[date]||[]
     this.setData({
       activeDate: event.detail.date,
       activeconfig: event.detail,
       istransitionshow: true,
       month: event.detail.month,
       year: event.detail.year,
+      todyObj
     });
-    console.log("当前选中的日期123", event, id, my_userInfo);
+    console.log("当前选中的日期123",rankList,todyObj, this.returntime(date));
   },
   setUser(e) {
     console.log(e);

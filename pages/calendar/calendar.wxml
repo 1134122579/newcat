@@ -24,47 +24,78 @@ actives:[激活的日期]
         <!-- <view class="actionView" style="{{showViewStyle}}" wx:if="{{showAction}}">为所欲为</view> -->
         <van-popup show="{{ showAction }}" bind:close="closeAction">为所欲为</van-popup>
     </view>
-    <view class="user_bottom" wx:if="{{adminUserInfo&&adminUserInfo.id==my_userInfo.id}}">
-        <van-transition name="fade-up" show="{{ istransitionshow }}">
-        <view class="user_header">
-            <van-button type="default" size="mini" bind:click="onRever">清除</van-button>
-            <view class="title-tag">点击用户头像设置排班</view>
-            <van-button type="warning" size="mini"bind:click="onaddclick" >完成</van-button>
-        </view>
-        <swiper class="user-swiper">
-            <block wx:for="{{userList}}" wx:for-index="idx" wx:for-item="swiperItemList" wx:key="idx">
-                <swiper-item>
-                    <view class="blocklist">
-                        <block wx:for="{{swiperItemList}}" wx:key="index">
-                            <view class="block-info" bindtap="setUser" data-info="{{item}}">
-                                <view class="huangguan" wx:if="{{item.isAdmin}}">
-                                    <image class="huangguanicon" mode="widthFix" src="/images/huangguan.png"></image>
-                                </view>
-                                <van-image width="80rpx" round height="80rpx" fit="cover" src="{{item.avatarUrl||'/images/catimg.png'}}" />
-                                <view class="block-name">
-                                    {{item.nickName||"未知"}}
-                                </view>
-                            </view>
-                        </block>
+
+
+    <!-- 人员列表 -->
+
+    <view class="tody-view">
+    <view  class="tody-header">{{activeDate}}排班人员</view>
+        <block wx:if="{{todyObj.length>0}}">
+        <view   class="todyList">
+            <block wx:for="{{todyObj}}">
+                <view class="flexbetween user-blcok">
+                <view class="flexastart " style="flex: 1;">
+                    <image class="user_image" src="{{item.feedMemberAvatar}}"></image>
+                    <view class="user-feedMemberNickname van-ellipsis">
+                        {{item.feedMemberNickname}}
                     </view>
-                </swiper-item>
+                </view>
+                <van-button type="danger" plain  size="mini" round wx:if="adminUserInfo">清除</van-button>
+                </view>
             </block>
-        </swiper>
-        </van-transition>
+            <view  class="more">暂无更多</view>
+        </view>
+        </block>
+        <block wx:else>
+        <view class="empty">
+            <van-empty description="暂无人员" />
+        </view>
+        </block>
+    </view>
+    <!-- 底部选项 -->
+    <view class="block-bottom">
+        <view class="user_bottom" wx:if="{{adminUserInfo&&adminUserInfo.id==my_userInfo.id}}">
+            <van-transition name="fade-up" show="{{ istransitionshow }}">
+                <view class="user_header">
+                    <van-button type="default" size="mini" bind:click="onRever">清除</van-button>
+                    <view class="title-tag">点击用户头像设置排班</view>
+                    <van-button type="warning" size="mini" bind:click="onaddclick">完成</van-button>
+                </view>
+                <swiper class="user-swiper">
+                    <block wx:for="{{userList}}" wx:for-index="idx" wx:for-item="swiperItemList" wx:key="idx">
+                        <swiper-item>
+                            <view class="blocklist">
+                                <block wx:for="{{swiperItemList}}" wx:key="index">
+                                    <view class="block-info" bindtap="setUser" data-info="{{item}}">
+                                        <view class="huangguan" wx:if="{{item.isAdmin}}">
+                                            <image class="huangguanicon" mode="widthFix" src="/images/huangguan.png"></image>
+                                        </view>
+                                        <van-image width="80rpx" round height="80rpx" fit="cover" src="{{item.avatarUrl||'/images/catimg.png'}}" />
+                                        <view class="block-name">
+                                            {{item.nickName||"未知"}}
+                                        </view>
+                                    </view>
+                                </block>
+                            </view>
+                        </swiper-item>
+                    </block>
+                </swiper>
+            </van-transition>
+        </view>
+        <view class="user_bottom_noadmin" wx:else>
+            <van-transition name="fade-up" show="{{ istransitionshow }}">
+                <view class="user_header">
+                    <van-button type="default" size="mini" bind:click="onaddclick">取消</van-button>
+                    <view class="title-tag">加入提示</view>
+                    <van-button type="warning" size="mini" bind:click="calendarRange">{{isMyOccupy?'退出':'加入'}}</van-button>
+                </view>
+                <view class="user_tag">
+                    请问<image style="display: inline-block;vertical-align:middle; width: 80rpx;border-radius: 50%;" mode="widthFix" src="{{my_userInfo.avatarUrl}}"></image>
+                    <text style="font-size: 28rpx;color: #333;font-weight: 700;"> {{my_userInfo.nickName}}</text>
+                    是否 <text style="font-size: 28rpx;color: var(--button-warning-background-color,#ff976a);font-weight: 700;">{{isMyOccupy?'退出':'加入'}} </text> <text style="font-size: 28rpx;color: #333;font-weight: 700;">{{activeDate}}</text>的投喂?
+                </view>
+            </van-transition>
+        </view>
     </view>
 
-    <view class="user_bottom_noadmin" wx:else>
-        <van-transition name="fade-up" show="{{ istransitionshow }}">
-            <view class="user_header">
-                <van-button type="default" size="mini" bind:click="onaddclick">取消</van-button>
-                <view class="title-tag">加入提示</view>
-                <van-button type="warning" size="mini" bind:click="calendarRange">{{isMyOccupy?'退出':'加入'}}</van-button>
-            </view>
-            <view class="user_tag">
-                请问<image style="display: inline-block;vertical-align:middle; width: 80rpx;border-radius: 50%;" mode="widthFix" src="{{my_userInfo.avatarUrl}}"></image>
-                <text style="font-size: 28rpx;color: #333;font-weight: 700;"> {{my_userInfo.nickName}}</text>
-                是否 <text style="font-size: 28rpx;color: var(--button-warning-background-color,#ff976a);font-weight: 700;">{{isMyOccupy?'退出':'加入'}} </text>  <text style="font-size: 28rpx;color: #333;font-weight: 700;">{{activeDate}}</text>的投喂?
-            </view>
-        </van-transition>
-    </view>
 </view>
