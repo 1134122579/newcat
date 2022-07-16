@@ -24,10 +24,11 @@ App({
     isGetlocation(cb) {
         var that = this;
         console.log(new Date().getTime())
-        let locationTime = this.globalData.locationTime + 300000
+        let locationTime = this.globalData.locationTime + 30000
         let newTime = new Date().getTime()
         let longitude = this.globalData.longitude
         let latitude = this.globalData.latitude
+        console.log(newTime,locationTime,"时间比较")
         if (newTime <= locationTime) {
             cb({
                 longitude,

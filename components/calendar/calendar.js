@@ -764,7 +764,6 @@ Component({
      * 点击具体日期
      */
     dayClick: function (event) {
-      console.log(event);
       const click_day = event.currentTarget.dataset.day;
       const eventDetail = {
         date: `${click_day.year}-${click_day.month > 10 ? click_day.month : "0" + click_day.month}-${

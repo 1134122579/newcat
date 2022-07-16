@@ -10,7 +10,7 @@ Page({
     data: {
         longitude: 116.336590,
         latitude: 39.941127,
-        scale: 28,
+        scale: 18,
         markers: [
             // //貘科动物馆
             // {
@@ -37,6 +37,10 @@ Page({
             } = res
             let mpCtx = wx.createMapContext('map')
             // 将地图中心移置当前定位点，此时需设置地图组件 show-location 为true。'2.8.0' 起支持将地图中心移动到指定位置。
+            this.setData({
+                latitude,
+                longitude
+            })
             Api.nearBy({
                 latitude,
                 longitude
@@ -55,10 +59,8 @@ Page({
                 })
                 mpCtx.moveToLocation()
                 this.setData({
-                    latitude,
-                    longitude,
                     markers,
-                    scale: 14
+                    scale: 18
                 })
             })
         })
@@ -90,7 +92,9 @@ Page({
     },
     onMarkerTap(e) {
         console.log('=onMarkerTap=', e)
-        let {markerId}=e.detail
+        let {
+            markerId
+        } = e.detail
         wx.navigateTo({
             url: `/pages/catdetail/catdetail?cat_id=${markerId}`,
         })
@@ -99,8 +103,7 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
-    },
+    onLoad: function (options) {},
 
     /**
      * 生命周期函数--监听页面初次渲染完成

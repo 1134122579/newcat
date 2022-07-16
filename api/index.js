@@ -828,7 +828,7 @@ export default {
       url: `/client/care/feedpoint/nearBy`,
       method: "post",
       params,
-      loading: true,
+      loading: false,
       isThree: false,
     });
   },

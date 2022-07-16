@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isfeed:false,
     is_share:0,
     recordTodayList: [], //今日投喂记录
     isjoinPounp: false,
@@ -222,6 +223,9 @@ Page({
         latitude,
       }).then(res => {
           if(res){
+              this.setData({
+                isfeed:true
+              })
             wx.showToast({
                 title: "投喂成功！",
               });
