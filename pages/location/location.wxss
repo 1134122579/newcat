@@ -1,5 +1,7 @@
 /* pages/location/location.wxss */
-
+page{
+    height: 100%;
+}
 
 .location{
     position:fixed;

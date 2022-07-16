@@ -44,9 +44,9 @@ page{
     margin-right: 8rpx;
 }
 .vancard{
-    margin-bottom: 20rpx;
-    box-shadow: 0 0 20rpx #787878;
-    border-radius: 16rpx;
+    margin-bottom: 27rpx;
+    box-shadow: 0 0 20rpx #b1b0b0;
+    border-radius: 14rpx;
 }
 .card-tag{
     position: absolute;

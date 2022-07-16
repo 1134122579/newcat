@@ -253,9 +253,8 @@ Page({
      */
     onShareAppMessage: function () {
         var shareObj = {
-            title: "WCCF协会", // 默认是小程序的名称(可以写slogan等)
-            path: "pages/home/home", // 默认是当前页面，必须是以‘/'开头的完整路径
-            imageUrl: "",
+            title: "投喂猫", // 默认是小程序的名称(可以写slogan等)
+            path: "/pages/location/location", // 默认是当前页面，必须是以‘/'开头的完整路径
         };
         return shareObj;
     },
