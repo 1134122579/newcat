@@ -111,7 +111,7 @@
     <view class="tw ">
     <view class="maoliangpen" bindtap="recordfeed">
         <!-- <iconfont slot="icon" name="maoliangpen"  size="42" /> -->
-        <image mode="widthFix" style="width: 90rpx;"  src="{{isfeed?'/images/man.png':'/images/kong-.png'}}"></image>
+        <image mode="widthFix" style="width: 100rpx;height: 100rpx;display: block;"  src="{{isfeed?'/images/man.png':'/images/kong-.png'}}"></image>
         <text>投喂</text>
     </view>
             <!-- <image class="tw-Image"  mode="aspectFit" src="/images/touwei.png"></image> -->

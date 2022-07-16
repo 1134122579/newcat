@@ -1,7 +1,8 @@
 {
     "setting": {
         "autoAudits": false,
-        "useIsolateContext": false
+        "useIsolateContext": false,
+        "urlCheck": false
     },
     "condition": {
         "miniprogram": {

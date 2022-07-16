@@ -2,7 +2,7 @@
 page {
     width: 100%;
     background-color: rgb(245, 243, 243);
-}
+} 
 
 .saishipage {
     width: 100%;

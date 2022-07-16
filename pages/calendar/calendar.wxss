@@ -156,8 +156,8 @@ padding: 10rpx  0;
 /* 人员 */
 .tody-view{
     background: #fff;
-    margin: 20rpx;
-    box-shadow: 0 0 20rpx #eeeeee;
+    margin: 28rpx;
+    box-shadow: 0 0 20rpx #bdbcbc;
     border-radius: 20rpx;
     padding: 20rpx ;
     box-sizing: border-box;
@@ -177,6 +177,7 @@ text-align: center;
 .more{
     font-size: 24rpx;
     color: #888;
+    margin-top: 10rpx;
 }
 .user-blcok{
     margin-top: 20rpx;

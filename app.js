@@ -212,7 +212,7 @@ App({
         menuButtonObject: {},
         is_location: false,
         is_login: true,
-        baseUrl: "http://106.14.159.176:8080",
+        baseUrl: "http://106.14.159.176:8888",
         userInfo: null,
         statusBarHeight: null,
         redBg: "#ff0000",
