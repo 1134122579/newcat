@@ -120,6 +120,7 @@
 
 .calendar-day {
     padding-top: 10rpx;
+    font-size: 28rpx;
 }
 
 .badge {
@@ -133,7 +134,7 @@
 }
 
 .calendar-lunar-lunar {
-    font-size: 18rpx;
+    font-size: 22rpx;
     padding-bottom: 5rpx;
     box-sizing: border-box;
 }

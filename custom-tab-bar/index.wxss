@@ -5,7 +5,6 @@
   left: 0;
   right: 0;
   z-index: 99999;
-  height: 48px;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -27,7 +26,7 @@
 
 .tab-bar-item {
   flex: 1;
-  height: 48px;
+  height: 60px;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -38,14 +37,14 @@
 }
 
 .tab-bar-item .coverimage {
-  width: 27px;
-  height: 27px;
+  width: 32px;
+  height: 32px;
   background: white;
 
 }
 
 .tab-bar-item .coverview {
-  font-size: 10px;
+  font-size: 26rpx;
   background: white;
 }
 .tab-bar-item .vipIcon{
@@ -64,11 +63,12 @@
 }
 .contentVip .coverimage{
   position: absolute;
-  border-top: 1px solid #cacaca;
-  top: -20px;
+  border-top: 1px solid #b3b2b2;
+  top: -25px;
   padding: 5px;
   border-radius: 50%;
+  z-index: 2;
   overflow: hidden;
-  width: 48px;
-  height: 48px;
+  width: 60px;
+  height: 60px;
 }

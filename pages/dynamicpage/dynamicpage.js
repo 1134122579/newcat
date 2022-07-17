@@ -51,8 +51,10 @@ Page({
                     wx.showToast({
                         title: "删除成功",
                     });
+                    console.log(res,that,"删除成功")
                     that.setData({
                         page: 1,
+                        isLastPage:false
                     });
                     that.getlist();
                 });

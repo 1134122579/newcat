@@ -23,7 +23,7 @@ Page({
         titleType: ["英文单字母", "英语简写", "中文简写"],
         title_index: 0,
         style: [],
-        activeType: "", // 日期背景效果
+        activeType: "square", // 日期背景效果
         activeDate: "", // 当前选中的任务日期
         activeconfig: "", // 当前选中的任务
         days_addon: [],
@@ -103,18 +103,28 @@ Page({
         let {
             todyObj
         } = this.data;
-        Api.calendarRemove({
-            id: user.id,
-        }).then(res => {
-            wx.showToast({
-                title: `已删除`,
-                icon: "none",
-            });
-            this.calendarList();
-            this.setData({
-                todyObj: todyObj.filter(item => item.id != user.id),
-            });
-        });
+        wx.showModal({
+            title: "提示",
+            content: "确定移除当日投喂吗？",
+            success: function (res) {
+                if (res.confirm == false) {
+                    return false;
+                }
+                Api.calendarRemove({
+                    id: user.id,
+                }).then(res => {
+                    wx.showToast({
+                        title: `已删除`,
+                        icon: "none",
+                    });
+                    this.calendarList();
+                    this.setData({
+                        todyObj: todyObj.filter(item => item.id != user.id),
+                    });
+                });
+            }
+        })
+
     },
 
     /**
@@ -300,11 +310,11 @@ Page({
         if (adminUserInfo.id != my_userInfo.id) {
             // 先判断自己是不是队员
             let isMyproper = todyObj.some(item => item.createBy == my_userInfo.id);
-              if (isMyproper) {
-                istransitionshow=false
-              }else{
-                istransitionshow=true
-              }
+            if (isMyproper) {
+                istransitionshow = false
+            } else {
+                istransitionshow = true
+            }
         }
         console.log(istransitionshow)
         this.setData({

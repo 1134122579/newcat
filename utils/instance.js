@@ -78,6 +78,9 @@ const handleResponse = ({ config, response }) => {
           console.error(e);
           storage.removeToken()
         }
+        !config.noToastError &&
+        wx.hideLoading()
+        return
       }
     // 统一报错
     !config.noToastError &&

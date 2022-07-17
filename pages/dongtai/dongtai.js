@@ -145,6 +145,9 @@ Page({
       })
       .catch(err => {
         wx.hideLoading();
+      }).finally(err=>{
+        wx.hideLoading();
+        console.log("finally",err)
       });
   },
   // 文件上传
@@ -199,6 +202,11 @@ Page({
             isupload: false,
           });
         },
+        complete(res){
+            wx.hideLoading({
+              success: (res) => {},
+            })
+        }
       });
     });
   },

@@ -35,7 +35,7 @@ actives:[激活的日期]
                                 {{item.feedMemberNickname}}
                             </view>
                         </view>
-                        <van-button type="danger" plain data-user="{{item}}" size="mini" round wx:if="adminUserInfo" bind:click="onReverUser">清除</van-button>
+                        <van-button type="danger" plain data-user="{{item}}" size="mini" round wx:if="adminUserInfo" bind:click="onReverUser">移除</van-button>
                     </view>
                 </block>
                 <view class="more">暂无更多</view>

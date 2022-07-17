@@ -25,9 +25,10 @@
             <!-- 地点  -->
             <view class="location flexastart">
                 <image class="locationicon" src="/images/locationicon.png"></image>
-                <view class="flexbetween" style="flex:1">
-                    <view>
-                        {{getdata.address}} </view>
+                <view class="flexbetween" style="flex:1;">
+                    <view style="padding-right: 20rpx;flex:1;">
+                        {{getdata.address}} 
+                        </view>
                     <view style="color: #787878;">
                         距离：{{getdata.showDistance}}
                     </view>
@@ -53,7 +54,7 @@
                 <view class="imageList flexastart" wx:if="{{getdata.feedMemberVos.length>0}}">
                     <image wx:for="{{getdata.feedMemberVos}}" wx:key="index" class="user-csr" src="{{item.avatarUrl||'/images/catimg.png'}}"></image>
                 </view>
-                <view class="imageList flexastart" wx:else style="font-size: 26rpx;">
+                <view class="imageList flexastart" wx:else style="font-size: 26rpx;color: #646363;">
                     暂无队员
                 </view>
                 <label for=""  wx:if="{{my_id== getdata.createBy}}" >
@@ -69,8 +70,8 @@
                 </label> -->
             </view>
             <view class="flexbetween" style="margin-top: 20rpx;">
-                <van-button  style="flex: 1;"  round size="small" plain  block bind:click="gocalendar">投喂排班</van-button>
-                <van-button  style="flex: 1;margin-left: 20rpx;" wx:if="{{is_share}}" round size="small" plain color="#54D0C7" block bind:click="joincat">立即加入</van-button>
+                <van-button  style="flex: 1;" color="#54D0C7" round size="small" plain  block bind:click="gocalendar">投喂排班</van-button>
+                <van-button  style="flex: 1;margin-left: 20rpx;" wx:if="{{is_share}}" round size="small" plain block bind:click="joincat">立即加入</van-button>
             </view>
         </view>
         <!-- 内容  精彩瞬间-->
@@ -78,7 +79,7 @@
             <view class="typetitle">
                简介
             </view>
-            <view class="typeList flexastart typedesc">
+            <view class="typeList flexastart">
                 {{getdata.introduction}}
             </view>
         </view>
