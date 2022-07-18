@@ -528,7 +528,7 @@ Component({
           month: month,
           year: year,
           info: "current",
-          color: "#4a4f74",
+          color: "#333",
           background: "transparent",
           date: `${year}-${month < 10 ? `0${month}` : month}-${
             i < 10 ? `0${i}` : i
@@ -766,8 +766,8 @@ Component({
     dayClick: function (event) {
       const click_day = event.currentTarget.dataset.day;
       const eventDetail = {
-        date: `${click_day.year}-${click_day.month > 10 ? click_day.month : "0" + click_day.month}-${
-          click_day.day > 10 ?click_day. day : "0" + click_day.day
+        date: `${click_day.year}-${click_day.month >= 10 ? click_day.month : "0" + click_day.month}-${
+          click_day.day >= 10 ?click_day. day : "0" + click_day.day
         }`,
         year: click_day.year,
         month: click_day.month,

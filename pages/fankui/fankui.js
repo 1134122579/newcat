@@ -17,13 +17,15 @@ Page({
       return;
     }
     Api.save({ content: problem }).then((res) => {
-        wx.showToast({
-          title: '提交成功',
-          icon:'none'
-        })
-      this.setData({
-        problem: "",
-      });
+        if(res){
+            wx.showToast({
+                title: '提交成功',
+                icon:'none'
+              })
+              this.setData({
+                problem: "",
+              });
+        }
     });
   },
 

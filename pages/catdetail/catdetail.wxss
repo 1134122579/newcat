@@ -162,6 +162,7 @@ page {
     flex-shrink: 0;
     margin-right: 14rpx;
     border-radius: 50%;
+    position: relative;
 }
 
 .imageList {
@@ -416,7 +417,8 @@ page {
 
 .recordTodayList-block {
     width: 100%;
-    margin: 10rpx 0;
+    /* margin: 10rpx 0; */
+    margin-top: 24rpx;
 }
 
 .touwei-user {
@@ -443,4 +445,22 @@ page {
     font-size: 24rpx;
     line-height: 1;
     margin:10rpx 0 16rpx;
+}
+/* 皇冠 */
+.huangguan{
+    position: absolute;
+    top: -25rpx;
+    margin: 0 auto;
+    width:40rpx;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.huangguanicon{
+    width:40rpx;
+    height: 40rpx;
+}
+.user-image{
+    position: relative;
 }

@@ -83,6 +83,20 @@
                     "query": "id=28",
                     "launchMode": "default",
                     "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/calendar/calendar",
+                    "query": "id=53",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/catdetail/catdetail",
+                    "query": "cat_id=53",
+                    "launchMode": "default",
+                    "scene": null
                 }
             ]
         }

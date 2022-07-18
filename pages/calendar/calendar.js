@@ -4,6 +4,7 @@ const App = getApp();
 
 Page({
     data: {
+        isAdmin: false,
         isMyOccupy: false, //是自己占用
         istransitionshow: false,
         my_userInfo: "",
@@ -103,6 +104,7 @@ Page({
         let {
             todyObj
         } = this.data;
+        let that = this
         wx.showModal({
             title: "提示",
             content: "确定移除当日投喂吗？",
@@ -114,11 +116,11 @@ Page({
                     id: user.id,
                 }).then(res => {
                     wx.showToast({
-                        title: `已删除`,
+                        title: `已移除`,
                         icon: "none",
                     });
-                    this.calendarList();
-                    this.setData({
+                    that.calendarList();
+                    that.setData({
                         todyObj: todyObj.filter(item => item.id != user.id),
                     });
                 });
@@ -161,23 +163,33 @@ Page({
     },
     //   获取投喂点人员列表
     feedmemberList(feedPointId) {
+        let {
+            my_userInfo,
+        } = this.data
         Api.feedmemberList({
             feedPointId,
         }).then(res => {
             res.ownerVo.isAdmin = true;
             let List = [res.ownerVo].concat(res.memberVos);
             let everyList = [res.ownerVo].concat(res.memberVos);
-            let len = Math.ceil(List.length / 12);
+            let len = Math.ceil(List.length / 6);
             let userList = [];
-            console.log(List, len);
             for (let index = 0; index < len; index++) {
-                const element = List.splice(12 * index, 12);
+                const element = List.splice(0, 6);
                 userList.push(element);
+            }
+            console.log(List, len,userList);
+
+            let adminUserInfo = res.ownerVo
+            let isAdmin = false
+            if (stroage.getToken() && adminUserInfo.id == my_userInfo.id) {
+                isAdmin = true
             }
             this.setData({
                 userList,
                 everyList,
-                adminUserInfo: res.ownerVo,
+                adminUserInfo,
+                isAdmin
             });
         });
     },
@@ -200,9 +212,9 @@ Page({
                 return {
                     date: that.returntime(item),
                     // other: item,
-                    otherColor: "#4ECA8E",
-                    badgeColor: "#4ECA8E",
-                    background: "rgba(59,139,242,0.1)",
+                    otherColor: "#08f381",
+                    badgeColor: "#08f381",
+                    background: "rgba(59,169,242,0.24)",
                 };
             });
 
@@ -294,6 +306,7 @@ Page({
             id,
             date
         } = event.detail;
+        console.log(date)
         let {
             my_userInfo,
             adminUserInfo,
@@ -310,13 +323,12 @@ Page({
         if (adminUserInfo.id != my_userInfo.id) {
             // 先判断自己是不是队员
             let isMyproper = todyObj.some(item => item.createBy == my_userInfo.id);
-            if (isMyproper) {
+            if (isMyproper || !my_userInfo) {
                 istransitionshow = false
             } else {
                 istransitionshow = true
             }
         }
-        console.log(istransitionshow)
         this.setData({
             activeDate: event.detail.date,
             activeconfig: event.detail,

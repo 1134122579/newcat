@@ -27,8 +27,8 @@
                 <image class="locationicon" src="/images/locationicon.png"></image>
                 <view class="flexbetween" style="flex:1;">
                     <view style="padding-right: 20rpx;flex:1;">
-                        {{getdata.address}} 
-                        </view>
+                        {{getdata.address}}
+                    </view>
                     <view style="color: #787878;">
                         距离：{{getdata.showDistance}}
                     </view>
@@ -45,7 +45,12 @@
                 <view class="label">
                     创建人：
                 </view>
-                <image class="user-csr" src="{{getdata.owner.avatarUrl||'/images/catimg.png'}}"></image>
+                <view class="user-csr">
+                    <view class="huangguan">
+                        <image class="huangguanicon" mode="widthFix" src="/images/huangguan.png"></image>
+                    </view>
+                    <image style="width:100%;height:100%;border-radius: 50%;" mode="widthFix" src="{{getdata.owner.avatarUrl||'/images/catimg.png'}}"></image>
+                </view>
             </view>
             <view class=" user-row flexastart">
                 <view class="label">
@@ -57,7 +62,7 @@
                 <view class="imageList flexastart" wx:else style="font-size: 26rpx;color: #646363;">
                     暂无队员
                 </view>
-                <label for=""  wx:if="{{my_id== getdata.createBy}}" >
+                <label for="" wx:if="{{my_id== getdata.createBy}}">
                     <view class="addbutton flexcolumn">
                         <van-icon name="plus" size="20" />
                     </view>
@@ -70,14 +75,14 @@
                 </label> -->
             </view>
             <view class="flexbetween" style="margin-top: 20rpx;">
-                <van-button  style="flex: 1;" color="#54D0C7" round size="small" plain  block bind:click="gocalendar">投喂排班</van-button>
-                <van-button  style="flex: 1;margin-left: 20rpx;" wx:if="{{is_share}}" round size="small" plain block bind:click="joincat">立即加入</van-button>
+                <van-button style="flex: 1;" color="#54D0C7" round size="small" plain block bind:click="gocalendar">投喂日历</van-button>
+                <van-button style="flex: 1;margin-left: 20rpx;" wx:if="{{is_share}}" round size="small" plain block bind:click="joincat">立即加入</van-button>
             </view>
         </view>
         <!-- 内容  精彩瞬间-->
         <view class="new_content">
             <view class="typetitle">
-               简介
+                简介
             </view>
             <view class="typeList flexastart">
                 {{getdata.introduction}}
@@ -88,34 +93,39 @@
             <view class="typetitle">
                 今日投喂记录
             </view>
-            <view class="typeList " >
-            <block wx:if="{{recordTodayList.length>0}}">
-                <block wx:for="{{recordTodayList}}"  wx:key="index">
-                    <view class="recordTodayList-block flexbetween">
-                        <van-image round width="90rpx" height="90rpx" fit="cover" src="{{item.avatarUrl}}" />
-                        <view class="touwei-user">
-                            <view class="nickName">{{item.nickName}}</view>
-                            <view class="feedTime">{{item.feedTime}}</view>
+            <view class="typeList ">
+                <block wx:if="{{recordTodayList.length>0}}">
+                    <block wx:for="{{recordTodayList}}" wx:key="index">
+                        <view class="recordTodayList-block flexbetween">
+                            <view class="user-image">
+                                <view class="huangguan" wx:if="{{item.userId==getdata.createBy}}">
+                                    <image class="huangguanicon" mode="widthFix" src="/images/huangguan.png"></image>
+                                </view>
+                                <van-image round width="90rpx" height="90rpx" fit="cover" src="{{item.avatarUrl}}" />
+                            </view>
+                            <view class="touwei-user">
+                                <view class="nickName">{{item.nickName}}</view>
+                                <view class="feedTime">{{item.feedTime}}</view>
+                            </view>
+                            <van-tag type="success " mark plain size="medium">已投喂</van-tag>
                         </view>
-                        <van-tag type="success " mark plain size="medium">已投喂</van-tag>
-                    </view>
+                    </block>
                 </block>
-            </block>
-            <block wx:else>
-                <van-empty description="暂无记录" />
-            </block>
+                <block wx:else>
+                    <van-empty description="暂无记录" />
+                </block>
             </view>
         </view>
     </view>
 
     <!-- 投喂  -->
     <view class="tw ">
-    <view class="maoliangpen" bindtap="recordfeed">
-        <!-- <iconfont slot="icon" name="maoliangpen"  size="42" /> -->
-        <image mode="widthFix" style="width: 100rpx;height: 100rpx;display: block;"  src="{{isfeed?'/images/man.png':'/images/kong-.png'}}"></image>
-        <text>投喂</text>
-    </view>
-            <!-- <image class="tw-Image"  mode="aspectFit" src="/images/touwei.png"></image> -->
+        <view class="maoliangpen" bindtap="recordfeed">
+            <!-- <iconfont slot="icon" name="maoliangpen"  size="42" /> -->
+            <image mode="widthFix" style="width: 100rpx;height: 100rpx;display: block;" src="{{isfeed?'/images/man.png':'/images/kong-.png'}}"></image>
+            <text>投喂</text>
+        </view>
+        <!-- <image class="tw-Image"  mode="aspectFit" src="/images/touwei.png"></image> -->
     </view>
 </view>
 

@@ -13,7 +13,7 @@ actives:[激活的日期]
 
 更多事件函数请参考JS页代码文档
 -->
-<view class="calender" style="{{istransitionshow&&'padding-bottom:400rpx'}}">
+<view class="calender" style="{{istransitionshow?'padding-bottom:400rpx':'padding-bottom:100rpx'}}">
     <view class="plugin">
         <view catchtap="catchtap">
             <calendar year="{{year}}" month="{{month}}" startDate="2022-05" day="{{day}}" today="{{true}}" header="{{header}}" next="{{next}}" prev="{{prev}}" addon="mixed" days-addon="{{days_addon}}" weeks="{{week_title}}" weeks-type="{{title_type}}" show-more-days="{{more}}" lunar="{{lunar}}" cell-size="{{cs}}" days-color="{{style}}" active-type="{{activeType}}" next-month='hi' bindnextMonth='nextMonth' bindprevMonth='prevMonth' binddateChange='dateChange' binddayClick='dayClick' />
@@ -35,7 +35,7 @@ actives:[激活的日期]
                                 {{item.feedMemberNickname}}
                             </view>
                         </view>
-                        <van-button type="danger" plain data-user="{{item}}" size="mini" round wx:if="adminUserInfo" bind:click="onReverUser">移除</van-button>
+                        <van-button type="danger" plain data-user="{{item}}" size="mini" round wx:if="{{isAdmin}}" bind:click="onReverUser">移除</van-button>
                     </view>
                 </block>
                 <view class="more">暂无更多</view>
@@ -48,24 +48,26 @@ actives:[激活的日期]
         </block>
     </view>
     <!-- 底部选项 -->
-    <view class="block-bottom">
+    <view class="block-bottom" wx:if="{{istransitionshow}}">
         <view class="user_bottom" wx:if="{{adminUserInfo&&adminUserInfo.id==my_userInfo.id}}">
             <van-transition name="fade-up" show="{{ istransitionshow }}">
                 <view class="user_header">
-                    <van-button type="default" size="mini" bind:click="onRever">取消</van-button>
+                <view style="width: 130rpx;"></view>
+
+                    <!-- <van-button type="default" size="mini" bind:click="onRever">取消</van-button> -->
                     <view class="title-tag">点击用户头像设置排班</view>
                     <van-button type="warning" size="mini" bind:click="onaddclick">完成</van-button>
                 </view>
                 <swiper class="user-swiper">
                     <block wx:for="{{userList}}" wx:for-index="idx" wx:for-item="swiperItemList" wx:key="idx">
-                        <swiper-item>
+                        <swiper-item  class="swiper-item">
                             <view class="blocklist">
                                 <block wx:for="{{swiperItemList}}" wx:key="index">
                                     <view class="block-info" bindtap="setUser" data-info="{{item}}">
                                         <view class="huangguan" wx:if="{{item.isAdmin}}">
                                             <image class="huangguanicon" mode="widthFix" src="/images/huangguan.png"></image>
                                         </view>
-                                        <van-image width="80rpx" round height="80rpx" fit="cover" src="{{item.avatarUrl||'/images/catimg.png'}}" />
+                                        <van-image width="90rpx" round height="90rpx" fit="cover" src="{{item.avatarUrl||'/images/catimg.png'}}" />
                                         <view class="block-name">
                                             {{item.nickName||"未知"}}
                                         </view>
@@ -85,7 +87,7 @@ actives:[激活的日期]
                     <van-button type="warning" size="mini" bind:click="calendarRange">{{isMyOccupy?'退出':'加入'}}</van-button>
                 </view>
                 <view class="user_tag">
-                    请问<image style="display: inline-block;vertical-align:middle; width: 80rpx;border-radius: 50%;" mode="widthFix" src="{{my_userInfo.avatarUrl}}"></image>
+                    请问<image style="display: inline-block;vertical-align:middle; width: 80rpx;height: 80rpx;border-radius: 50%;" mode="widthFix" src="{{my_userInfo.avatarUrl}}"></image>
                     <text style="font-size: 28rpx;color: #333;font-weight: 700;"> {{my_userInfo.nickName}}</text>
                     是否 <text style="font-size: 28rpx;color: var(--button-warning-background-color,#ff976a);font-weight: 700;">{{isMyOccupy?'退出':'加入'}} </text> <text style="font-size: 28rpx;color: #333;font-weight: 700;">{{activeDate}}</text>的投喂?
                 </view>
