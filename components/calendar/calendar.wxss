@@ -72,14 +72,15 @@
 .calendar-days::before {
     content: '';
     z-index: -1;
-    filter: blur(1px);
+    /* filter: blur(1px); */
     position: absolute;
     background-repeat: no-repeat;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F011b3b55497b5a0000019ae98bb69b.jpg%403000w_1l_2o_100sh.jpg&refer=http%3A%2F%2Fimg.zcool.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1660666040&t=b4da7206ebb5b653f07aa0b27c9a877c');
+    background: #FCF0E6;
+    /* background-image: url('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F011b3b55497b5a0000019ae98bb69b.jpg%403000w_1l_2o_100sh.jpg&refer=http%3A%2F%2Fimg.zcool.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1660666040&t=b4da7206ebb5b653f07aa0b27c9a877c'); */
     background-size:auto 100%;
     background-position: 50%  50%;
 }

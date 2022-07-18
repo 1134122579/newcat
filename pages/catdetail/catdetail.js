@@ -260,7 +260,8 @@ return
                 longitude,
                 latitude,
             }).then(res => {
-                if (res) {
+            console.log(res,"头未成功")
+                if (res.data.code==200) {
                     that.setData({
                         isfeed: true
                     })

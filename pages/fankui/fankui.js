@@ -17,14 +17,21 @@ Page({
       return;
     }
     Api.save({ content: problem }).then((res) => {
-        if(res){
+        console.log(res,'反馈')
+        if(res.data.code==200){
             wx.showToast({
-                title: '提交成功',
+                title: '提交成功,自动返回',
                 icon:'none'
               })
               this.setData({
                 problem: "",
               });
+              setTimeout(() => {
+                wx.redirectTo({
+                    url: '/pages/morepage/more',
+                  })
+              }, 1000);
+             
         }
     });
   },

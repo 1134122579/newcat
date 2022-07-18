@@ -157,7 +157,7 @@ export default {
       method: "post",
       params,
       loading: false,
-      isThree: false,
+      isThree: true,
     });
   },
   recordMe(params) {
@@ -185,7 +185,7 @@ export default {
       method: "post",
       params,
       loading: false,
-      isThree: false,
+      isThree: true,
     });
   },
   delCat(params) {

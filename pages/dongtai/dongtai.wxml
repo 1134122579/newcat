@@ -31,6 +31,6 @@
     </view>
 
     <view class="button_">
-        <van-button block round disabled="{{disabled}}"  type="warning" bind:click="onClick">发布</van-button>
+        <van-button block  disabled="{{disabled}}"  bind:click="onClick">发布</van-button>
     </view>
 </view>
