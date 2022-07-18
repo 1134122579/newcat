@@ -4,13 +4,13 @@
         <block wx:for="{{list}}" wx:key="index">
             <!-- <DongtaiModel item="{{item}}" isdele="{{isdele}}" bind:ondele="ondele" /> -->
             <block>
-                <van-card thumb-mode="scaleToFill" custom-class="vancard" thumb-link="{{'/pages/catdetail/catdetail?cat_id='+item.pointId}}" title-class="card-title">
+                <van-card thumb-mode="scaleToFill" humb="{{item.cover||'/images/catimg.png'}}" custom-class="vancard" thumb-link="{{'/pages/catdetail/catdetail?cat_id='+item.pointId}}" title-class="card-title">
                     <view slot="title" class="card-title">
                         {{item.title||'投喂点'}}
                     </view>
-                    <view slot="thumb" >
+                    <!-- <view slot="thumb" >
                         <image style="width:170rpx;height:220rpx;border-radius: 10rpx;display: block;" mode="aspectFill" src="{{item.cover||'/images/catimg.png'}}"></image>
-                    </view>
+                    </view> -->
                     <view slot="tag" class="card-tag">
                         <van-tag mark type="success">已加入</van-tag>
                     </view>

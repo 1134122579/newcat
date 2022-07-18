@@ -16,9 +16,9 @@ Page({
       });
       return;
     }
-    Api.save({ content: problem }).then((res) => {
-        console.log(res,'反馈')
-        if(res.data.code==200){
+    Api.save({ content: problem }).then((response) => {
+        console.log(response,'反馈')
+        if(response.data.code==200){
             wx.showToast({
                 title: '提交成功,自动返回',
                 icon:'none'
@@ -32,6 +32,16 @@ Page({
                   })
               }, 1000);
              
+        } else if (response.data.code == 401) {
+            wx.redirectTo({
+                url: '/pages/login/login',
+            })
+        } else {
+            wx.showToast({
+                title: response.data.msg,
+                icon: 'none',
+                mask: true,
+            })
         }
     });
   },

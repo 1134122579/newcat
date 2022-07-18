@@ -198,6 +198,14 @@ Page({
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
+       
+    },
+
+    /**
+     * 生命周期函数--监听页面显示
+     */
+    onShow: function () {
+        appInst.tabbershow(this, 2);
         if (storage.getToken()) {
             appInst.getUserinfoFn();
             this.setData({
@@ -208,16 +216,6 @@ Page({
                 is_login: false
             })
         }
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-        appInst.tabbershow(this, 2);
-        let {
-            powerlist
-        } = this.data;
         this.setData({
             userInfo: storage.getUserInfo(),
             navHeight: appInst.globalData.navHeight,

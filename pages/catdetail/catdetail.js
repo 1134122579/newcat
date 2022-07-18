@@ -190,13 +190,16 @@ Page({
     },
     //   加入投入点
     joincat() {
-        let {getdata,my_id}=this.data
-        if(getdata.createBy==my_id){
+        let {
+            getdata,
+            my_id
+        } = this.data
+        if (getdata.createBy == my_id) {
             wx.showToast({
-              title: '创建者无需加入',
-              icon:'none'
+                title: '创建者无需加入',
+                icon: 'none'
             })
-return
+            return
         }
         this.setData({
             isjoinPounp: true,
@@ -208,13 +211,20 @@ return
             createBy,
             my_id,
         } = this.data.getdata;
+        if(!storgae.getToken()){
+            wx.navigateTo({
+              url: '/pages/login/login',
+            })
+            return
+        }
         if (createBy == my_id) {
             wx.showToast({
-                title: "队长无需加入！",
+                title: "创建者无需加入！",
                 icon: "none",
             });
             return;
         }
+   
         Api.feedmemberJoin({
             feedPointId
         }).then(res => {
@@ -259,9 +269,9 @@ return
                 feedPointId,
                 longitude,
                 latitude,
-            }).then(res => {
-            console.log(res,"头未成功")
-                if (res.data.code==200) {
+            }).then(response => {
+                console.log(response, "头未成功")
+                if (response.data.code == 200) {
                     that.setData({
                         isfeed: true
                     })
@@ -269,6 +279,16 @@ return
                     wx.showToast({
                         title: "投喂成功",
                     });
+                } else if (response.data.code == 401) {
+                    wx.redirectTo({
+                        url: '/pages/login/login',
+                    })
+                } else {
+                    wx.showToast({
+                        title: response.data.msg,
+                        icon: 'none',
+                        mask: true,
+                    })
                 }
             });
         });

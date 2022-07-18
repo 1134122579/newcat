@@ -107,6 +107,7 @@ App({
             id
         }).then((res) => {
             this.globalData.userInfo = res;
+            console.log(res,"用户信息")
             storage.setUserInfo(res);
         });
     },

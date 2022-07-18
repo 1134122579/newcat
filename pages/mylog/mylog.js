@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isLastPage:false,
     listType: "homeblockmodel",
     isdele: true,
     catList: [],
@@ -54,23 +55,33 @@ Page({
     });
   },
   getlist() {
-    let { user_id } = storage.getUserInfo();
-    let { page: pageIndex, list, pageSize } = this.data;
+    // let { user_id } = storage.getUserInfo();
+    let { page: pageIndex, list, pageSize ,isLastPage} = this.data;
+    if (isLastPage) {
+        return
+    }
     Api.recordMe({ pageSize, pageIndex }).then((res) => {
-      this.setData({
-        ismore: res.length > 0 ? false : true,
-      });
-      res=res.list.map(item=>{
+      let {
+        list: catList,
+        total,
+        isLastPage
+    } = res
+    this.setData({
+        ismore: catList.length > 0 ? false : true,
+        total,
+        isLastPage
+    });
+      res=catList.map(item=>{
           item['feedTime']=formatTime(item['feedTime'])
           return item
       })
       if (pageIndex == 1) {
         this.setData({
-          list: res,
+          list: catList,
         });
       } else {
         this.setData({
-          list: list.concat(res),
+          list: list.concat(catList),
         });
       }
     });

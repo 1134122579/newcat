@@ -97,6 +97,13 @@
                     "query": "cat_id=53&is_share=1",
                     "launchMode": "default",
                     "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/catdetail/catdetail",
+                    "query": "cat_id=64&is_share=1",
+                    "launchMode": "default",
+                    "scene": null
                 }
             ]
         }

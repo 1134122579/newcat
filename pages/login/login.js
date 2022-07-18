@@ -82,6 +82,7 @@ Page({
               signature,
             }).then(res => {
               wx.hideLoading();
+              App.getUserinfoFn()
               wx.switchTab({
                 url: "/pages/location/location",
               });

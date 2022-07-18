@@ -206,7 +206,7 @@ page {
     overflow-x: auto;
     padding: 0 2rpx;
     line-height: 1.7;
-    letter-spacing: 8rpx;
+    /* letter-spacing: 8rpx; */
     color: #646363;
 }
 .typedesc{
