@@ -109,9 +109,13 @@ padding: 10rpx  0;
     top: -25rpx;
     margin: 0 auto;
     z-index: 2;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 .huangguanicon{
     width:40rpx;
+    height: 40rpx;
 }
 
 .block-name {
@@ -198,4 +202,7 @@ text-align: center;
 .swiper-item{
     /* height: 100px !important; */
     /* background: #ff0000; */
+}
+.userheaderimage{
+    position: relative;
 }

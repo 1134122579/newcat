@@ -30,13 +30,19 @@ actives:[激活的日期]
                 <block wx:for="{{todyObj}}">
                     <view class="flexbetween user-blcok">
                         <view class="flexastart " style="flex: 1;">
-                            <image class="user_image" src="{{item.feedMemberAvatar}}"></image>
-                            <view class="user-feedMemberNickname van-ellipsis">
-                                {{item.feedMemberNickname}}
+                            <view class="userheaderimage">
+                                <view class="huangguan" wx:if="{{isAdmin}}">
+                                    <image class="huangguanicon" mode="widthFix" src="/images/huangguan.png"></image>
+                                </view>
+                                <image class="user_image" src="{{item.feedMemberAvatar}}"></image>
                             </view>
+
+                                <view class="user-feedMemberNickname van-ellipsis">
+                                    {{item.feedMemberNickname}}
+                                </view>
+                            </view>
+                            <van-button type="danger" plain data-user="{{item}}" size="mini" round wx:if="{{isAdmin||item.createBy==my_userInfo.id}}" bind:click="onReverUser">移除</van-button>
                         </view>
-                        <van-button type="danger" plain data-user="{{item}}" size="mini" round wx:if="{{isAdmin}}" bind:click="onReverUser">移除</van-button>
-                    </view>
                 </block>
                 <view class="more">暂无更多</view>
             </view>
@@ -52,15 +58,15 @@ actives:[激活的日期]
         <view class="user_bottom" wx:if="{{adminUserInfo&&adminUserInfo.id==my_userInfo.id}}">
             <van-transition name="fade-up" show="{{ istransitionshow }}">
                 <view class="user_header">
-                <view style="width: 130rpx;"></view>
+                    <view style="width: 130rpx;"></view>
 
                     <!-- <van-button type="default" size="mini" bind:click="onRever">取消</van-button> -->
-                    <view class="title-tag">点击用户头像设置排班</view>
+                    <view class="title-tag">点击用户头像加入排班</view>
                     <van-button type="warning" size="mini" bind:click="onaddclick">完成</van-button>
                 </view>
                 <swiper class="user-swiper">
                     <block wx:for="{{userList}}" wx:for-index="idx" wx:for-item="swiperItemList" wx:key="idx">
-                        <swiper-item  class="swiper-item">
+                        <swiper-item class="swiper-item">
                             <view class="blocklist">
                                 <block wx:for="{{swiperItemList}}" wx:key="index">
                                     <view class="block-info" bindtap="setUser" data-info="{{item}}">

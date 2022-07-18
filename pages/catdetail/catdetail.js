@@ -190,6 +190,14 @@ Page({
     },
     //   加入投入点
     joincat() {
+        let {getdata,my_id}=this.data
+        if(getdata.createBy==my_id){
+            wx.showToast({
+              title: '创建者无需加入',
+              icon:'none'
+            })
+return
+        }
         this.setData({
             isjoinPounp: true,
         });
@@ -258,7 +266,7 @@ Page({
                     })
                     that.recordToday()
                     wx.showToast({
-                        title: "投喂成功！",
+                        title: "投喂成功",
                     });
                 }
             });

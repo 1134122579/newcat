@@ -279,7 +279,7 @@ Page({
                 avatarUrl: photo,
             })
             .then((res) => {
-                Api.getUserInfo({id}).then((res) => {
+                Api.getNewUserInfo({id}).then((res) => {
                     App.globalData.userInfo = res;
                     Cache.setUserInfo(res);
                     wx.hideLoading();

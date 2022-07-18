@@ -94,7 +94,7 @@
                 {
                     "name": "",
                     "pathName": "pages/catdetail/catdetail",
-                    "query": "cat_id=53",
+                    "query": "cat_id=53&is_share=1",
                     "launchMode": "default",
                     "scene": null
                 }
